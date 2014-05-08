@@ -1,7 +1,7 @@
 
 document.write('<link rel="stylesheet" href="../../basisviewer2/lib/OpenLayers-2.12/theme/default/style.css" type="text/css" />');
-document.write('<link rel="stylesheet" href="../../basisviewer2/theme/Website.css" type="text/css" />');
-document.write('<link rel="stylesheet" href="../../basisviewer2/theme/style.css" type="text/css" />');
+document.write('<link rel="stylesheet" href="../../basisviewer2/styles/Website.css" type="text/css" />');
+document.write('<link rel="stylesheet" href="../../basisviewer2/styles/style.css" type="text/css" />');
 // voor geocoder
 document.write('<link rel="stylesheet" href="../../basisviewer2/lib/jquery-ui/css/ui-lightness/jquery-ui-1.8.13.custom.css"/>');
 
