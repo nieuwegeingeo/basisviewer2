@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Gemeente Nieuwegein - basisviewer</title>
+  <link rel="stylesheet" href="lib/OpenLayers-2.12/theme/default/style.css" type="text/css" />
+  <link rel="stylesheet" href="theme/Website.css" type="text/css" />
+  <link rel="stylesheet" href="theme/style.css" type="text/css" />
+  <!-- voor geocoder -->
+  <link rel="stylesheet" href="lib/jquery-ui/css/ui-lightness/jquery-ui-1.8.13.custom.css"/>
+  <!-- openlayers includes -->
+  <script type="text/javascript" src="lib/OpenLayers.js"></script>
+  <script type="text/javascript" src="lib/proj4js.js"></script>
+  
+  <script type="text/javascript" src="lib/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/jquery-ui/js/jquery-ui-1.8.13.custom.min.js"></script>
+  <!-- geodan includes -->
+  <script type="text/javascript" src="lib/tools.js"></script>
+  <script type="text/javascript" src="lib/Geodan.js"></script>
+  <!-- <script type="text/javascript" src="lib/Geodan/lib/Geodan/Geodan.js"></script>
+  <script type="text/javascript" src="lib/Geodan/lib/Geodan/ReverseGeocodeRequest.Format.js"></script>
+  <script type="text/javascript" src="lib/Geodan/lib/Geodan/ReverseGeocodeResponse.Format.js"></script>
+  <script type="text/javascript" src="lib/Geodan/lib/Geodan/ReverseGeocoder.js"></script>
+  <script type="text/javascript" src="lib/Geodan/lib/Geodan/Geocoder.js"></script>
+  <script type="text/javascript" src="lib/Geodan/lib/Geodan/Format/GeocodeResponse.js"></script> -->
+  <script type="text/javascript" src="viewer.js"></script>  
+  <script>
+	if( isAndroid || isMobile || isIthing ) {
+		document.write('<link rel="stylesheet" href="theme/mobile.css" type="text/css" />');
+	}
+  </script>
+  </head>
+
+  <body onload="Geogem.init()" scroll="no">
+	<div id="map"></div>
+  </body>
+</html>

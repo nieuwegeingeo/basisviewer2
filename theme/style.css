@@ -1,0 +1,433 @@
+.selectie-lijst {
+  width: 200px;
+}
+
+.customEditingToolbar {
+  float: right;
+  right: 150px;
+  height: 30px; 
+  top: 25px;
+  width: 200px;
+}
+
+.customEditingToolbar div {
+  float: right;
+  margin: 5px;
+  width: 24px;
+  height: 24px;
+}
+
+.olPopupCloseBox {
+	/* some magic to create a bigger (invisible) close button for touch things */
+    padding: 23px;
+	background-position:center;
+	margin: -25px;
+}
+
+.olControlScaleLine {
+	bottom:40px;
+}
+
+#featurePopup h3 {
+    padding-top: 2px;
+}
+
+#attrpopuptable td {
+	vertical-align: top;
+}
+#attrpopuptable td.first {
+	/*width:30%;*/
+}
+
+#featurePopup_contentDiv {
+	/*margin-top:25px;*/
+}
+
+.olFramedCloudPopupContent {
+    font-size: 80%;
+	overflow: visible;
+}
+
+.olControlNavigationItemActive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -103px -23px; 
+}
+
+.olControlNavigationItemInactive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -103px -0px; 
+}
+
+.olControlDrawFeaturePointItemInactive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -77px 0px; 
+}
+
+.olControlDrawFeaturePointItemActive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -77px -23px ;                                                                   
+}
+
+.olControlDrawFeatureLineItemInactive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -51px 0px; 
+}
+
+.olControlDrawFeatureLineItemActive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -51px -23px ;                                                                   
+}
+
+.olControlDrawFeaturePolygonItemInactive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -26px 0px; 
+}
+
+.olControlDrawFeaturePolygonItemActive { 
+  background-image: url("img/editing_tool_bar.png");
+  background-repeat: no-repeat;
+  background-position: -26px -23px ;                                                                   
+}
+
+.olControlModifyFeatureItemActive { 
+  background-image: url(../theme/default/img/move_feature_on.png);
+  background-repeat: no-repeat;
+  background-position: 0px 1px;
+}
+.olControlModifyFeatureItemInactive { 
+  background-image: url(../theme/default/img/move_feature_off.png);
+  background-repeat: no-repeat;
+  background-position: 0px 1px;
+}
+.olControlDeleteFeatureItemActive { 
+  background-image: url(../theme/default/img/remove_point_on.png);
+  background-repeat: no-repeat;
+  background-position: 0px 1px;
+}
+.olControlDeleteFeatureItemInactive { 
+  background-image: url(../theme/default/img/remove_point_off.png);
+  background-repeat: no-repeat;
+  background-position: 0px 1px;
+}
+
+.olControlLayerSwitcher {
+	top: 57px;
+	min-width: 24em;
+}
+
+.olControlLayerSwitcher .layersDiv, 		/* center of LayerSwitcher */
+.olControlLayerSwitcher span, 				/* top & bottom of LayerSwitcher */
+.olControlOverviewMapElement { 				/* overviewmap */
+	background-color: #88179f !important;
+}
+
+.baseLayersDiv{
+    padding: 0px;
+}
+
+.olControlZoomPanel {
+    left: 14px;
+    top: 10px;
+}
+
+/* disable tile transition animation */
+.olLayerGrid .olTileImage {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: all 0 none;
+    transition: none;
+}
+
+.olControlAttribution {
+    bottom: 3em;
+	background: white;
+	padding: 2px;
+	opacity: 0.7;
+    filter: alpha(opacity=70);
+	
+}
+div.olControlAttribution  > a {
+color:#88179F;
+}
+
+geoviewerpopup_contentDiv {
+	font-family: Verdana;
+	font-size: .7em;
+}
+
+#attrpopuptable{
+	width: 100%;
+}
+
+.GeodanGeocoder {
+    padding: 5px;
+    top: 5px;
+    left: 60px;
+	width:250px;
+	overflow:hidden;
+}
+
+/* Animated throbber */
+input.form-autocomplete {
+  width:250px;
+  background-image: url(../img/throbber.gif);
+  background-repeat: no-repeat;
+  background-position: 100% 2px;
+  padding:2px;
+  margin:2px;
+  z-index:10000;
+}
+
+input.throbbing {
+  background-position: 100% -18px; /* LTR */
+}
+
+#topbar {
+	width:100%;
+	background-color:#88179F;
+	padding-bottom:3px;
+	min-height:24px;
+	
+	z-index:1001;
+	top:0px;
+	position:fixed;
+}
+#bottombar {
+	width:100%;
+	min-height:25px;
+	line-height:20px;
+	background-color:#88179F;
+	color:white;
+	font-weight:bold;
+	font-size: 80%;
+	
+	z-index:1001;
+	bottom:0px;
+	position:fixed;
+}
+
+div#bottombar  a:visited ,div#bottombar  a:link {
+	color:white;
+}
+
+div#bottombar  span {
+	float:right;
+	padding: 0 5px;
+}
+
+form{
+	display:inline;
+}
+/* to be able to position mapbuttons */
+#map{
+	position:relative;
+}
+#baselayerbuttons {
+	position: absolute;
+	float:right;
+	top:32px;
+	right:5px;
+	z-index:1000;
+	height:20px;
+	/*border:red 1px solid;*/
+	width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
+}
+.baselayerbutton {
+	background-color:white;
+	border:black 1px solid;
+	padding:0px 10px;
+	font-size:80%;
+	float:right;
+	margin: 0 5px;
+}
+.kaartlaag {
+	color:white;
+	padding:4px;
+	font-size:80%;
+}
+
+#zoomtools {
+	width:18px;
+	height:36px;
+	z-index:1000;
+	position:absolute;
+	top:35px;
+	left:10px;
+	line-height:0.6;
+}
+
+/* downloadbar IN legend: override some props */
+#legend #downloadbar {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    left: 0;
+    position: relative;
+	float: none;
+}
+
+#legendhead {
+	min-width:150px;
+	cursor: pointer;
+    height: 20px;
+    margin-right: 40px;
+}
+
+#legendImage {
+    padding-top: 10px;
+}
+
+#legendShowHide {
+  width: 30px; 
+  height: 17px; 
+  position: absolute; 
+  right: 10px; 
+  top: 10px; 
+  z-index: 1;
+}
+
+#legend {
+	background:none repeat scroll 0 0 white;
+	padding:10px;
+	bottom:50px;
+	position:absolute;
+	right:10px;
+	z-index:10000;
+	max-height: 75%;
+    overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.legendMinimize{
+	background: url("img/minimizebuttonup.gif") no-repeat; /* for IE8 */
+    background: url("img/minimizebuttonup.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+	width:25px;
+	height:25px;
+	background-position: center center;
+    margin: -25px;
+    padding: 23px;
+	/*border:1px solid green;*/
+}
+.legendMaximize {
+	background: url("img/minimizebuttondown.gif") no-repeat; /* for IE8 */
+    background: url("img/minimizebuttondown.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+	width:25px;
+	height:25px;
+	background-position: center center;
+    margin: -25px;
+    padding: 23px;
+	/*border:1px solid red;*/
+}
+
+#legend h3, #downloadbar h3 {
+	font-size: 80%;
+}
+
+#downloadbar {
+    bottom: 30px;
+    display: block;
+    float: left;
+    left: 120px;
+    position: absolute;
+    z-index: 1002;
+	background: white;
+	padding-top: 10px;
+}
+#downloadbar a img {
+	border: 0;
+}
+
+html, body, #map {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+body{
+  font-size:80%;
+}
+input{
+  font-size:80%;
+}
+.inforow0{
+	/*background:#F7E3FF*/
+}
+.inforow1{
+	
+}
+.olControlLoadingPanel {
+	background-image:url(../../basisviewer2/img/dataloading.png);
+	position: relative;
+	width: 200px;
+	height: 30px;
+	background-position:center;
+	background-repeat:no-repeat;
+	display: none;
+	top:40%;
+	left:40%;
+}
+
+/* this is the style of the plain text geoserver popup defined in content.ftl */
+#gssimplepopup {
+	min-width: 350px;
+	max-width: 500px;
+}
+
+#sidebar_head  h3 {
+	margin: 4px;
+}
+#sidebar_content  h3 {
+    background-color: #F7E3FF;
+    padding-left: 6px;
+	margin-top:5px;
+}
+
+#featurePopup_contentDiv {
+    overflow: auto !important;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#sidebar {
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 3px solid #88179F;
+    float: left;
+    hheight: 94%;
+    position: absolute;
+    top: 25px;
+    width: 400px;
+	font-size: 80%;
+	overflow:auto;
+	padding:10px;
+	margin:0px;
+	display:none;
+	z-index:20000;
+}
+#sidebarShowHide {
+  width: 17px; 
+  height: 17px; 
+  position: absolute; 
+  right: 15px; 
+  top: 15px; 
+  z-index: 1;
+}
+.sidebarMinimize{
+	background: url("img/minimizebuttonleft.gif");
+    cursor: pointer;
+	width:25px;
+	height:25px;
+}
+.sidebarMaximize {
+	background: url("img/minimizebuttonleft.gif");
+    cursor: pointer;
+	width:25px;
+	height:25px;
+}

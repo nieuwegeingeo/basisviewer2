@@ -1,0 +1,342 @@
+﻿body, input, textarea, td
+{
+  font-family             : Verdana, Arial, Helvetica;
+}
+
+body
+{
+  width                   : 100%;
+  height                  : 100%;
+  padding                 : 0px;
+  margin                  : 0px;
+  
+  font-size               : .9em;
+  line-height             : 140%;
+  color                   : #000000;
+  background-color        :  #F7F7F7;    
+}
+
+div.root
+{
+  width                   : 768px;
+  margin                  : 0px auto;
+  padding                 : 0px;
+  background-color        : #fff;
+  height                  : 100%;
+  position                : relative;
+}
+
+div#header
+{
+  height                  : 80px;
+  background-color        : #802991;
+}
+
+h1
+{
+  position                : absolute;
+  top                     : 0px;
+  right                   : 0px;
+  display                 : block;
+  width                   : 150px;
+  height                  : 66px;
+  background-image        : url('Images/logo.gif');
+  margin                  : 10px 10px 0px 0px;
+  padding                 : 0px;
+  text-indent             : -1000em;
+  
+}
+
+h2
+{
+  padding                 : 50px 0px 0px 10px;
+  margin                  : 0px 0px 4px 0px;
+  font-size               : 2em;    
+  font-weight             : bold;
+  color                   : #fff;
+}
+
+h3
+{
+  font-size               : 1.1em;
+  padding                 : 0px;
+  margin                  : 0px 0px 0px 0px;
+}
+
+.rel
+{
+  position                : relative;
+  top                     : 10px;
+  margin                  : 0px 10px;
+}
+
+div#mainpanel
+{
+  margin-right            : 250px;
+}
+
+div#rightpanel
+{
+  position                : absolute;
+  top                     : -1px;
+  right                   : 0px;
+  width                   : 240px;
+}
+
+ul.menu
+{
+  margin                  : 10px 0px;
+  padding                 : 10px;
+  list-style-type         : none;
+  background-color        : #802991;
+}
+
+* html ul.menu li
+{
+  color                   : #fff;
+}
+
+ul.menu a, ul.menu a:visited, ul.menu span.answerednonav, ul.menu span.unanswered
+{
+  color                   : #fff;
+  text-decoration         : none;
+}
+
+ul.menu a.current, ul.menu a.currentanswered
+{
+  font-weight             : bold;
+}
+
+ul.menu a.answered:hover, ul.menu a.currentanswered:hover, ul.menu a.navigatable:hover
+{
+  font-weight             : bold;
+}
+
+div.content
+{
+  background-color        : #F3E9F4;
+  padding                 : 10px;
+}
+
+* html div.content
+{
+  
+}
+
+div.footer
+{
+  margin                  : 20px 10px 0px 10px;
+  border-top              : solid 10px #802991;
+  color                   : #898989;
+}
+
+div.footercontent
+{
+  font-size               : 80%;
+  margin                  : 1px 10px;
+  text-align              : left;
+}
+
+div.footercontent a
+{
+  color                   : #898989;
+  text-decoration         : none;  
+}
+
+div.toolbar
+{
+  text-align              : right;
+  background-color        : #E7E7E7;
+  margin                  : 10px 0px;
+  padding                 : 5px 0px;
+}
+
+a.openbutton, a.savebutton, a.printbutton
+{
+  padding-left            : 16px;
+  margin                  : 0px 10px;
+  background-repeat       : no-repeat;
+  background-position     : left center;
+  color                   : #333;
+  text-decoration         : none;
+}
+
+a.openbutton:hover, a.savebutton:hover, a.printbutton:hover
+{
+  text-decoration         : underline;
+}
+
+a.openbutton
+{
+  background-image        : url('Images/openIcon.gif');
+}
+
+a.savebutton
+{
+  background-image        : url('Images/saveIcon.gif');
+}
+
+a.printbutton
+{
+  padding-left            : 18px;
+  background-image        : url('Images/printIcon.gif');
+}
+
+div.clear
+{
+  font-size               : 1px;
+  line-height             : 1px;
+  clear                   : both;
+}
+
+.scenarioList
+{
+  display                 : block;
+  padding                 : 10px 10px 50px 10px; 
+}
+
+div.navigatebuttons
+{
+  display: block;
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+  height: 25px;
+}
+
+a.previousstep, input.previousstep
+{
+  width: 160px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline;
+  height: 25px;
+  line-height: 25px;
+  padding-right: 30px;
+  background-image: url('images/arrow-left_h.gif');
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  text-align: right;  
+  text-decoration: none;
+  margin: 0px;
+  border-style: none;
+  background-color: Transparent;
+  color: #802991;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+a.nextstep, input.nextstep
+{
+  width: 250px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline;
+  height: 25px;
+  line-height: 25px;
+  padding-right: 30px;
+  background-image: url('images/arrow-right_h.gif');
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  text-align: right;  
+  text-decoration: none;
+  margin: 0px;
+  border-style: none;
+  background-color: Transparent;
+  color: #802991;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+a.previousstep:hover, input.previousstep:hover
+{
+  color               : #AE83BB;
+  background-image    : url('images/arrow-left.gif');
+  text-decoration     : underline;
+}
+
+a.nextstep:hover, input.nextstep:hover
+{
+  color               : #AE83BB;
+  background-image    : url('images/arrow-right.gif');
+  text-decoration     : underline;
+}
+
+.engine
+{
+  overflow                : hidden;
+}
+
+div.helpblock
+{
+  display                 : none;
+  width                   : 230px;
+  background-image        : url('Images/helpIcon.gif');
+  background-repeat       : no-repeat;
+  background-position     : left 5px;
+  margin                  : 20px 3px 3px -10px;
+  padding-left            : 22px;
+}
+
+div.helpmsg
+{
+  background-color        : #F3E9F4;
+  padding                 : 3px;
+  border                  : solid 1px black;
+  font-size               : 90%;
+}
+
+div.closehelp img
+{
+  border                  : 0px;
+}
+
+.asppanel
+{
+  margin                  : 0px;
+  padding                 : 0px;
+}
+
+div.statusbar
+{
+  float                   : left;
+  width                   : 272px;
+  height                  : 13px;
+  background-image        : url('Images/statusbar.gif');
+  background-repeat       : no-repeat;
+  margin                  : 7px 10px;
+}
+
+div.statusbar div.progressbar
+{
+  float                   : left;
+  /*width                   : 20px;*/
+  background-color        : #b4e600;
+  background-image        : url('Images/progress_right.gif');
+  background-repeat       : no-repeat;
+  background-position     : right top;
+  height                  : 9px;
+  line-height             : 9px;
+  margin                  : 2px 0px 2px 1px;
+}
+
+div.statusbar div.percentage
+{
+  font-size               : 9px;
+  line-height             : 9px;
+  margin                  : 2px 0px;
+  color                   : #c44745;
+}
+
+input.fupload
+{
+  width                   : 400px;
+}
+
+.infotable {
+	/*font-size: 80%;*/
+}
