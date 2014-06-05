@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2014.2';
+Geogem.VERSION = '2014.6';
 
 Geogem.Settings = {
 
@@ -1003,7 +1003,7 @@ Geogem.createWMSLayer = function(config) {
 				}
 			});
 			
-			var buffer = 20; // we default to a higher buffer then OL-default (5) because of tablet use
+			var buffer = 20; // we default to a higher buffer then OL-default (5) because of tablet use (mostly points)
 			if (config.buffer){
 				buffer = config.buffer
 			}
