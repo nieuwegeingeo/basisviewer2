@@ -372,22 +372,31 @@ Geogem.onFeatureSelect = function(e) {
 
 		// remove all (old) popups
 		Geogem.removeAllPopups();
-		// new popup
-		Geogem.popup = null;
-		Geogem.popup = new OpenLayers.Popup.FramedCloud("geoviewerpopup" // id
-		, feature.geometry.getBounds().getCenterLonLat() // lonlat
-		, popupSize // contentSize
-		, content // contentHTML
-		, null // anchor
-		, true // closeBox
-		, Geogem.onPopupClose // closeBoxCallback
-		);
-		if (popupSize) {
-			Geogem.popup.maxSize = popupSize;
+		
+		if ($('#sidebar').length==0) {
+			// new popup
+			Geogem.popup = null;
+			Geogem.popup = new OpenLayers.Popup.FramedCloud("geoviewerpopup" // id
+			, feature.geometry.getBounds().getCenterLonLat() // lonlat
+			, popupSize // contentSize
+			, content // contentHTML
+			, null // anchor
+			, true // closeBox
+			, Geogem.onPopupClose // closeBoxCallback
+			);
+			if (popupSize) {
+				Geogem.popup.maxSize = popupSize;
+			}
+			feature.popup = Geogem.popup;
+			Geogem.popup.feature = feature;
+			this.map.addPopup(Geogem.popup);
 		}
-		feature.popup = Geogem.popup;
-		Geogem.popup.feature = feature;
-		this.map.addPopup(Geogem.popup);
+		else{
+			// sidebar
+			$('#sidebar_content').html(content);
+			$('#sidebar_content').height( $('#map').height()-100 );
+			$('#sidebar').show();			
+		}
 	}
 };
 
@@ -848,7 +857,7 @@ Geogem.findWMSLayer = function(layername) {
 		}
 	}
 	if (!layer){
-		alert('Configuratie fout. Laagnaam niet gevonden. Workspace?');
+		//alert('Configuratie fout. Laagnaam niet gevonden. Workspace?');
 	}
 	return layer;
 }
@@ -918,7 +927,13 @@ Geogem.createWMSLayer = function(config) {
 							for (var i=0;i<event.features.length; i++){
 								var featureType = event.features[i].gml.featureNSPrefix+':'+event.features[i].gml.featureType;
 								var layer = Geogem.findWMSLayer(featureType);
-								var layerName = layer.name;
+								var layerName = '--';
+								if (layer) {// some services do not have featureType etc in service response
+									layerName = layer.name;
+								}
+								else{
+									layer = "--";
+								}
 								if ($.inArray(featureType, this.noinfolayers)>=0){
 									if($.inArray(featureType, handledFeatureTypes)<0){
 										popupContent += "<h3>Geen info voor '"+layerName+"'</h3><br/>";
@@ -988,8 +1003,12 @@ Geogem.createWMSLayer = function(config) {
 				}
 			});
 			
+			var buffer = 20; // we default to a higher buffer then OL-default (5) because of tablet use
+			if (config.buffer){
+				buffer = config.buffer
+			}
 			info.vendorParams = {
-				buffer:20
+				buffer:buffer
 			}
 			
 			this.map.addControl(info);
