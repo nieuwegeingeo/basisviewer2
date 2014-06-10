@@ -431,3 +431,30 @@ input{
 	width:25px;
 	height:25px;
 }
+
+
+#tools {
+	position: absolute;
+	float:right;
+	top:47px;
+	right:5px;
+	z-index:1000;
+	height:20px;
+	width:200px; /*for IE*/
+}
+  
+.toolbutton {
+	background-color:white;
+	border:black 1px solid;
+	padding:0px 10px;
+	font-size:80%;
+	float:right;
+	margin-right:5px;
+	margin-bottom:0px;
+	margin-top:10px;
+	width:70px;
+}
+	
+.toolactive {
+	background-color: rgb(241, 192, 42);
+}
