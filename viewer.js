@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2014.7.7';
+Geogem.VERSION = '2014.7.7_2';
 
 Geogem.Settings = {
 
@@ -943,7 +943,7 @@ Geogem.createWMSLayer = function(config) {
 									layerName = layer.name;
 								}
 								else{
-									layer = "--";
+									layerName = "--";
 								}
 								if ($.inArray(featureType, this.noinfolayers)>=0){
 									if($.inArray(featureType, handledFeatureTypes)<0){
@@ -1141,7 +1141,6 @@ Geogem.init = function() {
 
 	OpenLayers.DOTS_PER_INCH = 96; // zelfde als http://gisserver1.agro.nl/arcgis/rest/services/topografie/MapServer
 	OpenLayers.Lang.setCode('nl');
-	OpenLayers.ProxyHost = (Geogem.Settings.proxyUrl) ? Geogem.Settings.proxyUrl + '?url=' : '';
 
 	Proj4js.defs["EPSG:28992"] = "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +no_defs no_defs";
 	
@@ -1490,6 +1489,8 @@ Geogem.init = function() {
 		Geogem.applicatieInit();
 		//alert(OpenLayers.VERSION_NUMBER)
 	}
+	// proxyUrl often set in applicatieInit
+	OpenLayers.ProxyHost = (Geogem.Settings.proxyUrl) ? Geogem.Settings.proxyUrl + '?url=' : '';
 	
 	// hack because the layerswitcher is created in applicatieInit
 	if (downloadTool){
