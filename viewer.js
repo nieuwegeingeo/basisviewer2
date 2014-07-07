@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2014.6.10';
+Geogem.VERSION = '2014.7.7';
 
 Geogem.Settings = {
 
@@ -160,7 +160,20 @@ Geogem.openFormulier = function(url){
 }
 
 Geogem.formatAttributes = function(attributes, title, fields) {
-    
+   
+    // when this feature holds ONLY null/undefined values return ""    
+	function isEmpty(map) {
+	   for(var key in map) {
+		  if ( map[key]) {
+			 return false;
+		  }
+	   }
+	   return true;
+	}
+	if (isEmpty(attributes)){
+		return "";
+	}
+	
 	var html = '';	
     if (! fields) {
         // use attribute names if fields are missing
@@ -1377,10 +1390,113 @@ Geogem.init = function() {
 			return true;
 		});
 	}
+	
+	
+	// check for 'downloadformat' setting	
+	var downloadTool = false;
+	for (var i = 0; i < Geogem.map.layers.length; i++) {
+		if (Geogem.map.layers[i].downloadformat){
+			downloadTool = true;
+			break;
+		}
+	}
+	if (downloadTool){
+	
+		$('#sidebar').delegate('input', 'change', 
+		function(event){
+			event.stopPropagation();
+			Geogem.downloadControl.layer.removeAllFeatures(); // remove polygon if there is
+			var layer = Geogem.map.getLayer(this.id);
+			Geogem.downloadControl.featureAdded = function(feature){
+				// mogelijk formats: http://docs.geoserver.org/latest/en/user/services/wfs/outputformats.html
+				// csv, excel, excel2007 of shape-zip
+				format=layer.downloadformat;
+				typename=layer.params.LAYERS;	
+				propertyname='';
+				if (layer.geogemfields){
+					for (var field in layer.geogemfields[typename]){
+						// field can be undefined
+						if(field){propertyname+=(field+',')}
+					}
+				}
+				// mogelijke geografisch functies:
+				// EQUALS, DISJOINT, INTERSECTS, TOUCHES, CROSSES, WITHIN, CONTAINS, OVERLAPS, RELATE, DWITHIN, BEYOND
+				var wfsuri = 'http://gng-ap713.nieuwegein.nl/geoserver/wfs?typeNames='+typename+'&SERVICE=WFS&OUTPUTFORMAT='+
+						format+'&VERSION=2.0.0&REQUEST=GetFeature&propertyname='+propertyname+'&CQL_FILTER=WITHIN(GEOM, '+new OpenLayers.Format.WKT().write(feature)+')';
+				window.open(wfsuri);
+			}
+			return true;
+		});
+		
+		$('<div id="tools"/>').appendTo($('#map'));
+		$('#tools').append('<span id="downloadcontrol" class="toolbutton">Download kaartobjecten</span>');
+		
+		$('#downloadcontrol').click(function(){
+			$('#downloadcontrol').toggleClass("toolactive");
+			if ($('#downloadcontrol').hasClass("toolactive")){
+				var content = '';
+				for (var i = 0; i < Geogem.map.layers.length; i++) {
+					// check for 'downloadformat' setting
+					if (Geogem.map.layers[i].downloadformat){
+						var id = Geogem.map.layers[i].id;
+						content += '<label><input type="radio" id="'+id+'" class="downloadlayer" name="downloadlayer" value="'+id+'"/><b>'+Geogem.map.layers[i].name+'</b></label><br/>';
+					}
+				}
+				
+				if (content.length==0){
+					// no layer had the 'download'-format option !
+					alert('Geen downloadbare lagen geconfigureerd');
+				}else{
+					content = "<p>Kies hieronder een laag en teken een vlak.</p>"+
+						"<p>De volgende lagen zijn beschikbaar om te downloaden:</p>"+
+						content;
+					Geogem.showSidebarContent(content);
+					// activate first layer
+					//$('.downloadlayer').attr("checked", true).checkboxradio("refresh");
+					$('.downloadlayer')[0].click();
+				}
+				Geogem.downloadControl.activate();
+			}
+			else{
+				Geogem.downloadControl.deactivate();
+				Geogem.downloadControl.layer.removeAllFeatures(); // remove polygon
+				Geogem.removeAllPopups(); // closes sidebar
+			}	
+		});
+		
+		var polygonLayerStyle = new OpenLayers.StyleMap(OpenLayers.Util.applyDefaults(
+				{fillColor: '#88179F', fillOpacity: 0.25, strokeColor: '#88179F'},
+				OpenLayers.Feature.Vector.style["default"])  );
+
+		var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer", {styleMap:polygonLayerStyle, displayInLayerSwitcher:false});
+		Geogem.map.addLayers([polygonLayer]);
+
+		Geogem.downloadControl = new OpenLayers.Control.DrawFeature(polygonLayer,
+				OpenLayers.Handler.Polygon)
+		Geogem.map.addControl(Geogem.downloadControl);
+			
+		// to remove already available polygons if starting a new one
+		Geogem.downloadControl.handler.callbacks.point = function(data) {
+			if (polygonLayer.features.length > 0){
+				polygonLayer.removeAllFeatures();
+			}
+		}
+	
+	}
+	
 
 	// child apps can implement a function applicationInit which will be called here:
 	if (Geogem.applicatieInit) {
 		Geogem.applicatieInit();
+		//alert(OpenLayers.VERSION_NUMBER)
+	}
+	
+	// hack because the layerswitcher is created in applicatieInit
+	if (downloadTool){
+		// change position of layerswitcher if available
+		if ($('.olControlLayerSwitcher').length>0){
+			$($('.olControlLayerSwitcher')[0]).css('top', '97px');
+		}
 	}
 	
 	if (! map.getCenter()) {
@@ -1492,96 +1608,5 @@ Geogem.init = function() {
 		}
 	}
 
-	// check for 'downloadformat' setting	
-	var downloadTool = false;
-	for (var i = 0; i < Geogem.map.layers.length; i++) {
-		if (Geogem.map.layers[i].downloadformat){
-			downloadTool = true;
-			break;
-		}
-	}
-	if (downloadTool){
-	
-		$('#sidebar').delegate('input', 'change', 
-		function(event){
-			event.stopPropagation();
-			Geogem.downloadControl.layer.removeAllFeatures(); // remove polygon if there is
-			var layer = Geogem.map.getLayer(this.id);
-			Geogem.downloadControl.featureAdded = function(feature){
-				// mogelijk formats: http://docs.geoserver.org/latest/en/user/services/wfs/outputformats.html
-				// csv, excel, excel2007 of shape-zip
-				format=layer.downloadformat;
-				typename=layer.params.LAYERS;		
-				// mogelijke geografisch functies:
-				// EQUALS, DISJOINT, INTERSECTS, TOUCHES, CROSSES, WITHIN, CONTAINS, OVERLAPS, RELATE, DWITHIN, BEYOND
-				var wfsuri = 'http://gng-ap713.nieuwegein.nl/geoserver/wfs?typeNames='+typename+'&SERVICE=WFS&OUTPUTFORMAT='+
-						format+'&VERSION=2.0.0&REQUEST=GetFeature&CQL_FILTER=WITHIN(GEOM, '+new OpenLayers.Format.WKT().write(feature)+')';
-				window.open(wfsuri);
-			}
-			return true;
-		});
-		
-		$('<div id="tools"/>').appendTo($('#map'));
-		$('#tools').append('<span id="downloadcontrol" class="toolbutton">Download kaartobjecten</span>');
-		
-		$('#downloadcontrol').click(function(){
-			$('#downloadcontrol').toggleClass("toolactive");
-			if ($('#downloadcontrol').hasClass("toolactive")){
-				var content = '';
-				for (var i = 0; i < Geogem.map.layers.length; i++) {
-					// check for 'downloadformat' setting
-					if (Geogem.map.layers[i].downloadformat){
-						var id = Geogem.map.layers[i].id;
-						content += '<label><input type="radio" id="'+id+'" class="downloadlayer" name="downloadlayer" value="'+id+'"/><b>'+Geogem.map.layers[i].name+'</b></label><br/>';
-					}
-				}
-				
-				if (content.length==0){
-					// no layer had the 'download'-format option !
-					alert('Geen downloadbare lagen geconfigureerd');
-				}else{
-					content = "<p>Kies hieronder een laag en teken een vlak.</p>"+
-						"<p>De volgende lagen zijn beschikbaar om te downloaden:</p>"+
-						content;
-					Geogem.showSidebarContent(content);
-					// activate first layer
-					//$('.downloadlayer').attr("checked", true).checkboxradio("refresh");
-					$('.downloadlayer')[0].click();
-				}
-				Geogem.downloadControl.activate();
-			}
-			else{
-				Geogem.downloadControl.deactivate();
-				Geogem.downloadControl.layer.removeAllFeatures(); // remove polygon
-				Geogem.removeAllPopups(); // closes sidebar
-			}	
-		});
-		
-		var polygonLayerStyle = new OpenLayers.StyleMap(OpenLayers.Util.applyDefaults(
-				{fillColor: '#88179F', fillOpacity: 0.25, strokeColor: '#88179F'},
-				OpenLayers.Feature.Vector.style["default"])  );
-
-		var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer", {styleMap:polygonLayerStyle, displayInLayerSwitcher:false});
-		Geogem.map.addLayers([polygonLayer]);
-
-		Geogem.downloadControl = new OpenLayers.Control.DrawFeature(polygonLayer,
-				OpenLayers.Handler.Polygon)
-		Geogem.map.addControl(Geogem.downloadControl);
-			
-		// to remove already available polygons if starting a new one
-		Geogem.downloadControl.handler.callbacks.point = function(data) {
-			if (polygonLayer.features.length > 0){
-				polygonLayer.removeAllFeatures();
-			}
-		}
-		// change position of layerswitcher if available
-		if ($('.olControlLayerSwitcher').length>0){
-			$($('.olControlLayerSwitcher')[0]).css('top', '97px');
-		}
-	
-	
-	
-	}
-	
 	
 } 
