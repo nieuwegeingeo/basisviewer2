@@ -1051,7 +1051,8 @@ Geogem.createLegendDownloadBar = function() {
 	$('#legendhead').click(function(){
 		$('#legendImage').toggle();
 		$('.legendImage').toggle();
-		$('#downloadbar').toggle();
+		// let download part follow legend visibility
+		$('#downloadbar').css("display", $('#legendImage').css("display"));
 		// below is needed for firefox (we set a big margin to make the closebutton better clickable on touch devices)
 		if ($('#legendImage').is(":visible")){
 			$('#legend').css('overflow-y', 'auto')
@@ -1076,7 +1077,7 @@ Geogem.addDownloadButton = function(url, icon, tooltip){
 		else{
 			$('#legendhead h3').html($('#legendhead h3').html()+' / '+title);
 		}
-		$('#legend').append('<div id="downloadbar"><h3>'+title+'</h3></div>');		
+		$('#legend').append('<div id="downloadbar" style="display:none"><h3>'+title+'</h3></div>');		
 	}
 	// append actual image plus link
 	$('#downloadbar').append('<a href="'+url+'"><img src="'+icon+'" title="'+tooltip+'"/></a>');
