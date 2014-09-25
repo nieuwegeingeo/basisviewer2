@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2014.7.7_2';
+Geogem.VERSION = '2014.9.11';
 
 Geogem.Settings = {
 
@@ -1050,7 +1050,7 @@ Geogem.createLegendDownloadBar = function() {
 	// attach show hide click
 	$('#legendhead').click(function(){
 		$('#legendImage').toggle();
-		$('.legendImage').toggle();
+		//$('.legendImage').toggle();
 		// let download part follow legend visibility
 		$('#downloadbar').css("display", $('#legendImage').css("display"));
 		// below is needed for firefox (we set a big margin to make the closebutton better clickable on touch devices)
@@ -1374,9 +1374,35 @@ Geogem.init = function() {
 	$('#bottombar').html('<span>Team Geo-informatie - <a href="mailto:geoinformatie@nieuwegein.nl">geoinformatie@nieuwegein.nl</a></span>');
 	
 	// legend
-	if (Geogem.Settings.legendUrl) {
+	if (Geogem.Settings.legendUrl || Geogem.Settings.legend) {
 		Geogem.createLegendDownloadBar();
-		$('#legend').append('<img id="legendImage" src="'+Geogem.Settings.legendUrl+'" />');
+		var legendSetting = Geogem.Settings.legendUrl?Geogem.Settings.legendUrl:Geogem.Settings.legend;
+		if (legendSetting instanceof Array){
+			// legend is an array of {title:'title',url:'url'} objects
+			$('#legend').append('<div id="legendImage" src="'+legendSetting+'" />');
+			for (var i=0;i<legendSetting.length;i++){
+				var l = legendSetting[i];
+				$('#legendImage').append('<h3>'+l.title+'</h3><img class="legendImage" style="display:none;" src="'+l.url+'" />');
+			}
+			// show first one so we can just toggle others
+			$($('.legendImage')[0]).css('display', 'block')
+			// harmonice behaviour
+			$("#legendImage h3").click(function(){
+				if($(this).next().is(':visible')){
+					// clicking on an already visible one: hide it
+					$(this).next().hide();
+				}
+				else{
+					$('.legendImage').hide();
+					$(this).next().show();
+				}
+			});
+		}
+		else if (typeof legendSetting == 'string'){
+			// legend is string: should be an image url
+			$('#legend').append('<img id="legendImage" src="'+legendSetting+'" />');
+		}
+		else alert("Configuratie fout: legend of legendUrl heeft foute waarde: "+legendSetting)
 	}
 	
 	if (Geogem.Settings.sidebar) {
@@ -1401,7 +1427,6 @@ Geogem.init = function() {
 		}
 	}
 	if (downloadTool){
-	
 		$('#sidebar').delegate('input', 'change', 
 		function(event){
 			event.stopPropagation();
@@ -1413,6 +1438,11 @@ Geogem.init = function() {
 				format=layer.downloadformat;
 				typename=layer.params.LAYERS;	
 				propertyname='';
+				if(feature.geometry.getArea()==0 || feature.geometry.getVertices().length < 3){
+					alert("Geen geldige gekozen gebied (te klein of te weinig hoekpunten).\nTeken een nieuw vlak.");
+					Geogem.downloadControl.layer.removeAllFeatures();
+					return;
+				}
 				if (layer.geogemfields){
 					for (var field in layer.geogemfields[typename]){
 						// field can be undefined
@@ -1421,7 +1451,7 @@ Geogem.init = function() {
 				}
 				// mogelijke geografisch functies:
 				// EQUALS, DISJOINT, INTERSECTS, TOUCHES, CROSSES, WITHIN, CONTAINS, OVERLAPS, RELATE, DWITHIN, BEYOND
-				var wfsuri = 'http://gng-ap713.nieuwegein.nl/geoserver/wfs?typeNames='+typename+'&SERVICE=WFS&OUTPUTFORMAT='+
+				var wfsuri = 'http://' + location.host + '/geoserver/wfs?typeNames='+typename+'&SERVICE=WFS&OUTPUTFORMAT='+
 						format+'&VERSION=2.0.0&REQUEST=GetFeature&propertyname='+propertyname+'&CQL_FILTER=WITHIN(GEOM, '+new OpenLayers.Format.WKT().write(feature)+')';
 				window.open(wfsuri);
 			}
@@ -1500,6 +1530,8 @@ Geogem.init = function() {
 			$($('.olControlLayerSwitcher')[0]).css('top', '97px');
 		}
 	}
+	
+	Geogem.map.addControl(new OpenLayers.Control.LoadingPanel());
 	
 	if (! map.getCenter()) {
 		// uit urlParams: bbox of centerx/centery/kaartschaal
