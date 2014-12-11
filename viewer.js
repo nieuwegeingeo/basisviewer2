@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2014.9.25';
+Geogem.VERSION = '2014.10.30';
 
 Geogem.Settings = {
 
@@ -593,7 +593,7 @@ Geogem.createKmlLayer = function(config) {
 		styleMap: styleMap,
 		projection: new OpenLayers.Projection("EPSG:4326"),
 		strategies: [new OpenLayers.Strategy.Fixed()],
-		protocol: new OpenLayers.Protocol.HTTP( kmlProtocolOptions ) 
+		protocol: new OpenLayers.Protocol.HTTP( kmlProtocolOptions )
 	};
 		
 	OpenLayers.Util.extend(options, config.options);
@@ -1050,11 +1050,9 @@ Geogem.createLegendDownloadBar = function() {
 	// attach show hide click
 	$('#legendhead').click(function(){
 		$('#legendImage').toggle();
-		//$('.legendImage').toggle();
-		// let download part follow legend visibility
-		$('#downloadbar').css("display", $('#legendImage').css("display"));
+		$('#downloadbar').toggle();
 		// below is needed for firefox (we set a big margin to make the closebutton better clickable on touch devices)
-		if ($('#legendImage').is(":visible")){
+		if ($('#legendImage').is(":visible") || $('#downloadbar').is(":visible")){
 			$('#legend').css('overflow-y', 'auto')
 		}
 		else{
@@ -1077,7 +1075,7 @@ Geogem.addDownloadButton = function(url, icon, tooltip){
 		else{
 			$('#legendhead h3').html($('#legendhead h3').html()+' / '+title);
 		}
-		$('#legend').append('<div id="downloadbar" style="display:none"><h3>'+title+'</h3></div>');		
+		$('#legend').append('<div id="downloadbar"><h3>'+title+'</h3></div>');		
 	}
 	// append actual image plus link
 	$('#downloadbar').append('<a href="'+url+'"><img src="'+icon+'" title="'+tooltip+'"/></a>');
@@ -1144,6 +1142,7 @@ Geogem.init = function() {
 	OpenLayers.Lang.setCode('nl');
 
 	Proj4js.defs["EPSG:28992"] = "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +no_defs no_defs";
+	Proj4js.defs["EPSG:3857"] = "+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs";	
 	
 	var boundsNL = new OpenLayers.Bounds(-90000, 205000, 380000, 719000);
 	//var boundsNG = new OpenLayers.Bounds(132000, 445000, 137000, 453000);
