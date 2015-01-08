@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2014.12.11';
+Geogem.VERSION = '2015.01.08';
 
 Geogem.Settings = {
 
@@ -116,6 +116,13 @@ Geogem.Settings = {
    * If provide a (fixed) legend, it will be shown in the map
    */
   legendUrl: null,
+  
+  /**
+   * If provided a infourl, an 'i'-button will be shown, and
+   * the info from the url will be shown in sidebar content
+   * when clicked on the i-button
+   */
+  infoUrl: null,
   
   /**
   * If property 'geolocation'=='locate' or 'track', the geolocation control
@@ -443,8 +450,9 @@ Geogem.removeAllPopups = function() {
 			Geogem.map.removePopup(Geogem.map.popups[i]);
 		}
 	}
-	if ($('#sidebar').length>0){
-		$('#sidebar').hide();
+	if ($('#sidebar').length>0 && $('#sidebar').hasClass('sidebarhide')){
+		//$('#sidebar').hide();
+		$('#sidebar').toggleClass('sidebarhide');
 	}
 };
 
@@ -1035,10 +1043,14 @@ Geogem.createWMSLayer = function(config) {
 
 Geogem.showSidebarContent = function(content) {
 	$('#sidebar_content').html(content);
-	$('#sidebar_content').height( $('#map').height()-100 );
+	$('#sidebar_content').height( $('#map').height()-195 );
+	// showing getfeatureinfo, then hide the General Info
+	$('#sidebar_content2_head').addClass('folded');
+	$('#sidebar_content2_data').addClass('sidebar_content2_hide');
+	$('#sidebar_content').show();
 	$('#sidebar').show();
 }
-	
+
 Geogem.createLegendDownloadBar = function() {
 	if ($('#legend').length>0){
 		return; // there is already a legend or download
@@ -1378,22 +1390,26 @@ Geogem.init = function() {
 		var legendSetting = Geogem.Settings.legendUrl?Geogem.Settings.legendUrl:Geogem.Settings.legend;
 		if (legendSetting instanceof Array){
 			// legend is an array of {title:'title',url:'url'} objects
-			$('#legend').append('<div id="legendImage" src="'+legendSetting+'" />');
+			$('#legend').append('<div id="legendImage" src="'+legendSetting+'"/>');
 			for (var i=0;i<legendSetting.length;i++){
 				var l = legendSetting[i];
-				$('#legendImage').append('<h3>'+l.title+'</h3><img class="legendImage" style="display:none;" src="'+l.url+'" />');
+				$('#legendImage').append('<h3 class="folded">'+l.title+'</h3><img class="legendImage" style="display:none;" src="'+l.url+'" />');
 			}
 			// show first one so we can just toggle others
 			$($('.legendImage')[0]).css('display', 'block')
-			// harmonice behaviour
+			$($('#legendImage h3')[0]).removeClass('folded')
+			// harmonica behaviour
 			$("#legendImage h3").click(function(){
 				if($(this).next().is(':visible')){
 					// clicking on an already visible one: hide it
 					$(this).next().hide();
+					$(this).addClass('folded');
 				}
 				else{
-					$('.legendImage').hide();
+					$('.legendImage').hide(); // hide ALL legend images
+					$('#legendImage h3').addClass('folded'); // restore the + for all h3's
 					$(this).next().show();
+					$(this).removeClass('folded'); // now show the - for this h3
 				}
 			});
 		}
@@ -1404,19 +1420,39 @@ Geogem.init = function() {
 		else alert("Configuratie fout: legend of legendUrl heeft foute waarde: "+legendSetting)
 	}
 	
-	if (Geogem.Settings.sidebar) {
+	if (Geogem.Settings.sidebar || Geogem.infoUrl) {
 		var sidebarhtml = '<div id="sidebar">'+
-		'	<div id="sidebar_head"><h3>Informatie</h3><div class="sidebarMinimize" id="sidebarShowHide"></div></div>'+
-		'	<div id="sidebar_content"/>'+
-		'</div>';
+		'	<div class="sidebarMinimize" id="sidebarShowHide"></div>'+
+		//'<div id="sidebarWrapper" style="border: 1px solid red;">'+
+		'   <div id="sidebar_head"><h3>&nbsp;</h3>'+		
+		'	  <div id="sidebar_main_head"><h3>Informatie</h3></div>' +
+		'     <div id="sidebar_content2"><h3 id="sidebar_content2_head">Informatie algemeen</h3>'+
+		'     <div id="sidebar_content2_data"/></div>'+
+		'   </div>'+
+		'   <div id="sidebar_content"/>'+
+		//'</div>'+
+		'</div>';	
 		$('#map').append($(sidebarhtml));
-		$('#sidebar_head').click(function(){
-			$('#sidebar').toggle();
+		$('#sidebarShowHide').click(function(){
+			$('#sidebar').toggleClass('sidebarhide');
+			$('#sidebarShowHide').toggleClass('sidebarMinimize').toggleClass('sidebarMaximize');
 			return true;
 		});
+		$('#sidebar_content2_head').click(function(){
+			$('#sidebar_content2_data').toggleClass('sidebar_content2_hide');
+			$('#sidebar_content2_head').toggleClass('folded');
+			// if Informatie Algemeen is showing, hide the getfeatureinfo
+			if (!$('#sidebar_content2_head').hasClass('folded')){
+				$('#sidebar_content').html('');
+				$('#sidebar_content').css('height', '0px');
+			}
+			return true;
+		});		
 	}
-	
-	
+	if (Geogem.Settings.infoUrl){
+		$('#sidebar_content2_data').load(Geogem.Settings.infoUrl);
+		$('#sidebar').show();
+	}
 	// check for 'downloadformat' setting	
 	var downloadTool = false;
 	for (var i = 0; i < Geogem.map.layers.length; i++) {
@@ -1476,12 +1512,14 @@ Geogem.init = function() {
 					// no layer had the 'download'-format option !
 					alert('Geen downloadbare lagen geconfigureerd');
 				}else{
-					content = "<p>Kies hieronder een laag en teken een vlak.</p>"+
+					content = "<p>U kunt informatie opvragen per object door de 'Download kaartobjecten' te deactiveren.</p>"+
+						"<p>Kies hieronder een laag en teken een vlak</br>(dubbelklik om het tekenen te stoppen).</p>"+
 						"<p>De volgende lagen zijn beschikbaar om te downloaden:</p>"+
 						content;
-					Geogem.showSidebarContent(content);
+					//Geogem.showSidebarContent(content);
+					$('#sidebar_content2_data').html(content);
+					$('#sidebar').show();
 					// activate first layer
-					//$('.downloadlayer').attr("checked", true).checkboxradio("refresh");
 					$('.downloadlayer')[0].click();
 				}
 				Geogem.downloadControl.activate();

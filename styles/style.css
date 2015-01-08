@@ -26,6 +26,7 @@
 
 .olControlScaleLine {
 	bottom:40px;
+        z-index: 999 !important;
 }
 
 #featurePopup h3 {
@@ -294,6 +295,7 @@ form{
 
 #legend {
 	background:none repeat scroll 0 0 white;
+	border: 2px solid #88179F;
 	padding:10px;
 	bottom:50px;
 	position:absolute;
@@ -304,14 +306,30 @@ form{
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+#infobutton {
+	padding:10px;
+	top:23px;
+	position:absolute;
+	left:60px;
+	z-index:990;
+	max-height: 75%;
+    overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 
 #legendImage > h3 {
-    background-color: #88179f !important;
-	color:white;
-	opacity: 0.4;
+    background-color: #f7e3ff !important;
+	color:#333;
     filter: alpha(opacity=40); /* For IE8 and earlier */
+	background: url("img/min.png") no-repeat right; /* for IE8 */
+    background: url("img/min.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0);
 	padding-left: 4px;
     margin-bottom: 2px;
+}
+.folded {
+	background: url("img/plus.png") no-repeat right !important; /* for IE8 */
+    background: url("img/plus.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0) !important;
 }
 
 .legendMinimize{
@@ -389,52 +407,82 @@ input{
 	max-width: 500px;
 }
 
-#sidebar_head  h3 {
-	margin: 4px;
-}
-#sidebar_content  h3 {
-    background-color: #F7E3FF;
-    padding-left: 6px;
-	margin-top:5px;
-}
-
 #featurePopup_contentDiv {
     overflow: auto !important;
 	overflow-x: hidden;
 	overflow-y: auto;
 }
+#sidebar_content{
+	border-right: 2px solid #88179F;
+	border-bottom: 2px solid #88179F;
+    padding: 0px 20px 10px 10px;
+	background: white;
+	margin-left: -10px;
+	margin-top: -10px;
+    padding-left: 10px;
+	min-height: 20px;
+}
+#sidebar_head {
+    background: none repeat scroll 0 0 white;
+	border-top: 2px solid #88179F;
+	border-right: 2px solid #88179F;
+	margin-left: -10px;
+	padding: 0 20px 10px 10px;
+	/*min-height: 300px;*/
+}
+#sidebar_main_head > h3 {
+    padding-left: 5px;
+}
+#sidebar_content  h3, #sidebar_content2  h3 {
+    background-color: #F7E3FF !important;
+    padding-left: 6px;
+	margin-top:5px;
+}
+#sidebar_content2_data {
+	overflow: hidden;
+    padding-top: 10px;
+}
+#sidebar_content2_head {
+	background: url("img/min.png") no-repeat right; /* for IE8 */
+    background: url("img/min.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0);
+}
 
+.sidebar_content2_hide{
+	height:0px;
+}
+.sidebarhide{
+	left:-410px;
+}
 #sidebar {
-	background: none repeat scroll 0 0 #FFFFFF;
-    border: 3px solid #88179F;
     float: left;
-    hheight: 94%;
     position: absolute;
-    top: 25px;
+    top: 80px; /*25px;*/
     width: 400px;
 	font-size: 80%;
-	overflow:auto;
+	overflow:hidden;
 	padding:10px;
+	padding-right:20px;
 	margin:0px;
 	display:none;
 	z-index:1000; /* let op geocoder result z = 1002 */
 }
-#sidebarShowHide {
-  width: 17px; 
-  height: 17px; 
-  position: absolute; 
-  right: 15px; 
-  top: 15px; 
-  z-index: 1;
+#sidebarShowHide {;
+    height: 80px;
+    position: absolute;
+    right: 2px;
+    top: 15px;
+    width: 20px;
+    z-index: 1;
 }
+
 .sidebarMinimize{
-	background: url("img/minimizebuttonleft.gif");
+	background: url("img/minimizebuttonleft.png") no-repeat;
     cursor: pointer;
 	width:25px;
 	height:25px;
 }
 .sidebarMaximize {
-	background: url("img/minimizebuttonleft.gif");
+	background: url("img/minimizebuttonright.png") no-repeat;
     cursor: pointer;
 	width:25px;
 	height:25px;
