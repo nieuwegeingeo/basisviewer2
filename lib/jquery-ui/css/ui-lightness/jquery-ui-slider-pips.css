@@ -337,7 +337,7 @@
     /* SELECTED STATES */
     /* Comment out this chuck of code if you don't want to have
         the new label colours shown */
-
+/*
     .ui-slider-pips .ui-slider-pip-selected-initial,
     .ui-slider-pips .ui-slider-pip-selected-initial-first,
     .ui-slider-pips .ui-slider-pip-selected-initial-second {
@@ -377,7 +377,7 @@
     .ui-slider-pips .ui-slider-pip-selected-second {
         color: #E70081;
     }
-
+*/
 
 
 

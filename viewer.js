@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2015.01.08';
+Geogem.VERSION = '2015.12.21';
 
 Geogem.Settings = {
 
@@ -169,9 +169,9 @@ Geogem.openFormulier = function(url){
 Geogem.formatAttributes = function(attributes, title, fields) {
    
     // when this feature holds ONLY null/undefined values return ""    
-	function isEmpty(map) {
-	   for(var key in map) {
-		  if ( map[key]) {
+	function isEmpty(_map) {
+	   for(var key in _map) {
+		  if ( _map[key]) {
 			 return false;
 		  }
 	   }
@@ -193,7 +193,7 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 		html += '<h3>'+title+'</h3>';
 	}
 	if (attributes) {
-		html += '<table border=0 id="attrpopuptable">'
+		//html += '<table border=0 id="attrpopuptable">'
 		var row = 0;
 		var rowstyle;
 		for (var item in fields) {
@@ -219,6 +219,7 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 			else if (item.substring(0, 4) == 'name') {
 				// for KML: NO 'name' or 'description' in front of information
 				html = '<tr><td colspan="2"><b>'+ attributes[item] + '</b></td></tr>' + html;
+				//html += '<tr><td colspan="2"><b>'+ attributes[item] + '</b></td></tr>';
 			}
 			else if (item.substring(0, 10) == 'visibility') {
 				// for KML: NO 'visibility'
@@ -226,11 +227,21 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 			else if (attributes[item] instanceof Object) {
 				// for KML from for example qgis
 				var value = attributes[item]['value'];
-				if (value.slice(0,4)=='http') {
-					// clean url: lets try to make it a link
-					value = '<a href="'+value+'" target="_blank">'+value+'</a>';
+				if (value != undefined){
+					if (value.slice(0,4)=='http') {
+						// clean url: lets try to make it a link
+						value = '<a href="'+value+'" target="_blank">'+value+'</a>';
+					}
+					html += '<tr class="inforow'+rowstyle+'"><td class="first"><b>'+ attributes[item]['displayName'] +'</b></td><td>'+ value + '</td></tr>';
 				}
-				html += '<tr class="inforow'+rowstyle+'"><td class="first"><b>'+ attributes[item]['displayName'] +'</b></td><td>'+ value + '</td></tr>';
+			}
+			else if (item.substring(0, 4).toUpperCase() == 'FOTO') {
+				var value = attributes[item];
+				// development
+				//value = "http://geoserver.nieuwegein.nl/beheer2014fotos/m_reparatieplekken_reparatieplek8.jpg";
+				if (value && value.length>5){
+					html += '<tr><td colspan="2"><a href="'+value+'" target="basisviewer_foto"><img style="border:0;width:220px;" src="'+value+'"/></a></td></tr>';
+				}
 			}
 			else
 			{
@@ -240,9 +251,12 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 					//alert("Configuratie fout: '"+item+"' is niet een attribuut van deze laag");
 				}
 				else {
-					// value could be null:
-					if (value==undefined){value=' - '}
-					if (value.slice(0,4)=='http') {
+					// value could be null
+					if (value == undefined){
+						value = ' - '
+					}
+					// tricky: value can be a boolean: like false; make a string from it for this test
+					else if ((""+value).slice(0,4)=='http') {
 						// clean url: lets try to make it a link
 						value = '<a href="'+value+'" target="_blank">'+value+'</a>';
 					}
@@ -250,7 +264,7 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 				}
 			}
 		}
-		html += "</table><br/>"
+		html = '<table border=0 id="attrpopuptable">'+html+'</table><br/>'
 	}
     return html;
 };
@@ -928,9 +942,16 @@ Geogem.createWMSLayer = function(config) {
 					},
 					getfeatureinfo: function(event) {
 						popupContent = '';	
+						
 						// reset cursor
 						OpenLayers.Element.removeClass(Geogem.map.viewPortDiv, "olCursorWait");						
-						if (infoformat == 'text/plain'){
+
+						// optional application getfeatureinfo function
+						if (Geogem.getfeatureinfo){
+							popupContent = Geogem.getfeatureinfo(event, popupContent);
+							return;
+						}						
+						else if (infoformat == 'text/plain'){
 							popupContent = '<pre>'+event.text+'</pre>';
 						}
 						else if (infoformat == 'text/html'){
@@ -980,7 +1001,6 @@ Geogem.createWMSLayer = function(config) {
 								);
 							}
 						}
-						
 						if (popupContent.length > 0){
 							$('#featurePopup').show();
 							if ($('#featurePopup').length>0){
@@ -1043,12 +1063,16 @@ Geogem.createWMSLayer = function(config) {
 
 Geogem.showSidebarContent = function(content) {
 	$('#sidebar_content').html(content);
+	
 	$('#sidebar_content').height( $('#map').height()-195 );
 	// showing getfeatureinfo, then hide the General Info
 	$('#sidebar_content2_head').addClass('folded');
 	$('#sidebar_content2_data').addClass('sidebar_content2_hide');
 	$('#sidebar_content').show();
 	$('#sidebar').show();
+	if ($('#sidebar').hasClass('sidebarhide')){
+		$('#sidebarShowHide').click()
+	}
 }
 
 Geogem.createLegendDownloadBar = function() {
@@ -1074,7 +1098,7 @@ Geogem.createLegendDownloadBar = function() {
 	});
 }
 
-Geogem.addDownloadButton = function(url, icon, tooltip){
+Geogem.addDownloadButton = function(url, icon, tooltipOrTitle, onePerLine){
 	// check/create a legend/downloadbar if needed
 	Geogem.createLegendDownloadBar();
 	// check create download part if needed
@@ -1090,7 +1114,15 @@ Geogem.addDownloadButton = function(url, icon, tooltip){
 		$('#legend').append('<div id="downloadbar"><h3>'+title+'</h3></div>');		
 	}
 	// append actual image plus link
-	$('#downloadbar').append('<a href="'+url+'"><img src="'+icon+'" title="'+tooltip+'"/></a>');
+	if (onePerLine){
+		// smaller icon + title, one line per download
+	    $('#downloadbar').append('<a href="'+url+'"><img style="height:30px;" src="'+icon+'" title="'+tooltipOrTitle+'"/></a>');
+		$('#downloadbar').append('<span style="font-size:80%">&nbsp;'+tooltipOrTitle+'</span><br/>');
+	}
+	else{
+		// big icon only
+		$('#downloadbar').append('<a href="'+url+'"><img src="'+icon+'" title="'+tooltipOrTitle+'"/></a>');
+	}
 }
 
 Geogem.createWMTSLayer = function(layerConfigObj) {
@@ -1531,17 +1563,15 @@ Geogem.init = function() {
 			}	
 		});
 		
+		// download control
 		var polygonLayerStyle = new OpenLayers.StyleMap(OpenLayers.Util.applyDefaults(
 				{fillColor: '#88179F', fillOpacity: 0.25, strokeColor: '#88179F'},
 				OpenLayers.Feature.Vector.style["default"])  );
-
 		var polygonLayer = new OpenLayers.Layer.Vector("Polygon Layer", {styleMap:polygonLayerStyle, displayInLayerSwitcher:false});
 		Geogem.map.addLayers([polygonLayer]);
-
 		Geogem.downloadControl = new OpenLayers.Control.DrawFeature(polygonLayer,
 				OpenLayers.Handler.Polygon)
 		Geogem.map.addControl(Geogem.downloadControl);
-			
 		// to remove already available polygons if starting a new one
 		Geogem.downloadControl.handler.callbacks.point = function(data) {
 			if (polygonLayer.features.length > 0){
