@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2015.12.21';
+Geogem.VERSION = '2015.12.21-2';
 
 Geogem.Settings = {
 
@@ -372,6 +372,8 @@ OpenLayers.Control.LayerSwitcher.prototype.onButtonClick = function(evt) {
 Geogem.onFeatureSelect = function(e) {
 
 	var feature = e.feature;
+	var layer = e.object;
+	
 	var content = null;
 	var attributes = null;
 	var content = '';
@@ -386,9 +388,14 @@ Geogem.onFeatureSelect = function(e) {
 	else {
 		attributes = feature.attributes;
 	}
-
-	content = Geogem.formatAttributes(attributes);
-
+	// layer can have a attribute 'geogem_fields', set in settings/init of the layer
+	if (layer && layer.geogem_fields){
+		content = Geogem.formatAttributes(attributes, '', layer.geogem_fields);
+	}
+	else{
+		content = Geogem.formatAttributes(attributes);
+	}
+	
 	if (content) {
 	
 		var popupSize = null;
