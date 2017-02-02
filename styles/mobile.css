@@ -1,3 +1,15 @@
 .zoomtool img{
 	width:40px;
 }
+   
+/* smaller sidebar for mobiles */
+#sidebar {
+    width: 300px;
+}
+/* BUT then also smaller sidebarhide, to show the table */
+.sidebarhide {
+    left: -310px;
+}
+#sidebarShowHide{
+    right: 1px;
+} 
