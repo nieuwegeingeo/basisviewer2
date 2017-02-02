@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2017.02.02';
+Geogem.VERSION = '2017.02.02-2';
 
 Geogem.Settings = {
 
@@ -199,7 +199,11 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 		for (var field in fields) {
 			row++
 			rowstyle = row%2;
-			if (field.substring(0, 5) == 'DATUM') {
+            if (field in attributes == false){
+                // either wrongly configured fields, OR at this zoomlevel there are other fields? 
+                // Anyway: ignore
+            }
+			else if (field.substring(0, 5) == 'DATUM') {
 				// reorder year, month and date
 				html += '<tr><td class="first">' + fields[field] + '</td><td>' + attributes[field].substring(8, 10) + '-' + attributes[field].substring(5, 7) + '-' + attributes[field].substring(0, 4) + '</td></tr>';
 			}
