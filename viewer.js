@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2015.12.21-2';
+Geogem.VERSION = '2017.02.02';
 
 Geogem.Settings = {
 
@@ -185,8 +185,8 @@ Geogem.formatAttributes = function(attributes, title, fields) {
     if (! fields) {
         // use attribute names if fields are missing
         fields = {};
-        for (var item in attributes) {
-            fields[item] = item;
+        for (var field in attributes) {
+            fields[field] = field;
         }
     }
 	if (title) {
@@ -196,47 +196,47 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 		//html += '<table border=0 id="attrpopuptable">'
 		var row = 0;
 		var rowstyle;
-		for (var item in fields) {
+		for (var field in fields) {
 			row++
 			rowstyle = row%2;
-			if (item.substring(0, 5) == 'DATUM') {
+			if (field.substring(0, 5) == 'DATUM') {
 				// reorder year, month and date
-				html += '<tr><td class="first">' + fields[item] + '</td><td>' + attributes[item].substring(8, 10) + '-' + attributes[item].substring(5, 7) + '-' + attributes[item].substring(0, 4) + '</td></tr>';
+				html += '<tr><td class="first">' + fields[field] + '</td><td>' + attributes[field].substring(8, 10) + '-' + attributes[field].substring(5, 7) + '-' + attributes[field].substring(0, 4) + '</td></tr>';
 			}
-			else if (item.substring(0, 7) == 'snippet') {
+			else if (field.substring(0, 7) == 'snippet') {
 				// for KML: NO style attribute	
 			}			
-			else if (item.substring(0, 5) == 'style') {
+			else if (field.substring(0, 5) == 'style') {
 				// for KML: NO style attribute	
 			}
-			else if (item.substring(0, 5) == 'label') {
+			else if (field.substring(0, 5) == 'label') {
 				// for KML: a label attribute is NOT to be shown in popup
 			}
-			else if (item.substring(0, 11) == 'description' ) {
+			else if (field.substring(0, 11) == 'description' ) {
 				// for KML: NO 'key' in front of information (description is html already)
-				html += '<tr><td colspan="2">' + attributes[item] + '</td></tr>';
+				html += '<tr><td colspan="2">' + attributes[field] + '</td></tr>';
 			}
-			else if (item.substring(0, 4) == 'name') {
+			else if (field.substring(0, 4) == 'name') {
 				// for KML: NO 'name' or 'description' in front of information
-				html = '<tr><td colspan="2"><b>'+ attributes[item] + '</b></td></tr>' + html;
-				//html += '<tr><td colspan="2"><b>'+ attributes[item] + '</b></td></tr>';
+				html = '<tr><td colspan="2"><b>'+ attributes[field] + '</b></td></tr>' + html;
+				//html += '<tr><td colspan="2"><b>'+ attributes[field] + '</b></td></tr>';
 			}
-			else if (item.substring(0, 10) == 'visibility') {
+			else if (field.substring(0, 10) == 'visibility') {
 				// for KML: NO 'visibility'
 			}
-			else if (attributes[item] instanceof Object) {
+			else if (attributes[field] instanceof Object) {
 				// for KML from for example qgis
-				var value = attributes[item]['value'];
+				var value = attributes[field]['value'];
 				if (value != undefined){
 					if (value.slice(0,4)=='http') {
 						// clean url: lets try to make it a link
 						value = '<a href="'+value+'" target="_blank">'+value+'</a>';
 					}
-					html += '<tr class="inforow'+rowstyle+'"><td class="first"><b>'+ attributes[item]['displayName'] +'</b></td><td>'+ value + '</td></tr>';
+					html += '<tr class="inforow'+rowstyle+'"><td class="first"><b>'+ attributes[field]['displayName'] +'</b></td><td>'+ value + '</td></tr>';
 				}
 			}
-			else if (item.substring(0, 4).toUpperCase() == 'FOTO') {
-				var value = attributes[item];
+			else if (field.substring(0, 4).toUpperCase() == 'FOTO') {
+				var value = attributes[field];
 				// development
 				//value = "http://geoserver.nieuwegein.nl/beheer2014fotos/m_reparatieplekken_reparatieplek8.jpg";
 				if (value && value.length>5){
@@ -245,12 +245,12 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 			}
 			else
 			{
-				var value = attributes[item];
+				var value = attributes[field];
 				// config error
-				if (item in attributes == false){
-					//alert("Configuratie fout: '"+item+"' is niet een attribuut van deze laag");
+				/*if (field in attributes == false){
+					//alert("Configuratie fout: '"+field+"' is niet een attribuut van deze laag");
 				}
-				else {
+				else {*/
 					// value could be null
 					if (value == undefined){
 						value = ' - '
@@ -260,8 +260,13 @@ Geogem.formatAttributes = function(attributes, title, fields) {
 						// clean url: lets try to make it a link
 						value = '<a href="'+value+'" target="_blank">'+value+'</a>';
 					}
-					html += '<tr class="inforow'+rowstyle+'"><td class="first">' + fields[item] + '</td><td>' + value + '</td></tr>';
-				}
+					// tricky: value can be a boolean: like false; make a string from it for this test
+					else if ((""+value).slice(0,10)=='data:image') {
+						// clean url: lets try to make it a link
+						value = '<img src="'+value+'" width="100%"/>';
+					}
+					html += '<tr class="inforow'+rowstyle+'"><td class="first">' + fields[field] + '</td><td>' + value + '</td></tr>';
+				//}
 			}
 		}
 		html = '<table border=0 id="attrpopuptable">'+html+'</table><br/>'
@@ -956,7 +961,7 @@ Geogem.createWMSLayer = function(config) {
 						// optional application getfeatureinfo function
 						if (Geogem.getfeatureinfo){
 							popupContent = Geogem.getfeatureinfo(event, popupContent);
-							return;
+							//if(){return;}
 						}						
 						else if (infoformat == 'text/plain'){
 							popupContent = '<pre>'+event.text+'</pre>';
@@ -1323,7 +1328,7 @@ Geogem.init = function() {
 		function(event){
 			event.stopPropagation();
 			// first make all buttons inactive
-			$('.baselayerbutton').css("background-color", "#fff");
+			$('#baselayerbuttons .baselayerbutton').css("background-color", "#fff");
 			$(this).css("background-color", "#F1C02A");
 			Geogem.map.setBaseLayer(Geogem.map.getLayersByName(this.id)[0]);
 			return false;
