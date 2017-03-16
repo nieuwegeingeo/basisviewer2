@@ -210,7 +210,7 @@
 }
 
 .olControlLayerSwitcher {
-	top: 57px;
+	top: 114px !important;
 	min-width: 24em;
 }
 
@@ -322,22 +322,37 @@ form{
 	position:relative;
 }
 #baselayerbuttons {
-	position: absolute;
-	float:right;
-	top:32px;
-	right:5px;
-	z-index:1000;
-	height:20px;
+    position: absolute;
+    float: right;
+    top: 39px;
+    right: 10px;
+    z-index: 1000;
+    height: 70px;
+    /*border: red 1px solid;
 	/*border:red 1px solid;*/
-	width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
+	/*width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
 }
+.baselayerbutton,
+#sidebar_content2_head,
+.toolbutton{
+    cursor: pointer;
+}
+
 .baselayerbutton {
-	background-color:white;
-	border:black 1px solid;
-	padding:0px 10px;
-	font-size:80%;
-	float:right;
+	height: 60px;
+	width: 55px;
+	border: 1px solid #88179f;
+	border-radius: 7px;
+	float: right;
+	padding: 0px 10px;
 	margin: 0 5px;
+	font-size: 0%;
+}
+#Kaart{
+	background-image: url("img/kaartbtn.png") !important;
+}
+#Luchtfoto{
+	background-image: url("img/luchtfotobtn.png") !important;
 }
 .kaartlaag {
 	color:white;
@@ -547,7 +562,7 @@ input{
 #sidebar {
     float: left;
     position: absolute;
-    top: 80px; /*25px;*/
+    top: 104px; /*25px;*/
     width: 400px;
 	font-size: 80%;
 	overflow:hidden;
@@ -556,6 +571,7 @@ input{
 	margin:0px;
 	display:none;
 	z-index:1000; /* let op geocoder result z = 1002 */
+    max-width: 90%;
 }
 #sidebarShowHide {;
     height: 80px;
@@ -581,27 +597,42 @@ input{
 
 
 #tools {
-	position: absolute;
+	background: transparent;
+    position: absolute;
 	float:right;
-	top:47px;
-	right:5px;
+	top:39px;
+	right: 194px;
 	z-index:1000;
-	height:20px;
+	height:70px;
 	width:200px; /*for IE*/
 }
   
 .toolbutton {
-	background-color:white;
-	border:black 1px solid;
+	background-color:#88179f;
+	border:#88179f 1px solid;
 	padding:0px 10px;
-	font-size:80%;
+	font-size:0%;
 	float:right;
 	margin-right:5px;
 	margin-bottom:0px;
-	margin-top:10px;
-	width:70px;
+	margin-top:0px;
+	width:40px;
+    height: 60px;
+    border-radius: 7px;
 }
 	
 .toolactive {
-	background-color: rgb(241, 192, 42);
+	background-color: #F1C02A;
+    width: 40px;
+    height: 60px;
+    font-size: 0%;
+    border: 1px solid black;
+	border-radius: 7px;  
+}
+
+#downloadcontrol {
+    background-image: url("img/downloadtool.svg") !important;
+    background-position: center;
+	background-size: 100%;
+}
 }

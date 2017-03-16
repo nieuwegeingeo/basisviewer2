@@ -983,6 +983,11 @@ Geogem.createWMSLayer = function(config) {
 							for (var i=0;i<event.features.length; i++){
 								var featureType = event.features[i].gml.featureNSPrefix+':'+event.features[i].gml.featureType;
 								var layer = Geogem.findWMSLayer(featureType);
+                                if (layer==undefined){
+                                    // try to search for layer WITHOUT featureNSPrefix
+                                    featureType = event.features[i].gml.featureType;
+                                    layer = Geogem.findWMSLayer(featureType);
+                                }
 								var layerName = '--';
 								if (layer) {// some services do not have featureType etc in service response
 									layerName = layer.name;
@@ -1300,7 +1305,7 @@ Geogem.init = function() {
 	// create the div with baselayer buttons
 	$('#map').append(baselayerButtons);				
 	// our own zoom in and zoom out buttons
-	$('#map').append(
+/*	$('#map').append(
 		'<div id="zoomtools">'+
 		'<span id="zoomin" class="zoomtool"><img src="/basisviewer2/lib/img/zoom-plus-mini.png"/></span>'+
 		'<span id="zoomout" class="zoomtool"><img src="/basisviewer2/lib/img/zoom-minus-mini.png"/></span>'+
@@ -1323,7 +1328,7 @@ Geogem.init = function() {
 				Geogem.map.setBaseLayer(Geogem.map.getLayersByName(this.id)[0]);
 			}
 			return false;
-		});
+		});*/
 					
 	map.addLayers(layers);	
 		
