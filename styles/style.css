@@ -348,12 +348,7 @@ form{
 	margin: 0 5px;
 	font-size: 0%;
 }
-
-.baselayerbutton .tooltip .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-
+ 
 #Kaart{
 	background-image: url("img/kaartbtn.png") !important;
 }
@@ -361,6 +356,7 @@ form{
 #Luchtfoto{
 	background-image: url("img/luchtfotobtn.png") !important;
 }
+
 .kaartlaag {
 	color:white;
 	padding:4px;
@@ -611,7 +607,7 @@ input{
 	right: 194px;
 	z-index:1000;
 	height:70px;
-	width:200px; /*for IE*/
+	width:300px; /*for IE*/
 }
   
 .toolbutton {
@@ -634,17 +630,32 @@ input{
     height: 60px;
     font-size: 0%;
     border: 1px solid black;
-	border-radius: 7px;  
+	border-radius: 7px; 
+}
+
+.toolinactive {
+	background-color: #88179f;
+    width: 40px;
+    height: 60px;
+    font-size: 0%;
+    border: 1px solid 88179f;
+	border-radius: 7px;
 }
 
 #downloadcontrol {
     background-image: url("img/downloadtool.svg") !important;
     background-position: center;
-	background-size: 100%;
+	background-size: 100%;    
 }
 
 #pointcontrol {
     background-image: url("img/pointtool.svg") !important;
+    background-position: center;
+	background-size: 100%;
+}
+
+#baseinfobutton {
+    background-image: url("img/infobutton.svg") !important;
     background-position: center;
 	background-size: 100%;
 }

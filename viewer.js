@@ -306,6 +306,7 @@ if (location.search != '') {
  * opvraagt. Dit gebeurd door hieronder calculateInRange() te gebruiken samen met
  * getVisibility().
  */
+
 OpenLayers.Control.WMSGetFeatureInfo.prototype.findLayers = function() {
 
     var candidates = this.layers || this.map.layers;
@@ -1550,6 +1551,7 @@ Geogem.init = function() {
 		$('#tools').append('<span id="downloadcontrol" class="toolbutton">Download kaartobjecten</span>');
 		
 		$('#downloadcontrol').click(function(){
+            $('.toolbutton').removeClass("toolactive");
 			$('#downloadcontrol').toggleClass("toolactive");
 			if ($('#downloadcontrol').hasClass("toolactive")){
 				var content = '';
@@ -1578,7 +1580,7 @@ Geogem.init = function() {
 				Geogem.downloadControl.activate();
 			}
 			else{
-				Geogem.downloadControl.deactivate();
+				Geogem.downloadControl.deactivate();                    
 				Geogem.downloadControl.layer.removeAllFeatures(); // remove polygon
 				Geogem.removeAllPopups(); // closes sidebar
 			}	
