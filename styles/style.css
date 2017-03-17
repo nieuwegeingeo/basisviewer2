@@ -348,9 +348,16 @@ form{
 	margin: 0 5px;
 	font-size: 0%;
 }
+
+.baselayerbutton .tooltip .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
 #Kaart{
 	background-image: url("img/kaartbtn.png") !important;
 }
+
 #Luchtfoto{
 	background-image: url("img/luchtfotobtn.png") !important;
 }
@@ -635,4 +642,9 @@ input{
     background-position: center;
 	background-size: 100%;
 }
+
+#pointcontrol {
+    background-image: url("img/pointtool.svg") !important;
+    background-position: center;
+	background-size: 100%;
 }
