@@ -576,7 +576,7 @@ input{
 	z-index:1000; /* let op geocoder result z = 1002 */
     max-width: 90%;
 }
-#sidebarShowHide {;
+#sidebarShowHide {
     height: 80px;
     position: absolute;
     right: 2px;
@@ -605,6 +605,7 @@ input{
 	float:right;
 	top:39px;
 	right: 194px;
+    margin-left: 5px;
 	z-index:1000;
 	height:70px;
 	width:300px; /*for IE*/
@@ -622,6 +623,7 @@ input{
 	width:40px;
     height: 60px;
     border-radius: 7px;
+    
 }
 	
 .toolactive {
@@ -638,7 +640,7 @@ input{
     width: 40px;
     height: 60px;
     font-size: 0%;
-    border: 1px solid 88179f;
+    border: 1px solid #88179f;
 	border-radius: 7px;
 }
 
