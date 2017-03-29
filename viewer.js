@@ -1299,7 +1299,7 @@ Geogem.init = function() {
 		if (!layer.disabled) {
 			var id = "baselayerbutton"+i;
 			// we use layer.title/name as span-id to be able to retrieve the layer later
-			baselayerButtons += '<span class="baselayerbutton" id="'+layer.title+'">'+layer.title+'</span>';
+			baselayerButtons += '<span class="baselayerbutton" id="'+layer.title+'" title="Klik hier voor '+layer.title+' ondergrond">'+layer.title+'</span>';
 		}
 	}
 	baselayerButtons += '</div>';	
@@ -1508,7 +1508,8 @@ Geogem.init = function() {
 		$('#sidebar').show();
 	}
 	// check for 'downloadformat' setting	
-	var downloadTool = false;
+	var downloadToolActive = false;
+    var downloadTool = false;
 	for (var i = 0; i < Geogem.map.layers.length; i++) {
 		if (Geogem.map.layers[i].downloadformat){
 			downloadTool = true;
@@ -1517,8 +1518,8 @@ Geogem.init = function() {
 	}
 	if (downloadTool){
 		$('#sidebar').delegate('input', 'change', 
-		function(event){
-			event.stopPropagation();
+		function(event){			
+            event.stopPropagation();
 			Geogem.downloadControl.layer.removeAllFeatures(); // remove polygon if there is
 			var layer = Geogem.map.getLayer(this.id);
 			Geogem.downloadControl.featureAdded = function(feature){
@@ -1551,9 +1552,10 @@ Geogem.init = function() {
 		$('#tools').append('<span id="downloadcontrol" class="toolbutton">Download kaartobjecten</span>');
 		
 		$('#downloadcontrol').click(function(){
+            var toolBecomesActive = !$('#downloadcontrol').hasClass("toolactive");
             $('.toolbutton').removeClass("toolactive");
-			$('#downloadcontrol').toggleClass("toolactive");
-			if ($('#downloadcontrol').hasClass("toolactive")){
+			if (toolBecomesActive){
+                $('#downloadcontrol').addClass("toolactive");
 				var content = '';
 				for (var i = 0; i < Geogem.map.layers.length; i++) {
 					// check for 'downloadformat' setting
