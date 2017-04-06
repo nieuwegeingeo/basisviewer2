@@ -1516,6 +1516,9 @@ Geogem.init = function() {
 			break;
 		}
 	}
+    
+    $('<div id="tools"/>').appendTo($('#map'));
+    
 	if (downloadTool){
 		$('#sidebar').delegate('input', 'change', 
 		function(event){			
@@ -1548,8 +1551,7 @@ Geogem.init = function() {
 			return true;
 		});
 		
-		$('<div id="tools"/>').appendTo($('#map'));
-		$('#tools').append('<span id="downloadcontrol" class="toolbutton">Download kaartobjecten</span>');
+		$('#tools').append('<span id="downloadcontrol" class="toolbutton" title="Download gegevens">Download kaartobjecten</span>');
 		
 		$('#downloadcontrol').click(function(){
             var toolBecomesActive = !$('#downloadcontrol').hasClass("toolactive");
