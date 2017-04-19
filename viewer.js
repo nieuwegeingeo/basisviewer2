@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2017.03.23';
+Geogem.VERSION = '2017.04.13';
 
 Geogem.Settings = {
 
@@ -1551,7 +1551,7 @@ Geogem.init = function() {
 			return true;
 		});
 		
-		$('#tools').append('<span id="downloadcontrol" class="toolbutton" title="Download gegevens">Download kaartobjecten</span>');
+		$('#tools').append('<span id="downloadcontrol" class="toolbutton download_icon" title="Download gegevens">Download kaartobjecten</span>');
 		
 		$('#downloadcontrol').click(function(){
             var toolBecomesActive = !$('#downloadcontrol').hasClass("toolactive");
