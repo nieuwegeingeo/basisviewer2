@@ -1652,89 +1652,100 @@ Geogem.init = function() {
 			//console.log('zooming to nieuwegeinExtent', Geogem.Settings.nieuwegeinExtent);
 		}
 	}
-	
-	if (Geogem.Settings.geolocation) {
-		var geolocateLayer = new OpenLayers.Layer.Vector('geolocation');
-		map.addLayer(geolocateLayer);
-		var geolocate = new OpenLayers.Control.Geolocate({
-			bind: false,
-			geolocationOptions: {
-				enableHighAccuracy: true,
-				maximumAge: 0,
-				timeout: 70000
-			}
-		});
-		map.addControl(geolocate);
-		
-		var firstGeolocation = true;
-		geolocate.events.register("locationupdated",geolocate,function(e) {
-			geolocateLayer.removeAllFeatures();
-			var circle = new OpenLayers.Feature.Vector(
-				OpenLayers.Geometry.Polygon.createRegularPolygon(
-					new OpenLayers.Geometry.Point(e.point.x, e.point.y),
-					e.position.coords.accuracy/2,
-					40,
-					0
-				),
-				{},
-				{
-					fillColor: '#fff',
-					fillOpacity: 0.1,
-					strokeWidth: 0
-				}
-			);
-			geolocateLayer.addFeatures([
-				new OpenLayers.Feature.Vector(
-					e.point,
-					{},
-					{
-						graphicName: 'circle',
-						strokeColor: '#88179F',
-						strokeWidth: 2,
-						fillOpacity: 0,
-						pointRadius: 5
-					}
-				),
-				circle
-			]);
-			if (firstGeolocation) {
-				alert(e.point.x +" - "+ e.point.y);
-				Geogem.map.setCenter(new OpenLayers.LonLat(e.point.x, e.point.y), 12);
-				//pulsate(circle);
-				firstGeolocation = false;
-				this.bind = true;
-			}
-			else{
-				alert(e.point.x +" + "+ e.point.y +" + "+ geolocate.watchId );
-				Geogem.map.setCenter(new OpenLayers.LonLat(e.point.x, e.point.y), 12);
-			}
-		});
-		geolocate.events.register("locationfailed",this,function() {
-			alert('We probeerden uw lokatie op te vragen. Maar dit ging fout, herlaad de application om opnieuw te proberen.');
-		});
-		geolocate.events.register("locationuncapable",this,function() {
-			alert('We probeerden uw lokatie op te vragen. Maar uw browser ondersteunt dit niet.');
-		});
+
+    Geogem.startGeolocation = function(){   
+    
+        if (Geogem.geolocateLayer==undefined){
+            Geogem.geolocateLayer = new OpenLayers.Layer.Vector('geolocation');
+            map.addLayer(Geogem.geolocateLayer);
+            Geogem.geolocate = new OpenLayers.Control.Geolocate({
+                bind: false,
+                geolocationOptions: {
+                    enableHighAccuracy: true,
+                    maximumAge: 0,
+                    timeout: 70000
+                }
+            });
+            
+            Geogem.geolocate.firstGeolocation = true;
+            
+            map.addControl(Geogem.geolocate);
+        		
+            Geogem.geolocate.events.register("locationupdated", Geogem.geolocate, function(e) {
+                Geogem.geolocateLayer.removeAllFeatures();
+                //console.log(e)
+                var circle = new OpenLayers.Feature.Vector(
+                    OpenLayers.Geometry.Polygon.createRegularPolygon(
+                        new OpenLayers.Geometry.Point(e.point.x, e.point.y),
+                        e.position.coords.accuracy/2,
+                        40,
+                        0
+                    ),
+                    {},
+                    {
+                        fillColor: '#fff',
+                        fillOpacity: 0.1,
+                        strokeWidth: 0
+                    }
+                );
+                Geogem.geolocateLayer.addFeatures([
+                    new OpenLayers.Feature.Vector(
+                        e.point,
+                        {},
+                        {
+                            graphicName: 'circle',
+                            strokeColor: '#88179F',
+                            strokeWidth: 2,
+                            fillOpacity: 0,
+                            pointRadius: 5
+                        }
+                    ),
+                    circle
+                ]);
+                if (Geogem.geolocate.firstGeolocation) {
+                    alert(e.point.x +" - "+ e.point.y);
+                    Geogem.map.setCenter(new OpenLayers.LonLat(e.point.x, e.point.y), 12);
+                    //pulsate(circle);
+                    Geogem.geolocate.firstGeolocation = false;
+                    this.bind = true;
+                }
+                else{
+                    alert(e.point.x +" + "+ e.point.y +" + "+ Geogem.geolocate.watchId );
+                    Geogem.map.setCenter(new OpenLayers.LonLat(e.point.x, e.point.y), 12);
+                }
+            });
+            Geogem.geolocate.events.register("locationfailed",this,function() {
+                alert('We probeerden uw lokatie op te vragen. Maar dit ging fout, herlaad de application om opnieuw te proberen.');
+            });
+            Geogem.geolocate.events.register("locationuncapable",this,function() {
+                alert('We probeerden uw lokatie op te vragen. Maar uw browser ondersteunt dit niet.');
+            });
+            
+        }
 				
 		if (Geogem.Settings.geolocation=='locate'){
-			geolocateLayer.removeAllFeatures();
-			geolocate.deactivate();
-			geolocate.watch = false;
-			firstGeolocation = true;
-			geolocate.activate();
+			Geogem.geolocateLayer.removeAllFeatures();
+			Geogem.geolocate.deactivate();
+			Geogem.geolocate.watch = false;
+			Geogem.geolocate.firstGeolocation = true;
+			Geogem.geolocate.activate();
 		}
 		else if (Geogem.Settings.geolocation=='track'){
-			geolocateLayer.removeAllFeatures();
-			geolocate.deactivate();
-			geolocate.watch = true;
-			firstGeolocation = true;
-			geolocate.activate();
+			Geogem.geolocateLayer.removeAllFeatures();
+			Geogem.geolocate.deactivate();
+			Geogem.geolocate.watch = true;
+			Geogem.geolocate.firstGeolocation = true;
+			Geogem.geolocate.activate();
 		}
 		else{
 			alert('Geogem.Settings.geolocation heeft waarde: "'+Geogem.Settings.geolocation+
 				'"\nmaar alleen "locate" en "track" zijn toegestaan.');
 		}
 	}
+    
+	if (Geogem.Settings.geolocation) {
+        self.startGeolocation();     
+    }
+        
 
-	
 } 
