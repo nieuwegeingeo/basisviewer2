@@ -78,8 +78,7 @@ Geogem.Settings = {
   baseLayers: [
 	{
 		title: 'Luchtfoto',
-		//url: 'http://' + location.hostname + '/geowebcache/service/wms',
-        url: 'http://' + location.hostname + '/mapproxy/service',
+        url: location.protocol + '//' + location.hostname + '/mapproxy/service',
 		params: {
 			layers: 'basisluchtfoto',		// geowebcache layer	 
 			format: 'image/jpeg'
@@ -90,8 +89,7 @@ Geogem.Settings = {
     },
 	{
 		title: 'Kaart',
-		//url: 'http://' + location.hostname + '/geowebcache/service/wms',
-        url: 'http://' + location.hostname + '/mapproxy/service',
+        url: location.protocol + '//' + location.hostname + '/mapproxy/service',
 		params: {
 			layers: 'basistopo',   // geowebcache layer
 			format: 'image/jpeg'
