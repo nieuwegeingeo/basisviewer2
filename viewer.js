@@ -1097,6 +1097,20 @@ Geogem.showSidebarContent = function(content) {
 	}
 }
 
+Geogem.showSidebar = function(show) {
+	if (show == undefined || show){
+		if ($('#sidebar').hasClass('sidebarhide')){
+			$('#sidebarShowHide').click();
+		}
+		// else: already visible
+	}
+	else { // show = false
+		if(!$('#sidebar').hasClass('sidebarhide')){
+			$('#sidebarShowHide').click();
+		}
+	}
+}
+
 Geogem.createLegendDownloadBar = function() {
 	if ($('#legend').length>0){
 		return; // there is already a legend or download
