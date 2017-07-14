@@ -1097,6 +1097,7 @@ Geogem.showSidebarContent = function(content) {
 
 Geogem.showSidebar = function(show) {
 	if (show == undefined || show){
+        $('#sidebar').show();
 		if ($('#sidebar').hasClass('sidebarhide')){
 			$('#sidebarShowHide').click();
 		}
