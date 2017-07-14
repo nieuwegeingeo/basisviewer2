@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2017.04.13';
+Geogem.VERSION = '2017.07.14';
 
 Geogem.Settings = {
 
