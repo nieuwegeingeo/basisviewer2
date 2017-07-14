@@ -99,51 +99,11 @@ Geogem.initWFST = function(wfs){
 		//console.log("report", evt, this)
 	}
 	
-	/*
-	* Definieer een featureType...
-	*
-	*/
-	Geogem.featureTypes = {
-		'ID':{ 
-			// TYPE: 'TEXT',  // default
-			TITLE: 'Id',
-			TYPE: 'HIDDEN',
-		},
-		'TYPE':{ 
-			TYPE: 'SELECT',   // 'RADIO' of 'SELECT'
-			TITLE: 'Baktype',
-			OPTIONS: [	
-						{value:'AFVAL BOVENGRONDS', title:'Restafval bovengronds'},
-						{value:'AFVAL ONDERGRONDS', title:'Restafval ondergronds'},
-						{value:'GLAS', title:'Glas'},
-						{value:'PAPIER', title:'Papier'},
-						{value:'TEXTIEL', title:'Textiel'},
-						{value:'NIET IN BEHEER', title:'Niet in beheer Gemeente'}
-					]
-		},
-		'OPMERKING':{ 
-			TITLE: 'Opmerking',
-		},
-		'DICHTSBIJZIJNDE_ADRES':{ 
-			TITLE: 'Adres dichtbij',
-		},
-		'IMGDATA':{ 
-			TYPE: 'PHOTO',
-			TITLE: 'Foto'
-		}
-	}
-
 	Geogem.featureAdded = function(feature){
 		
-		var attrs = {
-			ID:undefined,
-			TYPE:'PAPIER',
-			OPMERKING:'',
-			DICHTSBIJZIJNDE_ADRES:''
-		};
-		
 		// clean up the featureTypes (as they contain object (data definitions))
-		for (var key in attrs){attrs[key]=undefined}
+		var attrs = {};
+		for (var key in Geogem.featureTypes){attrs[key]=undefined}
 		feature.attributes = attrs;
 		
 		Geogem.saveStrategy.save();
