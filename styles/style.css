@@ -42,7 +42,7 @@
 .olControlLayerSwitcher .layersDiv, 		/* center of LayerSwitcher */
 .olControlLayerSwitcher span, 				/* top & bottom of LayerSwitcher */
 .olControlOverviewMapElement { 				/* overviewmap */
-	background-color: #88179f !important;
+	background-color: #93328E !important;
 }
 
 .baseLayersDiv{
@@ -71,7 +71,7 @@
 	
 }
 div.olControlAttribution  > a {
-    color:#88179F;
+    color:#93328E;
 }
 
 geoviewerpopup_contentDiv {
@@ -108,7 +108,7 @@ input.throbbing {
 
 #topbar {
 	width:100%;
-	background-color:#88179F;
+	background-color:#93328E;
 	padding-bottom:3px;
 	min-height:24px;
 	
@@ -120,7 +120,7 @@ input.throbbing {
 	width:100%;
 	min-height:25px;
 	line-height:20px;
-	background-color:#88179F;
+	background-color:#93328E;
 	color:white;
 	font-weight:bold;
 	font-size: 80%;
@@ -166,7 +166,7 @@ form{
 .baselayerbutton {
 	height: 60px;
 	width: 55px;
-	border: 1px solid #88179f;
+	border: 1px solid #93328E;
 	border-radius: 7px;
 	float: right;
 	padding: 0px 10px;
@@ -233,7 +233,7 @@ form{
 
 #legend {
 	background:none repeat scroll 0 0 white;
-	border: 2px solid #88179F;
+	border: 2px solid #93328E;
 	padding:10px;
 	bottom:50px;
 	position:absolute;
@@ -351,8 +351,8 @@ input{
 	overflow-y: auto;
 }
 #sidebar_content{
-	border-right: 2px solid #88179F;
-	border-bottom: 2px solid #88179F;
+	border-right: 2px solid #93328E;
+	border-bottom: 2px solid #93328E;
     padding: 0px 20px 10px 10px;
 	background: white;
 	margin-left: -10px;
@@ -362,8 +362,8 @@ input{
 }
 #sidebar_head {
     background: none repeat scroll 0 0 white;
-	border-top: 2px solid #88179F;
-	border-right: 2px solid #88179F;
+	border-top: 2px solid #93328E;
+	border-right: 2px solid #93328E;
 	margin-left: -10px;
 	padding: 0 20px 10px 10px;
 	/*min-height: 300px;*/
@@ -441,8 +441,8 @@ input{
 }
   
 .toolbutton {
-	background-color:#88179f;
-	border:#88179f 1px solid;
+	background-color:#93328E;
+	border:#93328E 1px solid;
 	padding:0px 10px;
 	font-size:0%;
 	float:right;
@@ -466,11 +466,11 @@ input{
 }
 
 .toolinactive {
-	background-color: #88179f;
+	background-color: #93328E;
     width: 40px;
     height: 60px;
     font-size: 0%;
-    border: 1px solid #88179f;
+    border: 1px solid #93328E;
 	border-radius: 7px;
 }
 
@@ -487,6 +487,9 @@ input{
     background-image: url("img/point.svg") !important;
 }
 
+.location_icon {
+    background-image: url("img/location.svg") !important;
+}
 
 /*
 #downloadcontrol {
