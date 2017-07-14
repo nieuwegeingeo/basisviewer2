@@ -143,7 +143,8 @@ isAndroid = ua.indexOf("android") > -1;
 isMobile = ua.indexOf("mobile") > -1;
 isIthing = (ua.match(/iphone/i)) || (ua.match(/ipod/i)) || (ua.match(/ipad/i));
 if( isAndroid || isMobile || isIthing ) {
-    document.write('<link rel="stylesheet" href="theme/mobile.css" type="text/css" />');
+	// will only work in apps, NOT in basisviewer2 itself!!
+	document.write('<link rel="stylesheet" href="../../basisviewer2/styles/mobile.css" type="text/css" />');
 }
 
 Geogem.combine_url_params = function(url, data) {

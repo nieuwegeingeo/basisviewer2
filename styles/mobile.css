@@ -13,15 +13,3 @@
 #sidebarShowHide{
     right: 1px;
 } 
-
-#tools {
-	background: transparent;
-    position: absolute;
-	float:right;
-	top:39px;
-	left: 10px;
-    margin-top: 5px;
-	z-index:1000;
-	height: 300px;
-	width: 70px;
-}
