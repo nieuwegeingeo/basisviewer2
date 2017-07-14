@@ -14,8 +14,7 @@ Geogem.Settings = {
   *   default is geoserver.nl GET
   */
   reverseGeocoder: {
-    //url: 'http://' + location.hostname + '/MOR-revgeocoder',
-	url: 'http://' + location.hostname + '/geocoder-1.0.1/revgeocoder',
+	url: location.protocol + '//' + location.hostname + '/geocoder-1.0.1/revgeocoder',
     method: 'POST'
   },
 
@@ -30,7 +29,7 @@ Geogem.Settings = {
   * 40 posities in adresveld voor straat + huisnr
   */
   geocoder: {
-    url: 'http://' + location.host + '/geocoder/geocode?',
+    url: location.protocol + '//' + location.host + '/geocoder/geocode?',
     //tooltip: 'Zoek op postcode of straat, met huisnummers.',
     extentMargin: 100,     // postcode en straat
     pointMargin: 20,       // coordinaat van verblijfsobject
