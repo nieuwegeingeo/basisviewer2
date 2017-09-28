@@ -36,13 +36,14 @@
 
 .olControlLayerSwitcher {
 	top: 114px !important;
-	min-width: 24em;
+	min-width: 20em;
 }
 
 .olControlLayerSwitcher .layersDiv, 		/* center of LayerSwitcher */
 .olControlLayerSwitcher span, 				/* top & bottom of LayerSwitcher */
 .olControlOverviewMapElement { 				/* overviewmap */
-	background-color: #93328E !important;
+	background-color: #842e93 !important;
+    box-shadow: 0px 2px 5px #777777;
 }
 
 .baseLayersDiv{
@@ -64,14 +65,15 @@
 
 .olControlAttribution {
     bottom: 3em;
-	background: white;
+	background: transparent;
 	padding: 2px;
 	opacity: 0.7;
-    filter: alpha(opacity=70);
+    /*filter: alpha(opacity=70);*/
+    z-index: 1000 !important;
 	
 }
 div.olControlAttribution  > a {
-    color:#93328E;
+    color:#842e93;
 }
 
 geoviewerpopup_contentDiv {
@@ -108,19 +110,19 @@ input.throbbing {
 
 #topbar {
 	width:100%;
-	background-color:#93328E;
+	background-color:#842e93;
 	padding-bottom:3px;
-	min-height:24px;
-	
+	min-height:24px;	
 	z-index:1001;
 	top:0px;
 	position:fixed;
+    box-shadow: 0px 2px 5px #777777;
 }
 #bottombar {
 	width:100%;
 	min-height:25px;
 	line-height:20px;
-	background-color:#93328E;
+	background-color:#842e93;
 	color:white;
 	font-weight:bold;
 	font-size: 80%;
@@ -147,12 +149,13 @@ form{
 	position:relative;
 }
 #baselayerbuttons {
-    position: absolute;
-    float: right;
+    position: relative;
+    background: transparent;
+    /*float: right;
     top: 39px;
     right: 10px;
     z-index: 1000;
-    height: 70px;
+    height: 70px;*/
     /*border: red 1px solid;
 	/*border:red 1px solid;*/
 	/*width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
@@ -166,12 +169,13 @@ form{
 .baselayerbutton {
 	height: 60px;
 	width: 55px;
-	border: 1px solid #93328E;
+	border: 1px solid #842e93;
 	border-radius: 7px;
 	float: right;
 	padding: 0px 10px;
 	margin: 0 5px;
 	font-size: 0%;
+    box-shadow: 0px 1px 5px #777777;
 }
  
 #Kaart{
@@ -233,7 +237,7 @@ form{
 
 #legend {
 	background:none repeat scroll 0 0 white;
-	border: 2px solid #93328E;
+	border: 2px solid #842e93;
 	padding:10px;
 	bottom:50px;
 	position:absolute;
@@ -243,6 +247,7 @@ form{
     overflow: auto;
 	overflow-x: hidden;
 	overflow-y: auto;
+    box-shadow: 0px 2px 5px #777777;
 }
 #infobutton {
 	padding:10px;
@@ -351,19 +356,20 @@ input{
 	overflow-y: auto;
 }
 #sidebar_content{
-	border-right: 2px solid #93328E;
-	border-bottom: 2px solid #93328E;
+	border-right: 2px solid #842e93;
+	border-bottom: 2px solid #842e93;
     padding: 0px 20px 10px 10px;
 	background: white;
 	margin-left: -10px;
 	margin-top: -15px;
     padding-left: 10px;
-	min-height: 20px;
+	min-height: 20px;    
+    box-shadow: 0px 2px 5px #777777;
 }
 #sidebar_head {
     background: none repeat scroll 0 0 white;
-	border-top: 2px solid #93328E;
-	border-right: 2px solid #93328E;
+	border-top: 2px solid #842e93;
+	border-right: 2px solid #842e93;
 	margin-left: -10px;
 	padding: 0 20px 10px 10px;
 	/*min-height: 300px;*/
@@ -404,6 +410,8 @@ input{
 	display:none;
 	z-index:1000; /* let op geocoder result z = 1002 */
     max-width: 90%;
+    max-height: 90vh;
+    
 }
 #sidebarShowHide {
     height: 80px;
@@ -427,22 +435,34 @@ input{
 	height:25px;
 }
 
-
-#tools {
+#barContainer {
 	background: transparent;
     position: absolute;
 	float:right;
+	top:39px;
+	right: 10px;
+    margin-left: 5px;
+	z-index:1000;
+	height:70px;
+    float: right;
+	width:300px;
+}
+
+#tools {
+	background: transparent;
+    position: relative;
+	/*float:right;
 	top:39px;
 	right: 194px;
     margin-left: 5px;
 	z-index:1000;
 	height:70px;
-	width:300px; /*for IE*/
+	width:300px;*/ /*for IE*/
 }
   
 .toolbutton {
-	background-color:#93328E;
-	border:#93328E 1px solid;
+	background-color:#842e93;
+	border:#842e93 1px solid;
 	padding:0px 10px;
 	font-size:0%;
 	float:right;
@@ -454,6 +474,7 @@ input{
     border-radius: 7px;
     background-position: center;
 	background-size: 100%;  
+    box-shadow: 0px 2px 5px #777777;    
 }
 	
 .toolactive {
@@ -466,11 +487,11 @@ input{
 }
 
 .toolinactive {
-	background-color: #93328E;
+	background-color: #842e93;
     width: 40px;
     height: 60px;
     font-size: 0%;
-    border: 1px solid #93328E;
+    border: 1px solid #842e93;
 	border-radius: 7px;
 }
 
@@ -512,4 +533,12 @@ input{
 #form_img {
 	margin-top:5px;
 	max-height: 200px;
+}
+
+@media only screen and (max-height: 580px) {
+    #sidebar_head {
+         max-height:70vh;
+         max-width:80vw;
+         overflow:scroll;
+    }
 }

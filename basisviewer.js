@@ -17,6 +17,7 @@ document.write('<script type="text/javascript" src="../../basisviewer2/lib/jquer
 
 document.write('<script type="text/javascript" src="../../basisviewer2/lib/tools.js"></script>');
 document.write('<script type="text/javascript" src="../../basisviewer2/lib/Geodan.js"></script>');
+document.write('<script type="text/javascript" src="../../basisviewer2/lib/pdoklocatieserver.js"></script>');
 document.write('<script type="text/javascript" src="../../basisviewer2/viewer.js"></script>');
 document.write('<script type="text/javascript" src="../../basisviewer2/wfst.js"></script>');
 document.write('<script type="text/javascript" src="settings.js"></script>');

@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2017.07.14';
+Geogem.VERSION = '2017.09.07';
 
 Geogem.Settings = {
 
@@ -1252,8 +1252,15 @@ Geogem.init = function() {
 	Geogem.map = map;
 	var layers = [];
 	// base layers
+    
+    $('<div id="barContainer"/>').appendTo($('#map'));
+    
+    
 	var baselayerButtons = '<div id="baselayerbuttons">';
 
+    
+    
+    
 	for (var i = 0; i < Geogem.Settings.baseLayers.length; i++) {
 		var layer = Geogem.Settings.baseLayers[i];
 		var olLayer;
@@ -1317,7 +1324,7 @@ Geogem.init = function() {
 	}
 	baselayerButtons += '</div>';	
 	// create the div with baselayer buttons
-	$('#map').append(baselayerButtons);				
+	$('#barContainer').append(baselayerButtons);				
 	// our own zoom in and zoom out buttons
 /*	$('#map').append(
 		'<div id="zoomtools">'+
@@ -1429,6 +1436,9 @@ Geogem.init = function() {
 		if (geocoderSettings.type=='pdok'){
 			var geocoderControl = new Geogem.Geocoder(geocoderSettings);
 		}
+		else if (geocoderSettings.type=='pdoklocatieserver'){
+			var geocoderControl = new Geogem.PdokLocatieServer(geocoderSettings);
+		}
 		else //defaulting to closed geocoder of Nieuwegein
 		{
 			var geocoderControl = new Geodan.Geocoder(geocoderSettings);
@@ -1530,7 +1540,8 @@ Geogem.init = function() {
 		}
 	}
     
-    $('<div id="tools"/>').appendTo($('#map'));
+
+    $('<div id="tools"/>').appendTo($('#barContainer'));
     
 	if (downloadTool){
 		$('#sidebar').delegate('input', 'change', 
@@ -1716,14 +1727,14 @@ Geogem.init = function() {
                     circle
                 ]);
                 if (Geogem.geolocate.firstGeolocation) {
-                    alert(e.point.x +" - "+ e.point.y);
+                    //alert(e.point.x +" - "+ e.point.y);
                     Geogem.map.setCenter(new OpenLayers.LonLat(e.point.x, e.point.y), 12);
                     //pulsate(circle);
                     Geogem.geolocate.firstGeolocation = false;
                     this.bind = true;
                 }
                 else{
-                    alert(e.point.x +" + "+ e.point.y +" + "+ Geogem.geolocate.watchId );
+                    //alert(e.point.x +" + "+ e.point.y +" + "+ Geogem.geolocate.watchId );
                     Geogem.map.setCenter(new OpenLayers.LonLat(e.point.x, e.point.y), 12);
                 }
             });
@@ -1755,10 +1766,5 @@ Geogem.init = function() {
 				'"\nmaar alleen "locate" en "track" zijn toegestaan.');
 		}
 	}
-    
-	if (Geogem.Settings.geolocation) {
-        self.startGeolocation();     
-    }
-        
 
 } 
