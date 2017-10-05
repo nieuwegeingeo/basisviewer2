@@ -364,8 +364,8 @@ input{
 	margin-top: -15px;
     padding-left: 10px;
 	min-height: 20px;    
-    box-shadow: 0px 2px 5px #777777;
 }
+
 #sidebar_head {
     background: none repeat scroll 0 0 white;
 	border-top: 2px solid #842e93;
@@ -401,7 +401,7 @@ input{
     float: left;
     position: absolute;
     top: 104px; /*25px;*/
-    width: 400px;
+    width: 300px;
 	font-size: 80%;
 	overflow:hidden;
 	padding:10px;
@@ -445,7 +445,7 @@ input{
 	z-index:1000;
 	height:70px;
     float: right;
-	width:300px;
+	width:90%;
 }
 
 #tools {
@@ -539,6 +539,11 @@ input{
     #sidebar_head {
          max-height:70vh;
          max-width:80vw;
-         overflow:scroll;
+
     }
+    
+    #sidebar_content {
+        overflow: scroll;
+    }
+    
 }

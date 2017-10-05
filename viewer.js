@@ -5,7 +5,7 @@ OpenLayers.Lang.setCode('nl');
 
 var Geogem = Geogem || {};
 
-Geogem.VERSION = '2017.09.07';
+Geogem.VERSION = '2017.10.05';
 
 Geogem.Settings = {
 
@@ -29,7 +29,6 @@ Geogem.Settings = {
   * 40 posities in adresveld voor straat + huisnr
   */
   geocoder: {
-    url: location.protocol + '//' + location.host + '/geocoder/geocode?',
     //tooltip: 'Zoek op postcode of straat, met huisnummers.',
     extentMargin: 100,     // postcode en straat
     pointMargin: 20,       // coordinaat van verblijfsobject
@@ -38,8 +37,30 @@ Geogem.Settings = {
       minLength: 3,
       delay: 200
     },
-    inputSize: 40
+    inputSize: 40,
+    
+    // nieuwegein geocoder (alleen werkend voor Nieuwegein!)
+    // heeft 'autocomplete'
+    //url: location.protocol + '//' + location.host + '/geocoder/geocode?',
+    
+    // pdok geocoder
+    // heeft GEEN 'autocomplete' omdat de pdok geocoder geen wildcards ondersteund
+    //url: location.protocol + '//geodata.nationaalgeoregister.nl/geocoder/Geocoder?',
+    //type: 'pdok',
+    //city: 'nieuwegein',
+    
+    // pdok locatieserver V3
+    //url: location.protocol + '//geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?',
+    //type: 'pdoklocatieserver',
+    //city: 'nieuwegein',   
+    
+    // pdok locatieserver V3
+    url: location.protocol + '//geodata.nationaalgeoregister.nl/locatieserver/v3/suggest?',
+	type: 'pdoklocatieserver',
+	city: 'nieuwegein'
   },
+  
+  
   
   // NL tileschema PDOK
   //maxExtent: new OpenLayers.Bounds(-65200.96, 242799.04, 375200.96, 683200.96),
@@ -128,6 +149,12 @@ Geogem.Settings = {
   * try to track every x seconds (in case of 'track')
   */
   geolocation: false,  // default false, or either 'locate' or 'track'
+
+  /**
+   * position flag/icon showing after a geocoding result  
+   */
+  usePositionFlag: true,  // defaulting to true
+  keepPositionFlag: false, // to NOT let it fade away after 2 zoom/pans  
   
   controls: []
   
@@ -1255,11 +1282,7 @@ Geogem.init = function() {
     
     $('<div id="barContainer"/>').appendTo($('#map'));
     
-    
 	var baselayerButtons = '<div id="baselayerbuttons">';
-
-    
-    
     
 	for (var i = 0; i < Geogem.Settings.baseLayers.length; i++) {
 		var layer = Geogem.Settings.baseLayers[i];
@@ -1429,8 +1452,6 @@ Geogem.init = function() {
 
 		var geocoderSettings = Geogem.Settings.geocoder;
 		
-		// OpenLayers.Util.extend(kmlProtocolOptions, config.protocolOptions);
-		
 		geocoderSettings.div = document.getElementById('topbar');
 		
 		if (geocoderSettings.type=='pdok'){
@@ -1448,9 +1469,6 @@ Geogem.init = function() {
 	}
 	// Attribution control
 	map.addControl(new OpenLayers.Control.Attribution());
-	
-	// Loading panel
-	//map.addControl(new OpenLayers.Control.LoadingPanel());
 	
 	// mobile stuff
 	if( isAndroid || isMobile || isIthing ) {
@@ -1629,10 +1647,8 @@ Geogem.init = function() {
 				polygonLayer.removeAllFeatures();
 			}
 		}
+	}  // end download tool code
 	
-	}
-	
-
 	// child apps can implement a function applicationInit which will be called here:
 	if (Geogem.applicatieInit) {
 		Geogem.applicatieInit();
@@ -1677,10 +1693,68 @@ Geogem.init = function() {
 		}
 	}
 
+    // position flag/icon showing after a geocoder result
+    // use     
+    // Geogem.Settings.usePositionFlag = true;
+    // to use it and
+    // Geogem.Settings.keepPositionFlag = true;
+    // to NOT let it fade away after 2 zoom/pans    
+    Geogem.positionFlagCounter = 0;
+    Geogem.addPosition = function(x, y, name){
+        
+        // first time: create layer and register on movestart to clean flag
+        if (Geogem.positionLayer == undefined){
+            // creating a geoposition layer to be used to show a point (mostly for geocoding purposes)
+            Geogem.positionLayer = new OpenLayers.Layer.Vector('geoposition', {displayInLayerSwitcher: false});
+            map.addLayer(Geogem.positionLayer); 
+            // register a movestart event to be able to remove a flag after some moves
+            Geogem.map.events.register("movestart", Geogem.map, function() {
+                Geogem.positionFlagCounter++;
+                // after 2 moves, remove the positionFlagCounter
+                if (Geogem.positionFlagCounter>2 && !Geogem.Settings.keepPositionFlag){
+                    Geogem.positionLayer.removeAllFeatures();
+                }
+            });
+        }
+        // when adding a position, always remove the old flag
+        Geogem.positionLayer.removeAllFeatures();
+        // reset counter
+        Geogem.positionFlagCounter = 0
+        // only when Geogem.Settings.usePositionFlag is true
+        if (Geogem.Settings.usePositionFlag){
+            Geogem.positionLayer.addFeatures([
+                new OpenLayers.Feature.Vector(
+                    new OpenLayers.Geometry.Point(x, y),
+                    {},
+                    {
+                        externalGraphic: '/basisviewer2/styles/img/geo_point.svg',
+                        graphicWidth: 40,    graphicHeight: 40,
+                        graphicXOffset: -20, graphicYOffset: -37,
+                    }
+                ),
+                // check
+                /*
+                new OpenLayers.Feature.Vector(
+                    new OpenLayers.Geometry.Point(x, y),
+                    {},
+                    {
+                        graphicName: 'circle',
+                        strokeColor: '#88179F',
+                        strokeWidth: 2,
+                        fillOpacity: 0,
+                        pointRadius: 5
+                    }
+                )
+                */
+            ]);
+        }
+        
+    } // end position flag code
+
     Geogem.startGeolocation = function(){   
     
         if (Geogem.geolocateLayer==undefined){
-            Geogem.geolocateLayer = new OpenLayers.Layer.Vector('geolocation');
+            Geogem.geolocateLayer = new OpenLayers.Layer.Vector('geolocation', {displayInLayerSwitcher: false});
             map.addLayer(Geogem.geolocateLayer);
             Geogem.geolocate = new OpenLayers.Control.Geolocate({
                 bind: false,
