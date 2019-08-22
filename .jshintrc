@@ -1,0 +1,20 @@
+{
+  "browser" : true,
+  "node": true,
+  "globals": {
+    "Geogem": true,
+    "$": false,
+    "OpenLayers": true,
+    "jQuery": false
+  },
+  "predef": [
+    "document",
+    "window",
+    "navigator",
+    "location",
+    "OpenLayers",
+    "alert",
+    "Proj4js",
+    "Geodan"
+  ]
+}

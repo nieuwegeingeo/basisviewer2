@@ -1,0 +1,84 @@
+
+<div id="wijkSelectHeader">
+<div class="listKnop" id="knopLinks" onclick="listNmbr(-1)">
+    <a>&#10094;</a>
+</div>
+
+<div id="wijkSelectTitle">
+    <h3>Wijken</h3>
+</div>
+
+<div class="listKnop" id="knopRechts" onclick="listNmbr(1)" >
+    <a >&#10095;</a>
+</div>
+</div>
+<div>
+
+
+    <ul class="wijkZoomKnopList" id="wijkZoomKnopList1">
+        <li class="wijkZoomKnop" id="bataunoord" value="[132676,449893,134272,451649]">Batau-Noord</li>
+        <li class="wijkZoomKnop" id="batauzuid" value="[131681,448766,134503,450296]">Batau-Zuid</li>
+        <li class="wijkZoomKnop" id="blokhoeve" value="[133379,450337,136202,451867]">Blokhoeve</li>
+        <li class="wijkZoomKnop" id="de_wiers" value="[134017,447010,136840,448541]">De Wiers</li>
+        <li class="wijkZoomKnop" id="doorslag" value="[132037,447464,134859,448994]">Doorslag</li>
+        <li class="wijkZoomKnop" id="fokkesteeg" value="[133261,447061,136084,448592]">Fokkesteeg</li>
+        <li class="wijkZoomKnop" id="galecop" value="[132569,451114,135392,452645]">Galecop</li>
+        <li class="wijkZoomKnop" id="het_klooster" value="[133638,446001,139283,449062]">Het Klooster</li>
+    </ul>
+
+    <ul class="wijkZoomKnopList hidden" id="wijkZoomKnopList2">
+        <li class="wijkZoomKnop" id="hoge_landen" value="[131943,446393,134765,447923]">Hoge Landen</li>
+        <li class="wijkZoomKnop" id="hogezandveld" value="[132441,445812,135263,447343]">Hoogzandveld</li>
+        <li class="wijkZoomKnop" id="huis_de_geer" value="[133789,450502,136611,452033]">Huis de Geer</li>
+        <li class="wijkZoomKnop" id="jutphaas_wijkersloot" value="[132708,448766,135530,450296]">Jutphaas Wijkersloot</li>
+        <li class="wijkZoomKnop" id="laagraven" value="[133339,449147,138984,452208]">Laagraven</li>
+        <li class="wijkZoomKnop" id="lekboulevard" value="[132677,445206,135500,446737]">Lekboulevard</li>
+        <li class="wijkZoomKnop" id="merwestein" value="[133019,448116,135842,449646]">Merwestein</li>
+        <li class="wijkZoomKnop" id="park_oudegein" value="[132709,446982,135532,448513]">Park Oudegein</li>
+
+    </ul>
+
+    <ul class="wijkZoomKnopList hidden" id="wijkZoomKnopList3">
+        <li class="wijkZoomKnop" id="plettenburg" value="[132455,448102,138100,451163]">Plettenburg</li>
+        <li class="wijkZoomKnop" id="rijnhuizen" value="[133692,448818,136514,450348]">Rijnhuizen</li>
+        <li class="wijkZoomKnop" id="stadscentrum" value="[133226,448587,134638,449353]">Stadscentrum</li>
+        <li class="wijkZoomKnop" id="vreeswijk" value="[133638,445833,136461,447364]">Vreeswijk</li>
+        <li class="wijkZoomKnop" id="zandveld" value="[133120,445977,135942,447508]">Zandveld</li>
+        <li class="wijkZoomKnop" id="zuilenstein" value="[132837,449668,135659,451198]">Zuilenstein</li>
+    </ul>
+</div>
+
+<script>
+$('.wijkZoomKnop').on('click',function() {
+console.log($(this).attr('id') + 'Extent');
+wijkExtent = JSON.parse($(this).attr('value'));
+console.log(wijkExtent)
+Geogem.map.zoomToExtent(wijkExtent);
+});
+
+$('#wijkSelectTitle').on('click', function() {
+if ($('#wijkSelectTitle').parent().parent().hasClass('show')) {
+    $('#wijkSelectTitle').parent().parent().removeClass('show');
+} else {
+    $('#wijkSelectTitle').parent().parent().addClass('show');
+}
+});
+
+var listCounter = 1;
+currentList(listCounter);
+
+function listNmbr(n) {
+currentList(listCounter += n);
+};
+
+function currentList(n){
+console.log(listCounter);
+lists = document.getElementsByClassName('wijkZoomKnopList');
+if (n > lists.length){listCounter = 1}
+if (n < 1){listCounter = lists.length;}
+$('#wijkZoomKnopList' + listCounter).removeClass('hidden').siblings().addClass('hidden')
+};
+</script>
+
+
+

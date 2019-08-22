@@ -1,0 +1,77 @@
+.flex-wrapper {
+display: flex;
+flex-wrap: wrap;
+}
+
+.input-container {
+    display: flex;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.filterInput {
+    border: 2px solid #945b96;
+    height: 4em;
+    width: 14em;
+    line-height: 2em;
+    color: black;
+    font-weight: bold;
+    background-color: #f1f1f1;
+    text-align: left;
+    margin: -1px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.1s;
+}
+
+.filterInput input{
+    float: left;
+}
+
+.breakline {
+    line-height: 1em; 
+    height: 1em;
+    width:100%;
+}
+
+.filterInput:hover {
+    background-color: #e2e2e2;
+}
+
+.checkbox-aan, .radio-aan {
+    background-color:#945b96 !important;
+    border: 2px solid #842e93;
+    transition: background-color 0.1s;
+    color: white !important;
+}
+
+.back-button {
+    display:block;
+    position:absolute;
+    top:15px;
+    left:5px;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid #842e93;
+    cursor: pointer;
+}
+#sidebar_main_head h3 {
+    width: 100%;
+    line-height: 3em;
+    text-align: left;
+    margin-top: 2em;
+    font-size: unset;
+}
+
+.sidebar-filter__data {
+    font-size: 12px;
+    
+}
+
+.filter-categorie {
+    min-width: 50%;
+    
+}

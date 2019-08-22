@@ -1,0 +1,221 @@
+*, ::before, ::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html, body{
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;    
+    height: 100%;
+    background: url('./img/cheap_diagonal_fabric_Ufuk_Sarp_Selçok.png');
+    overflow: hidden;
+}
+
+.border-ng-paars { 
+    border: 1px solid #842e93;
+    border-radius: 10px;
+}
+
+.border-ng-paars_sq {border: 1px solid #842e93;}
+
+.shadow { box-shadow:2px 2px 6px 2px #666;}
+
+/*----- Header -----*/
+.top-bar {
+    width:100%;
+    height: 3em;
+    border-bottom: 1px solid #842e93;
+    position: fixed;
+    background-color: white;
+    z-index: 1000;
+}
+    .homebutton {
+        position: fixed;
+        top: 5px;
+        left: 5px;
+        width: 30px;
+        height: 30px;
+    }
+    
+    .homebutton img {
+        width: 30px;
+    }
+    
+    .container {
+        float: left;
+        margin: 0px auto; 
+        position: relative;         
+        box-sizing: content-box; 
+        left: 50%;
+        transform: translatex(-50%);
+        height: 100%;
+    }
+    
+        /*----- Tab Links -----*/
+        /* Clearfix */
+        .tab-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-flow: row nowrap;
+            height: 100%;
+        }
+
+        .tab-links li {           
+            display: inline-flex;
+            border: 1px solid #842e93;
+            border-bottom:0;
+            margin-right: -1px;
+        }
+
+        .tab-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 20px;
+            background-color: #f1f1f1;
+            color:#000000;
+            text-decoration: none;
+            white-space: nowrap;
+            position: relative;
+            transition: all linear 0.15s;
+        }
+
+        .tab-links a:hover {
+            background:#e2e2e2;
+            text-decoration:none;
+        }
+
+        li.active a, li.active a:hover {
+            background:#945b96;            
+            color:#fff;
+        }
+
+    /*----- Content of Tabs -----*/
+.main-content{
+    position: relative;
+    top: 40px;
+    width: 100%;
+    height: 95%;
+}
+    
+    .intro-image {
+        width: 60%;
+        height: auto; 
+        margin: 0;         
+    }
+    
+    .tab-content {
+        padding:15px;
+        background:#fff;
+        height: 95vh;    
+        background: url('./img/cheap_diagonal_fabric_Ufuk_Sarp_Selçok.png');
+    }
+        
+        .tab {
+            display:none;
+            opacity: 0.6;
+            height: 100%;
+
+        }
+      
+        .tab.active {
+            display:block;
+            opacity:1;
+            width: 100%;
+            height: 100%;
+            
+        }
+
+        .left {
+            position: absolute;
+            left: 1em;
+        }
+        
+        .right {
+            position: absolute;
+            right: 1em;
+        }
+        
+        .tab h3 {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .tabkaart {
+            width: 60%;
+            height: 95%; 
+            margin: 0;            
+        }
+        
+        .tabkaart,.olMapViewport {
+            border-radius: 10px;
+        }
+        
+        .tab-frame{
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .tab-text {
+            width: 35%;
+            margin: 0px;
+            height: 95%;
+            background-color: white; 
+        }
+        
+        .tab-text iframe {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            width: calc(100% - 20px);
+            height:  calc(100% - 20px);
+            margin: 0px;
+            border: none;                      
+        }
+ 
+        .frame-body {
+            display: flex;
+        }
+        
+        #topbar, #bottombar{
+            display: none;
+        }
+
+        .baselayerbutton {
+            width: 75px !important;
+        }
+
+#sidebarBackButton {
+    display: block;
+    width: auto;
+    line-height: 25px;
+    padding: 5px;
+    top: 5px;
+    
+}
+
+.position-switcher img{
+    width: 30px;
+    height: 30px;
+}
+.position-switcher {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    left: 40px;
+}
+
+.layer-slider {
+    margin-top: 1em;
+    margin-left: 1em;
+    width: 18em;
+}
+

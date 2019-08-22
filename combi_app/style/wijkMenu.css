@@ -1,0 +1,145 @@
+/*----- Wijk menu -----*/
+
+#wijkSelectMenu {
+    display: block;
+    width: 200px;
+    height: 305px;
+    position: absolute;
+    right: 20px;
+    bottom: -255px;
+    border: 1px solid #842e93;
+    border-radius: 5px 5px 0 0;
+    z-index: 1000;
+    background-color: rgba(241,241,241,0.8);
+    animation: wijkMenuFadeOut 0.1s 1;
+    animation-timing-function: linear;
+    overflow: hidden;
+    /*----- Maak text niet selecteerbaar-----*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#wijkSelectMenu.show {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    animation: wijkMenuFadeIn 0.1s 1;
+    animation-timing-function: linear;
+}
+
+@keyframes wijkMenuFadeIn {
+    from {bottom: -255px;}
+    to {bottom: 20px;}
+}
+
+@keyframes wijkMenuFadeOut {
+    from {bottom: 20px;}
+    to {bottom: -255px;}
+}
+
+    /*----- Wijk menu header -----*/
+
+    #wijkSelectHeader{        
+        display: flex;
+    }
+    
+    #wijkSelectMenu.show .listKnop {
+        opacity: 1 !important;
+        width: 10%;
+        height: 25px;
+        border: 1px solid #842e93;
+        background-color: #945b96;
+        z-index: 2000;
+        right: 0;
+        top: 0;
+        margin: -1px;
+    }
+    
+    .listKnop {
+        
+        position: relative;
+        width: 0;
+        height: 25px;
+        border: 1px solid #842e93;
+        background-color: #945b96;
+        z-index: 2000;
+        right: 0;
+        top: 0;
+        margin: -1px;
+        opacity: 0
+    }
+
+    .listKnop:hover {
+        background-color: #842e93;
+        cursor: pointer;
+    }
+
+    #knopRechts {
+        border-radius: 0 5px 0 0;
+    }
+
+    #knopLinks {
+        border-radius: 5px 0 0 0;
+    }
+
+    .listKnop a {
+        position: relative;
+        top: 10%;
+        left:20%;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+    }
+
+    #wijkSelectTitle {
+        align-items: center;
+        text-align: center;
+        flex-grow: 1;
+        line-height: 25px;
+        border: 1px solid #842e93;
+        background-color: #945b96;
+        color: white;
+        margin: -1px;
+        cursor: pointer;
+    }
+
+    #wijkSelectHead:hover {
+    background-color: #842e93;
+    }
+
+/*----- Wijk menu inhoud -----*/  
+  
+    .wijkZoomKnopList {
+        padding: 0;
+        list-style: none;
+    }
+
+    .wijkZoomKnop {
+        display: block;
+        position: relative;
+        border: 1px solid #842e93;
+        background-color: #945b96;
+        border-radius: 5px;
+        line-height:25px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        margin: 5px;
+        cursor: pointer;
+    }
+
+    .wijkZoomKnop:hover {
+        background-color: #842e93;
+        cursor: pointer;
+    }
+
+    .wijkZoomKnopList.hidden {
+        display: none !important;
+    }
+
+
+

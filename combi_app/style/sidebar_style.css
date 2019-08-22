@@ -1,0 +1,79 @@
+body {
+    overflow: hidden;
+}
+
+body.preload *{
+animation-duration: 0s !important;
+-webkit-animation-duration: 0s !important;
+transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;}
+
+/*----- Sidebar Animation -----*/
+
+#sidebar {
+    width: 300px !important;
+    animation: fadeIn 0.3s 1;
+    animation-timing-function: linear;
+}
+
+@keyframes fadeIn {
+    from {left: -340px;}
+    to {left: 0px;}    
+}
+
+.sidebarhide {
+    left: -310px;
+    animation: fadeOut 0.3s 1 !important;
+}
+
+@keyframes fadeOut {
+    from {left: 0;}
+    to {left: -310px;}
+}
+
+/*----- Layer switch buttons -----*/
+
+.checkboxLabel{
+    display: block;
+    border: 1px solid #842e93;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    
+    width: 20em;
+    max-width: 90%;
+    margin: 0;
+    padding: 0px 4px 0px 4px;
+    align-items: center;
+    line-height: 25px;
+    position: relative; 
+    text-align: center;  
+    color: black;
+    transition: all linear 0.1s;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .checkboxLabel:hover {
+        background-color: #e2e2e2;    
+    }
+    
+.checkboxLabel.aan{
+    background-color: #945b96;
+    color: white;
+    transition: background-color linear 0.1s;
+}
+
+    .checkboxLabel.aan:hover{
+        background-color: #842e93;
+    }
+
+.layerBox {
+
+}
+
+
+

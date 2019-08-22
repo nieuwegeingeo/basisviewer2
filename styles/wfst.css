@@ -1,0 +1,275 @@
+.form-overlay, .popup__container, .feature-selector__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: rgba(0,0,0,0.2);
+}
+
+.form-pos__container {
+    position: absolute;
+    width: 70%;
+    height: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+
+#wfsform {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 1em;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 95%;
+    width: calc(100% - 2em);
+}
+
+.form-body, .confirm-popup__body, .feature-selector  {
+    font-family: Montserrat;
+    position: absolute;
+    /*padding: 1em;*/
+    background-color: white;
+}
+
+.confirm-popup__body, .feature-selector  {
+    overflow-y: scroll;
+}
+
+.feature-selector {
+    max-height: 90%;  
+}
+
+.form-body {
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.confirm-popup__body, .feature-selector {
+    transform: translateX(-50%);
+    padding: 1em;
+    left: 50%;
+    min-height: 20em;
+    max-width: 90%;
+}
+
+.confirm-popup__body, .feature-selector {
+    top: 50%;
+    min-width: 40em;
+    transform: translate(-50%,-50%);
+}
+
+.form-section {
+    padding: 1em;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    border: 1px solid #842e93;
+}
+.form-section summary {
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    padding-bottom: 0.5em;
+}
+
+.basic-button {
+    min-width: 8em;
+    max-width: 10em;
+    line-height: 2em;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #842e93;
+    border-radius:5px;
+    background-color: #A653A5;
+    color: white;
+    margin-bottom: 1em;
+}
+
+.basic-button:hover {
+    background-color: #842e93EE;
+}
+
+.menu-button__link:focus {
+    background-color: #ccc;
+}
+
+.button-container{
+    display: flex;
+}
+
+.menu-button {
+    color: white;
+}
+
+.button-bevestig {
+    margin-bottom: 1em;
+}
+
+.form-container span {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.drawtools_container {
+    float: right;
+    order: 2;
+}
+
+.form-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    min-height: 2em;
+    line-height: 2em;
+    padding-left: 1em;
+}
+
+.form-select {
+    width: 18.5em !important;
+}
+
+.form-text {
+    width: 18.5em !important;
+    font-size: 100% !important;
+}
+
+.form-textarea {
+    width: 38em !important;
+    height: 6em !important;
+    max-width: 80% !important;
+}
+
+
+#wfsform details {
+    width: 100%;
+}
+
+.req-msg {
+    display: none;
+    color: red;
+}
+.mark span {
+    color: red;
+}
+.feature-selector__head {
+    height: 2em;
+    width: 100%;
+    text-align: center;
+}
+
+.feature-selector__head  span{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.feature-selector__item {
+    margin: 0.5em;
+    padding: 0.3em;
+    font-weight: bold;
+    border-bottom: 1px solid #945b96;
+    cursor: pointer;
+}
+
+.feature-selector__item:hover {
+    background-color: #ccc;
+}
+
+.close-button {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    width: 2.5em;
+    height: 2.5em;
+    color: #945b96;
+    background-color: red;
+    outline: none;
+    border: 2px solid #945b96;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.drag-bar, .resize-box {
+    position: absolute;    
+    left: 0;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.drag-bar {
+    top: 0;
+    width: 100%;
+    height: 15px;
+    opacity: 0.3;
+    transition: background-color 0.2s linear;
+}
+
+.resize-box {
+    bottom: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: url('./img/drag_box_icon.svg');
+}
+
+.drag-active, .drag-bar:hover {
+    background-color: #945b96;
+    opacity: 0.3;
+    
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: wrap;
+    /* justify-content: space-between; */
+    width: 100%;
+    flex-basis: auto;
+}
+
+.flex-container .form-item {
+    width: 45%;
+    flex-grow:1;
+}
+
+.form-checkbox_value {
+    display: block;
+}
+
+.cb-t-left {
+    padding-right: 4em;
+    width: 1px;
+    white-space: nowrap;
+}
+
+.cb-t-right input { 
+    max-width: 4em;
+}
+
+th.cb-t-right, th.cb-t-left  {
+        text-align: left;
+}
+
+.wfsform-buttonheader {
+    height: 3em;
+    position: relative;
+    width: 100%;
+}
+
+.form-content {
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: calc(100% - 4em);
+}
+.wfsform-buttonheader.bar-offscreen {
+    border-bottom: 1px solid #842e93;
+    box-shadow: 0px 2px 5px #777777;
+    transition: box-shadow 0.1s ease-out;
+}
+

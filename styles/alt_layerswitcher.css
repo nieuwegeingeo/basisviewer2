@@ -1,0 +1,209 @@
+﻿
+@media only screen and (max-height: 1000px) {
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.legend-button {
+    position: fixed;
+    display:block;
+    bottom: 25px;
+    left: 50%;
+    width: auto;
+    height: 2em;
+    transform: translate(-50%, 2px);
+    background-color: white;
+    line-height: 2em;
+    text-align: center;
+    border: 2px solid #842e93;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    padding: 0 1em 0 1em;
+}
+
+.legend-button::after {
+    content: "Legenda & Download";
+    font-weight: 600;
+}
+
+
+.legend-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.legend-content {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    max-width: 90%;
+    height: 80vh;
+    max-height: 600px;
+    background-color: white;
+    z-index: 1007;
+    overflow-y: scroll;
+    border: 1px solid #842e93;
+    padding: 1em;
+    box-shadow:  0px 1px 5px #777777;
+}
+
+.legend-head {
+    width: 2em;
+    line-height: 2em;
+    position:absolute;
+    top:0;
+    right:0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.legend-head:before {
+    content: "✖";
+    font-weight: 600;
+    font-size: 20px;
+    color: #842e93;
+}
+
+.legend-body {
+    top: 2em;
+    position: relative;
+
+}
+
+.legend-mask {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.2;
+    z-index: 1100;
+}
+
+.legend-item {
+    display: none;
+    width: 100%;
+    height: auto;
+    border: 2px solid #842e93;
+    margin-top: calc(-1em - 2px);
+    margin-bottom: 1em;
+}
+
+.image-head {
+    width: 100%;
+    line-height: 2em;
+    border: 2px solid #842e93;
+    text-align: center;
+    margin-bottom: 1em;
+    cursor: pointer;
+    background-color: white;
+}
+
+.image-head:hover {
+    background-color: #ccc !important;
+}
+
+
+
+.ls-filterbutton__container{
+    width: 1em;
+}
+
+.layer-switcher__button {
+    display: none;
+    position: absolute;
+    top: 120px;
+    right: 0;
+    width: 2em;
+    line-height: 2em;
+    background-color: white;
+    border: 2px solid #842e93;
+    border-radius: 5px 0 0 5px;
+    z-index: 1200;
+    text-align: center;
+    cursor: pointer;
+}
+
+.layer-switcher__button:after {
+    content: "➕";
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.layer-switcher__container {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 120px;
+    right: -2px;
+    min-width: 14em;
+    max-width: 30%;
+    max-height: 70vh;
+    background-color: white;
+    border: 2px solid #842e93;
+    border-radius: 10px 0 0 10px;
+    z-index: 1007;
+    overflow-y: hidden;
+    -ms-overflow-y: scroll;
+    box-shadow: 0px 2px 5px #777777;
+}
+
+.layer-switcher__head {
+    width: 100%;
+    height: 2em;
+    line-height: 2em;
+    border-bottom: 2px solid #842e93;
+    text-align: center;
+    cursor: pointer;
+}
+
+.layer-switcher__head::after {
+    content: "Informatielagen ➖";
+    font-weight: 600;
+}
+
+.layer-switcher__content {
+    width: 100%;
+    height: auto;
+    overflow-y: hidden;
+    -ms-overflow-y: hidden;
+}
+
+.layer-switcher__list {
+    list-style: none;
+    padding-left: 1em;
+    overflow: hidden;
+    padding-right: 2em;
+    table-layout: fixed;
+}
+
+.layer-switcher__item {
+    width: 100%;
+    height: auto;
+    line-height: 1.5em;
+    font-size: 12px;
+}
+
+.layer-switcher__label {
+    width: 100%;
+}
+
+.layer-switcher__item input{
+    position: relative;
+    top: 3px;
+    line-height: 2em;
+    margin-right: 1em;
+}

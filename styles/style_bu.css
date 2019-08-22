@@ -1,0 +1,553 @@
+.selectie-lijst {
+  width: 200px;
+}
+
+.olPopupCloseBox {
+	/* some magic to create a bigger (invisible) close button for touch things */
+    padding: 23px;
+	background-position:center;
+	margin: -25px;
+}
+
+.olControlScaleLine {
+	bottom:40px;
+        z-index: 999 !important;
+}
+
+#featurePopup h3 {
+    padding-top: 2px;
+}
+
+#attrpopuptable td {
+	vertical-align: top;
+}
+#attrpopuptable td.first {
+	/*width:30%;*/
+}
+
+#featurePopup_contentDiv {
+	/*margin-top:25px;*/
+}
+
+.olFramedCloudPopupContent {
+    font-size: 80%;
+	overflow: visible;
+}
+
+.olControlLayerSwitcher {
+	top: 114px !important;
+	min-width: 20em;
+}
+
+.olControlLayerSwitcher .layersDiv, 		/* center of LayerSwitcher */
+.olControlLayerSwitcher span, 				/* top & bottom of LayerSwitcher */
+.olControlOverviewMapElement { 				/* overviewmap */
+	background-color: #842e93 !important;
+    box-shadow: 0px 2px 5px #777777;
+}
+
+.baseLayersDiv{
+    padding: 0px;
+}
+
+.olControlZoomPanel {
+    left: 14px;
+    top: 10px;
+}
+
+/* disable tile transition animation */
+.olLayerGrid .olTileImage {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: all 0 none;
+    transition: none;
+}
+
+.olControlAttribution {
+    bottom: 3em;
+	background: transparent;
+	padding: 2px;
+	opacity: 0.7;
+    /*filter: alpha(opacity=70);*/
+    z-index: 1000 !important;
+	
+}
+div.olControlAttribution  > a {
+    color:#842e93;
+}
+
+geoviewerpopup_contentDiv {
+	font-family: Verdana;
+	font-size: .7em;
+}
+
+#attrpopuptable{
+	width: 100%;
+}
+
+.GeodanGeocoder {
+    padding: 5px;
+    top: 5px;
+    left: 60px;
+	width:250px;
+	overflow:hidden;
+}
+
+/* Animated throbber */
+input.form-autocomplete {
+  width:250px;
+  background-image: url(../img/throbber.gif);
+  background-repeat: no-repeat;
+  background-position: 100% 2px;
+  padding:2px;
+  margin:2px;
+  z-index:10000;
+}
+
+input.throbbing {
+  background-position: 100% -18px; /* LTR */
+}
+
+#topbar {
+	width:100%;
+	background-color:#842e93;
+	padding-bottom:3px;
+	min-height:24px;	
+	z-index:1001;
+	top:0px;
+	position:fixed;
+    box-shadow: 0px 2px 5px #777777;
+}
+#bottombar {
+	width:100%;
+	min-height:25px;
+	line-height:20px;
+	background-color:#842e93;
+	color:white;
+	font-weight:bold;
+	font-size: 80%;
+	
+	z-index:1001;
+	bottom:0px;
+	position:fixed;
+}
+
+div#bottombar  a:visited ,div#bottombar  a:link {
+	color:white;
+}
+
+div#bottombar  span {
+	float:right;
+	padding: 0 5px;
+}
+
+form{
+	display:inline;
+}
+/* to be able to position mapbuttons */
+#map{
+	position:relative;
+}
+#baselayerbuttons {
+    position: relative;
+    background: transparent;
+    /*float: right;
+    top: 39px;
+    right: 10px;
+    z-index: 1000;
+    height: 70px;*/
+    /*border: red 1px solid;
+	/*border:red 1px solid;*/
+	/*width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
+}
+.baselayerbutton,
+#sidebar_content2_head,
+.toolbutton{
+    cursor: pointer;
+}
+
+.baselayerbutton {
+	height: 60px;
+	width: 55px;
+	border: 1px solid #842e93;
+	border-radius: 7px;
+	float: right;
+	padding: 0px 10px;
+	margin: 0 5px;
+	font-size: 0%;
+    box-shadow: 0px 1px 5px #777777;
+}
+ 
+#Kaart{
+	background-image: url("img/kaartbtn.png") !important;
+}
+
+#Luchtfoto{
+	background-image: url("img/luchtfotobtn.png") !important;
+}
+
+#OSM{
+	background-image: url("img/osmbtn.png") !important;
+}
+
+#OpenTopo{
+	background-image: url("img/opentopobtn.png") !important;
+}
+
+.kaartlaag {
+	color:white;
+	padding:4px;
+	font-size:80%;
+}
+
+#zoomtools {
+	width:18px;
+	height:36px;
+	z-index:1000;
+	position:absolute;
+	top:35px;
+	left:10px;
+	line-height:0.6;
+}
+
+/* downloadbar IN legend: override some props */
+#legend #downloadbar {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: 0;
+    left: 0;
+    position: relative;
+	float: none;
+}
+
+#legendhead {
+	min-width:150px;
+	cursor: pointer;
+    height: 20px;
+    margin-right: 40px;
+}
+
+#legendImage {
+    padding-top: 10px;
+}
+
+#legendShowHide {
+  width: 30px; 
+  height: 17px; 
+  position: absolute; 
+  right: 10px; 
+  top: 10px; 
+  z-index: 1;
+}
+
+#legend {
+	background:none repeat scroll 0 0 white;
+	border: 2px solid #842e93;
+	padding:10px;
+	bottom:50px;
+	position:absolute;
+	right:10px;
+	z-index:10000;
+	max-height: 75%;
+    overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+    box-shadow: 0px 2px 5px #777777;
+}
+#infobutton {
+	padding:10px;
+	top:23px;
+	position:absolute;
+	left:60px;
+	z-index:990;
+	max-height: 75%;
+    overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+#legendImage > h3 {
+    background-color: #f7e3ff !important;
+	color:#333;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+	background: url("img/min.png") no-repeat right; /* for IE8 */
+    background: url("img/min.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0);
+	padding-left: 4px;
+    margin-bottom: 2px;
+}
+.folded {
+	background: url("img/plus.png") no-repeat right !important; /* for IE8 */
+    background: url("img/plus.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.legendMinimize{
+	background: url("img/minimizebuttonup.gif") no-repeat; /* for IE8 */
+    background: url("img/minimizebuttonup.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+	width:25px;
+	height:25px;
+	background-position: center center;
+    margin: -25px;
+    padding: 23px;
+	/*border:1px solid green;*/
+}
+.legendMaximize {
+	background: url("img/minimizebuttondown.gif") no-repeat; /* for IE8 */
+    background: url("img/minimizebuttondown.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+	width:25px;
+	height:25px;
+	background-position: center center;
+    margin: -25px;
+    padding: 23px;
+	/*border:1px solid red;*/
+}
+
+#legend h3, #downloadbar h3 {
+	font-size: 80%;
+}
+
+#downloadbar {
+    bottom: 30px;
+    display: block;
+    float: left;
+    left: 120px;
+    position: absolute;
+    z-index: 1002;
+	background: white;
+	padding-top: 10px;
+}
+#downloadbar a img {
+	border: 0;
+}
+
+html, body, #map {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+body{
+  font-size:80%;
+}
+input{
+  font-size:80%;
+}
+.inforow0{
+	/*background:#F7E3FF*/
+}
+.inforow1{
+	
+}
+.olControlLoadingPanel {
+	background-image:url(../../basisviewer2/img/dataloading.gif);
+	position: relative;
+	width: 20px;
+	height: 25px;
+	background-position:center;
+	background-repeat:no-repeat;
+	display: none;
+	right:12px;
+}
+
+/* this is the style of the plain text geoserver popup defined in content.ftl */
+#gssimplepopup {
+	min-width: 350px;
+	max-width: 500px;
+}
+
+#featurePopup_contentDiv {
+    overflow: auto !important;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+#sidebar_content{
+	border-right: 2px solid #842e93;
+	border-bottom: 2px solid #842e93;
+    padding: 0px 20px 10px 10px;
+	background: white;
+	margin-left: -10px;
+	margin-top: -15px;
+    padding-left: 10px;
+	min-height: 20px;    
+}
+
+#sidebar_head {
+    background: none repeat scroll 0 0 white;
+	border-top: 2px solid #842e93;
+	border-right: 2px solid #842e93;
+	margin-left: -10px;
+	padding: 0 20px 10px 10px;
+	/*min-height: 300px;*/
+}
+#sidebar_main_head > h3 {
+    padding-left: 5px;
+}
+#sidebar_content  h3, #sidebar_content2  h3 {
+    background-color: #F7E3FF !important;
+    padding-left: 6px;
+	margin-top:5px;
+}
+#sidebar_content2_data {
+	overflow: hidden;
+    padding-top: 10px;
+}
+#sidebar_content2_head {
+	background: url("img/min.png") no-repeat right; /* for IE8 */
+    background: url("img/min.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+.sidebar_content2_hide{
+	height:0px;
+}
+.sidebarhide{
+	left:-410px;
+}
+#sidebar {
+    float: left;
+    position: absolute;
+    top: 104px; /*25px;*/
+    width: 400px;
+	font-size: 80%;
+	overflow:hidden;
+	padding:10px;
+	padding-right:20px;
+	margin:0px;
+	display:none;
+	z-index:1000; /* let op geocoder result z = 1002 */
+    max-width: 90%;
+    max-height: 90vh;
+    
+}
+#sidebarShowHide {
+    height: 80px;
+    position: absolute;
+    right: 2px;
+    top: 15px;
+    width: 20px;
+    z-index: 1;
+}
+
+.sidebarMinimize{
+	background: url("img/minimizebuttonleft.png") no-repeat;
+    cursor: pointer;
+	width:25px;
+	height:25px;
+}
+.sidebarMaximize {
+	background: url("img/minimizebuttonright.png") no-repeat;
+    cursor: pointer;
+	width:25px;
+	height:25px;
+}
+
+#barContainer {
+	background: transparent;
+    position: absolute;
+	float:right;
+	top:39px;
+	right: 10px;
+    margin-left: 5px;
+	z-index:1000;
+	height:70px;
+    float: right;
+	width:90%;
+}
+
+#tools {
+	background: transparent;
+    position: relative;
+	/*float:right;
+	top:39px;
+	right: 194px;
+    margin-left: 5px;
+	z-index:1000;
+	height:70px;
+	width:300px;*/ /*for IE*/
+}
+  
+.toolbutton {
+	background-color:#842e93;
+	border:#842e93 1px solid;
+	padding:0px 10px;
+	font-size:0%;
+	float:right;
+	margin-right:5px;
+	margin-bottom:0px;
+	margin-top:0px;
+	width:40px;
+    height: 60px;
+    border-radius: 7px;
+    background-position: center;
+	background-size: 100%;  
+    box-shadow: 0px 2px 5px #777777;    
+}
+	
+.toolactive {
+	background-color: #F1C02A;
+    width: 40px;
+    height: 60px;
+    font-size: 0%;
+    border: 1px solid black;
+	border-radius: 7px; 
+}
+
+.toolinactive {
+	background-color: #842e93;
+    width: 40px;
+    height: 60px;
+    font-size: 0%;
+    border: 1px solid #842e93;
+	border-radius: 7px;
+}
+
+
+.download_icon {
+    background-image: url("img/download.svg") !important;
+}
+
+.edit_icon {
+    background-image: url("img/edit.svg") !important;
+}
+
+.point_icon {
+    background-image: url("img/point.svg") !important;
+}
+
+.location_icon {
+    background-image: url("img/location.svg") !important;
+}
+
+#formulier input {
+	font-size:100%;
+}
+#formulier input[type=button] {
+	width: 80px;
+	height: 35px;
+}
+#formulier input[type=text] {
+	width: 60%;
+}
+#formulier input[type=radio] {
+	width: 10px;
+	vertical-align: middle;
+}	
+#formulier textarea {
+	height:320px;
+	width:75%;
+}
+#form_img {
+	margin-top:5px;
+	max-height: 200px;
+}
+
+@media only screen and (max-height: 580px) {
+    #sidebar_head {
+         max-height:70vh;
+         max-width:80vw;
+
+    }
+    
+    #sidebar_content {
+        overflow: scroll;
+    }
+    
+}
