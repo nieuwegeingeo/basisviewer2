@@ -95,14 +95,16 @@ var filterBuilder = function() {
         $('.filter-select__container').hide();
 
     }
+    
+    multiFilter.filterLayer = [];
 
-multiFilter.filterLayer = [];
-
-Geogem.map.layers.map(function(layer) {
+    Geogem.map.layers.map(function(layer) {
         if (layer.options.filter || layer.options.multiFilter) {
             multiFilter.filterLayer.push(layer);
         }
     });
+    
+    
 };
 
 var filterCat = '';
@@ -179,7 +181,7 @@ var listSearch = function() {
                 } else{
                     var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ code +"%'";
                     layer.params.CQL_FILTER = filter;
-                    Geogem.map.infoControl.vendorParams.cql_filter = filter;
+                    Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
                     layer.redraw();
                 }
             });
@@ -187,10 +189,11 @@ var listSearch = function() {
         listSearchFilter(listFilter);
 };
 
-var sliderFunction = function(filterName, filterObject) {
+function sliderFunction(filterName, filterObject) {
     var sliderMin = filterObject.MIN;
     var sliderMax = filterObject.MAX;
-    var range =  filterObject.RANGE || false;
+    var sliderStep = filterObject.STEP !== undefined ? filterObject.STEP : 3;
+    var range =  filterObject.RANGE !== undefined ? filterObject.RANGE : false;
     var $slider = $( "#slider" ).slider({ range: range, min: sliderMin, max: sliderMax });
     var layer = multiFilter.filterLayer;
     $slider.slider({
@@ -215,7 +218,7 @@ var sliderFunction = function(filterName, filterObject) {
             }
         }
     });
-    $slider.slider('pips', {rest: 'label', step: 3});
+    $slider.slider('pips', {rest: 'label', step: sliderStep});
     $slider.slider( { values: [ sliderMin, sliderMax ] } );
     $('#slider-label').html(sliderMin--)
 }
@@ -229,7 +232,7 @@ var filterLayerFunction = function(array) {
                 } else {
                     var filter = filterCat + " IN (" + array +")";
                     layer.params.CQL_FILTER = filter;
-                    Geogem.map.infoControl.vendorParams.cql_filter = filter;
+                    Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
                     layer.redraw();
                 }
         });
@@ -249,7 +252,7 @@ var radioFunctions = function() {
                 } else {
                         var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ filterValue +"%' OR " + filterCat + " IS NULL";
                         layer.params.CQL_FILTER = filter;
-                        Geogem.map.infoControl.vendorParams.cql_filter = filter;
+                        Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
                         layer.redraw();
                 }
             });
@@ -262,7 +265,7 @@ var radioFunctions = function() {
                 } else {
                         var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ filterValue +"%'";
                         layer.params.CQL_FILTER = filter;
-                        Geogem.map.infoControl.vendorParams.cql_filter = filter;
+                        Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
                         layer.redraw();
                 }
             });

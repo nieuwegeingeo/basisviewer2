@@ -3,7 +3,7 @@
 }
 
 .selectie-lijst {
-  width: 200px;
+    width: 200px;
 }
 
 .no-select {
@@ -21,36 +21,60 @@
     box-sizing: border-box;
 }
 
-.border-ng-paars {border: 1px solid #842e93;}
-.border-ng-dik {border: 2px solid #842e93;}
-.border-ng-lichtpaars {border: 1px solid #945b96;}
-.border-round {border-radius:5px;}
-.shadow {box-shadow: 0px 2px 5px #777777;}
+.border-ng-paars {
+    border: 1px solid #842e93;
+}
 
-.zichtbaar-block {display: block !important;}
-.zichtbaar-flex {display: flex !important;}
-.flex-wrap {flex-wrap: wrap;}
+.border-ng-dik {
+    border: 2px solid #842e93;
+}
+
+.border-ng-lichtpaars {
+    border: 1px solid #945b96;
+}
+
+.border-round {
+    border-radius: 5px;
+}
+
+.shadow {
+    box-shadow: 0px 2px 5px #777777;
+}
+
+.zichtbaar-block {
+    display: block !important;
+}
+
+.zichtbaar-flex {
+    display: flex !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .flex-break {
     display: flex;
     width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
 .spacer {
     width: 1em;
 }
 
 
 .olPopupCloseBox {
-	/* some magic to create a bigger (invisible) close button for touch things */
+    /* some magic to create a bigger (invisible) close button for touch things */
     padding: 23px;
-	background-position:center;
-	margin: -25px;
+    background-position: center;
+    margin: -25px;
 }
 
 .olControlScaleLine {
-	bottom:40px;
-        z-index: 999 !important;
+    bottom: 40px;
+    z-index: 999 !important;
 }
 
 
@@ -63,38 +87,44 @@
     font-size: 11px;
 }
 
-#attrpopuptable td.first {
-	/*width:30%;*/
-}
+/* #attrpopuptable td.first {
+    width:30%;
+} */
 
-#attrpopuptable td.second {
-	/*word-break: break-all;*/
-}
+/* #attrpopuptable td.second {
+    word-break: break-all;
+} */
 
-#featurePopup_contentDiv {
-	/*margin-top:25px;*/
-}
+/* #featurePopup_contentDiv {
+    margin-top:25px;
+} */
 
 .olFramedCloudPopupContent {
     font-size: 80%;
-	overflow: visible;
+    overflow: visible;
 }
 
 .olControlLayerSwitcher {
-	top: 114px !important;
-	min-width: 20em;
+    top: 114px !important;
+    min-width: 20em;
 }
 
-.layersDiv, #legend {border-radius: 10px;}
+.layersDiv,
+#legend {
+    border-radius: 10px;
+}
 
-.olControlLayerSwitcher .layersDiv, 		/* center of LayerSwitcher */
-.olControlLayerSwitcher span, 				/* top & bottom of LayerSwitcher */
-.olControlOverviewMapElement { 				/* overviewmap */
-	background-color: #842e93 !important;
+.olControlLayerSwitcher .layersDiv,
+/* center of LayerSwitcher */
+.olControlLayerSwitcher span,
+/* top & bottom of LayerSwitcher */
+.olControlOverviewMapElement {
+    /* overviewmap */
+    background-color: #842e93 !important;
     box-shadow: 0px 2px 5px #777777;
 }
 
-.baseLayersDiv{
+.baseLayersDiv {
     padding: 0px;
 }
 
@@ -113,93 +143,111 @@
 
 .olControlAttribution {
     bottom: 3em;
-	background: transparent;
-	padding: 2px;
-	opacity: 0.7;
+    background: transparent;
+    padding: 2px;
+    opacity: 0.7;
     /*filter: alpha(opacity=70);*/
     z-index: 1000 !important;
     font-weight: bold;
-	background-color: #ccc;
+    background-color: #ccc;
     bottom: 24px;
     right: 0;
 }
 
-div.olControlAttribution  > a {
-    color:#842e93;
+div.olControlAttribution>a {
+    color: #842e93;
 }
 
 geoviewerpopup_contentDiv {
-	font-family: Verdana;
-	font-size: .7em;
+    font-family: Verdana;
+    font-size: .7em;
 }
 
-#attrpopuptable{
-	width: 100%;
+#attrpopuptable {
+    width: 100%;
 }
 
 .GeodanGeocoder {
     padding: 5px;
     top: 5px;
     left: 60px;
-	width:250px;
-	overflow:hidden;
+    width: 250px;
+    overflow: hidden;
 }
 
 /* Animated throbber */
 input.form-autocomplete {
-  width:250px;
-  background-image: url(../img/throbber.gif);
-  background-repeat: no-repeat;
-  background-position: 100% 2px;
-  padding:2px;
-  margin:2px;
-  z-index:10000;
+    width: 250px;
+    background-image: url(../img/throbber.gif);
+    background-repeat: no-repeat;
+    background-position: 100% 2px;
+    padding: 2px;
+    margin: 2px;
+    z-index: 10000;
 }
 
 input.throbbing {
-  background-position: 100% -18px; /* LTR */
+    background-position: 100% -18px;
+    /* LTR */
 }
 
 #topbar {
-	width:100%;
-	background-color:#842e93;
-	padding-bottom:3px;
-	min-height:24px;
-	z-index:1009;
-	top:0px;
-	position:fixed;
+    width: 100%;
+    background-color: #842e93;
+    padding-bottom: 3px;
+    min-height: 24px;
+    z-index: 1009;
+    top: 0px;
+    position: fixed;
     box-shadow: 0px 2px 5px #777777;
 }
+
+#topbar-element__container {
+    position: absolute;
+    top: 6px;
+    right: 50px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+}
+
+#topbar-element__container div {
+    margin-left: 1em;
+}
+
 #bottombar {
-	width:100%;
-	min-height:25px;
-	line-height:20px;
-	background-color:#842e93;
-	color:white;
-	font-weight:bold;
-	font-size: 80%;
+    width: 100%;
+    min-height: 25px;
+    line-height: 20px;
+    background-color: #842e93;
+    color: white;
+    font-weight: bold;
+    font-size: 80%;
 
-	z-index:1001;
-	bottom:0px;
-	position:fixed;
+    z-index: 1001;
+    bottom: 0px;
+    position: fixed;
 }
 
-div#bottombar  a:visited ,div#bottombar  a:link {
-	color:white;
+div#bottombar a:visited,
+div#bottombar a:link {
+    color: white;
 }
 
-div#bottombar  span {
-	float:right;
-	padding: 0 5px;
+div#bottombar span {
+    float: right;
+    padding: 0 5px;
 }
 
-form{
-	display:inline;
+form {
+    display: inline;
 }
+
 /* to be able to position mapbuttons */
-#map{
-	position:relative;
+#map {
+    position: relative;
 }
+
 #baselayerbuttons {
     position: relative;
     background: transparent;
@@ -210,22 +258,24 @@ form{
     height: 70px;*/
     /*border: red 1px solid;
 	/*border:red 1px solid;*/
-	/*width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
+    /*width:150px; /*for IE, be carefull, if too wide, covering MOR edit buttons, making them unclickable */
 }
 
-.baselayerbutton, #sidebar_content2_head, .toolbutton{
+.baselayerbutton,
+#sidebar_content2_head,
+.toolbutton {
     cursor: pointer;
 }
 
 .baselayerbutton {
-	height: 60px;
-	width: 75px;
-	border: 1px solid #842e93;
-	border-radius: 7px;
-	float: right;
-	padding: 0px 10px;
-	margin: 0 5px;
-	font-size: 0%;
+    height: 60px;
+    width: 75px;
+    border: 1px solid #842e93;
+    border-radius: 7px;
+    float: right;
+    padding: 0px 10px;
+    margin: 0 5px;
+    font-size: 0%;
     box-shadow: 0px 1px 5px #777777;
     box-sizing: border-box;
 }
@@ -236,60 +286,60 @@ form{
 }
 
 #Kaart {
-	background-image: url("img/kaartbtn.png") !important;
+    background-image: url("img/kaartbtn.png") !important;
 }
 
 #Kaart:hover {
-	background-image: url("img/kaartbtn_hover.svg") !important;
+    background-image: url("img/kaartbtn_hover.svg") !important;
 
 }
 
 #Luchtfoto {
-	background-image: url("img/luchtfotobtn.png") !important;
+    background-image: url("img/luchtfotobtn.png") !important;
 }
 
 #Luchtfoto:hover {
-	background-image: url("img/luchtfotobtn_hover.svg") !important;
+    background-image: url("img/luchtfotobtn_hover.svg") !important;
 }
 
 #OSM {
-	background-image: url("img/osmbtn.png") !important;
+    background-image: url("img/osmbtn.png") !important;
 }
 
 #OpenTopo {
-	background-image: url("img/opentopobtn.png") !important;
+    background-image: url("img/opentopobtn.png") !important;
 }
 
 #Basiskaart {
-	background-image: url("img/basiskaartbtn.png") !important;
+    background-image: url("img/basiskaartbtn.png") !important;
 }
 
 #Basiskaart:hover {
-	background-image: url("img/basiskaartbtn_hover.svg") !important;
+    background-image: url("img/basiskaartbtn_hover.svg") !important;
 }
 
-#BGT{
-	background-image: url("img/bgtbtn.png") !important;
+#BGT {
+    background-image: url("img/bgtbtn.png") !important;
 }
 
-#BGT_Zwart{
-	background-image: url("img/bgtzwartbtn.png") !important;
+#BGT_Zwart {
+    background-image: url("img/bgtzwartbtn.png") !important;
 }
 
 .kaartlaag {
-	color:white;
-	padding:4px;
-	font-size:80%;
+    color: white;
+    padding: 4px;
+    font-size: 80%;
 }
 
 #zoomtools {
-	width:18px;
-	height:36px;
-	z-index:1000;
-	position:absolute;
-	top:35px;
-	left:10px;
-	line-height:0.6;
+    width: 18px;
+    height: 36px;
+    z-index: 1000;
+    position: absolute;
+    top: 35px;
+    left: 10px;
+    line-height: 0.6;
 }
 
 .zoomtool img {
@@ -305,28 +355,28 @@ form{
     bottom: 0;
     left: 0;
     position: relative;
-	float: none;
+    float: none;
 }
 
 #legend {
     display: flex;
     flex-direction: column;
-	background:none repeat scroll 0 0 white;
-	border: 2px solid #842e93;
-	padding:10px;
-	bottom:50px;
-	position:absolute;
-	right:10px;
-	z-index:1007;
-	max-height: 75%;
+    background: none repeat scroll 0 0 white;
+    border: 2px solid #842e93;
+    padding: 10px;
+    bottom: 50px;
+    position: absolute;
+    right: 10px;
+    z-index: 1007;
+    max-height: 75%;
     overflow: auto;
-	overflow-x: hidden;
-	overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     box-shadow: 0px 2px 5px #777777;
 }
 
 #legendhead {
-	min-width:150px;
+    min-width: 150px;
     width: 100%;
     height: 2em;
     cursor: pointer;
@@ -339,66 +389,75 @@ form{
 }
 
 #legendShowHide {
-  width: 30px;
-  height: 17px;
-  position: absolute;
-  right: 1.5em;
-  top: 1.5em;
-  z-index: 1;
+    width: 30px;
+    height: 17px;
+    position: absolute;
+    right: 1.5em;
+    top: 1.5em;
+    z-index: 1;
 }
 
 #infobutton {
-	padding:10px;
-	top:23px;
-	position:absolute;
-	left:60px;
-	z-index:990;
-	max-height: 75%;
+    padding: 10px;
+    top: 23px;
+    position: absolute;
+    left: 60px;
+    z-index: 990;
+    max-height: 75%;
     overflow: auto;
-	overflow-x: hidden;
-	overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
-#legendImage > h3 {
+#legendImage>h3 {
     background-color: #f7e3ff !important;
-	color:#333;
-    filter: alpha(opacity=40); /* For IE8 and earlier */
-	background: url("img/min.png") no-repeat right; /* for IE8 */
+    color: #333;
+    filter: alpha(opacity=40);
+    /* For IE8 and earlier */
+    background: url("img/min.png") no-repeat right;
+    /* for IE8 */
     background: url("img/min.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0);
-	padding-left: 4px;
+    padding-left: 4px;
     margin-bottom: 2px;
 }
+
 .folded {
-	background: url("img/plus.png") no-repeat right !important; /* for IE8 */
+    background: url("img/plus.png") no-repeat right !important;
+    /* for IE8 */
     background: url("img/plus.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0) !important;
 }
 
-.legendMinimize{
-	background: url("img/minimizebuttonup.gif") no-repeat; /* for IE8 */
+.legendMinimize {
+    background: url("img/minimizebuttonup.gif") no-repeat;
+    /* for IE8 */
     background: url("img/minimizebuttonup.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     cursor: pointer;
-	width:25px;
-	height:25px;
-	background-position: center center;
-    margin: -25px;
-    padding: 23px;
-	/*border:1px solid green;*/
-}
-.legendMaximize {
-	background: url("img/minimizebuttondown.gif") no-repeat; /* for IE8 */
-    background: url("img/minimizebuttondown.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    cursor: pointer;
-	width:25px;
-	height:25px;
-	background-position: center center;
-    margin: -25px;
-    padding: 23px;
-	/*border:1px solid red;*/
+    width: 25px;
+    height: 25px;
+    background-position: center center;
+    margin: -5px;
+    /* padding: 23px; */
+    /*border:1px solid green;*/
 }
 
-#legend h3, #downloadbar h3 {
+.legendMaximize {
+    background: url("img/minimizebuttondown.gif") no-repeat;
+    /* for IE8 */
+    background: url("img/minimizebuttondown.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    background-position: center center;
+    margin: -5px;
+    /* padding: 23px; */
+    /*border:1px solid red;*/
+}
+
+#legend h3,
+#downloadbar h3 {
     margin-top: 0.5em;
-	/*font-size: 80%;*/
+    padding-right: 1.5em;
+    font-size: 90%;
 }
 
 #downloadbar {
@@ -408,52 +467,58 @@ form{
     left: 120px;
     position: absolute;
     z-index: 1002;
-	background: white;
-	padding-top: 10px;
-}
-#downloadbar a img {
-	border: 0;
+    background: white;
+    padding-top: 10px;
 }
 
-html, body, #map {
+#downloadbar a img {
+    border: 0;
+}
+
+html,
+body,
+#map {
     height: 100%;
     margin: 0;
     width: 100%;
 }
-body{
-    font-size:80%;
+
+body {
+    font-size: 80%;
     overflow: hidden;
 }
-input{
-  font-size:80%;
-}
-.inforow0{
-	/*background:#F7E3FF*/
-}
-.inforow1{
 
+input {
+    font-size: 80%;
 }
+
+/* .inforow0 {
+    background:#F7E3FF
+} */
+
+/* .inforow1 {} */
+
 .olControlLoadingPanel {
-	background-image:url(../../basisviewer2/img/dataloading.gif);
-	position: relative;
-	width: 20px;
-	height: 25px;
-	background-position:center;
-	background-repeat:no-repeat;
-	display: none;
-	right:12px;
+    background-image: url(../../basisviewer2/img/dataloading.gif);
+    position: relative;
+    width: 20px;
+    height: 25px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+    right: 12px;
 }
 
 /* this is the style of the plain text geoserver popup defined in content.ftl */
 #gssimplepopup {
-	min-width: 350px;
-	max-width: 500px;
+    min-width: 350px;
+    max-width: 500px;
 }
 
 #featurePopup_contentDiv {
     overflow: auto !important;
-	overflow-x: hidden;
-	overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /***********/
@@ -461,22 +526,24 @@ input{
 /***********/
 
 #sidebar {
-    display:flex;
+    display: flex;
     flex-direction: column;
     position: absolute;
-    top: 110px; /*25px;*/
+    top: 110px;
+    /*25px;*/
     left: -2px;
     width: 400px;
     height: 100%;
     max-width: 90%;
     min-height: 120px;
     max-height: 70vh;
-	font-size: 80%;
-	padding:10px;
-	margin:0px;
+    font-size: 80%;
+    padding: 10px;
+    margin: 0px;
     background: white;
     box-sizing: border-box;
-    z-index:1008; /* let op geocoder result z = 1002 */
+    z-index: 1008;
+    /* let op geocoder result z = 1002 */
     border-radius: 0 10px 10px 0;
     box-shadow: 0px 2px 5px #777777;
     transition: transform 0.1s ease-out;
@@ -491,27 +558,28 @@ input{
     z-index: 1;
 }
 
-    .sidebarMinimize{
-        background: url("img/minimizebuttonleft.png") no-repeat;
-        cursor: pointer;
-        width:25px;
-        height:25px;
-    }
-    .sidebarMaximize {
-        background: url("img/minimizebuttonright.png") no-repeat;
-        cursor: pointer;
-        width:25px;
-        height:25px;
-    }
+.sidebarMinimize {
+    background: url("img/minimizebuttonleft.png") no-repeat;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
 
-#sidebar_content{
+.sidebarMaximize {
+    background: url("img/minimizebuttonright.png") no-repeat;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+
+#sidebar_content {
     padding: 0px 10px 10px 10px;
-	background: white;
+    background: white;
     min-height: 100px;
 }
 
 
-#sidebar_main_head > h3 {
+#sidebar_main_head>h3 {
     padding-left: 5px;
 }
 
@@ -525,28 +593,35 @@ input{
     overflow-x: hidden;
 }
 
-#sidebar_content  h3, #sidebar_content2  h3, .sidebar-filter__container h3 {
+#sidebar_content h3,
+#sidebar_content2 h3,
+.sidebar-filter__container h3 {
     background-color: #F7E3FF !important;
     padding-left: 6px;
-	margin-top:5px;
+    margin-top: 5px;
 
 }
+
 #sidebar_content2_data {
     padding: 10px 5px 0px 6px;
-     box-sizing: border-box;
+    box-sizing: border-box;
 }
-#sidebar_content2_head, .sidebar-filter__container h3 {
-    background: url("img/min.png") no-repeat right; /* for IE8 */
+
+#sidebar_content2_head,
+.sidebar-filter__container h3 {
+    background: url("img/min.png") no-repeat right;
+    /* for IE8 */
     background: url("img/min.png") no-repeat right scroll 0 0 rgba(0, 0, 0, 0);
     box-sizing: border-box;
 }
 
-.sidebar_content2_hide{
-	height:0px;
+.sidebar_content2_hide {
+    height: 0px;
     overflow: hidden;
 }
-.sidebarhide{
-	transform:translateX(-100%);
+
+.sidebarhide {
+    transform: translateX(-100%);
 }
 
 /***********/
@@ -555,70 +630,71 @@ input{
 
 
 #barContainer {
-	display: flex;
+    display: flex;
     background: transparent;
     position: absolute;
-	float:right;
-	top:39px;
-	right: 10px;
+    float: right;
+    top: 39px;
+    right: 10px;
     margin-left: 5px;
-	z-index:1000;
-	height:70px;
+    z-index: 1000;
+    height: 70px;
     flex-flow: row-reverse;
     -webkit-flex-flow: row-reverse;
-	width:auto;
+    width: auto;
 }
 
 
 
 #tools {
-	background: transparent;
+    background: transparent;
     position: relative;
     display: flex;
     flex-direction: row-reverse;
-	/*float:right;
+    /*float:right;
 	top:39px;
 	right: 194px;
     margin-left: 5px;
 	z-index:1000;
 	height:70px;
-	width:300px;*/ /*for IE*/
+	width:300px;*/
+    /*for IE*/
 }
 
 
 .toolbutton {
-	background-color:#842e93;
-	border:#842e93 1px solid;
-	padding:0px 10px;
-	font-size:0%;
-	float:right;
-	margin-right:5px;
-	margin-bottom:0px;
-	margin-top:0px;
-	width:40px;
+    background-color: #842e93;
+    border: #842e93 1px solid;
+    padding: 0px 10px;
+    font-size: 0%;
+    float: right;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    width: 40px;
     height: 60px;
     border-radius: 7px;
     background-position: center;
-	background-size: 100%;
+    background-size: 100%;
     box-shadow: 0px 2px 5px #777777;
 }
 
 .toolactive {
-	background-color: #F1C02A;
+    background-color: #F1C02A;
     width: 40px;
     height: 60px;
     font-size: 0%;
     border: 1px solid black;
-	border-radius: 7px;
+    border-radius: 7px;
 }
 
 .toolinactive {
-	background-color: #842e93;
+    background-color: #842e93;
     width: 40px;
     height: 60px;
     font-size: 0%;
     border: 1px solid #842e93;
-	border-radius: 7px;
+    border-radius: 7px;
 }
 
 
@@ -674,31 +750,35 @@ input{
 }
 
 #formulier input {
-	font-size:100%;
+    font-size: 100%;
 }
+
 #formulier input[type=button] {
-	
-	height: 35px;
+
+    height: 35px;
 }
+
 #formulier input[type=text] {
-	width: 60%;
+    width: 60%;
 }
 
 #formulier select {
-	width: 60%;
+    width: 60%;
 }
 
 #formulier input[type=radio] {
-	width: 10px;
-	vertical-align: middle;
+    width: 10px;
+    vertical-align: middle;
 }
+
 #formulier textarea {
-	height:140px;
-	width:75%;
+    height: 140px;
+    width: 75%;
 }
+
 #form_img {
-	margin-top:5px;
-	max-height: 200px;
+    margin-top: 5px;
+    max-height: 200px;
 }
 
 #formulier .mark {
@@ -709,17 +789,20 @@ input{
     margin-left: 1em;
     margin-right: 1em;
 }
+
 /****************/
 /* Small screen */
 /****************/
 
 @media only screen and (max-height: 450px) {
     #sidebar {
-         max-height:80%;
-         max-width:80vw;
+        max-height: 80%;
+        max-width: 80vw;
 
     }
-    #bottombar, #topbar {
+
+    #bottombar,
+    #topbar {
         display: none;
     }
 
@@ -728,7 +811,8 @@ input{
         z-index: 2000 !important;
     }
 
-    #barContainer, #zoomtools {
+    #barContainer,
+    #zoomtools {
         top: 30px !important;
     }
 }
@@ -743,20 +827,21 @@ input{
         top: 125px;
     }
 }
+
 /******************/
 /* Viewer buttons */
 /******************/
 
 #cycloramas {
-background-image: url("img/360fotobutton.svg") !important;
+    background-image: url("img/360fotobutton.svg") !important;
 }
 
 #streetview {
-background-image: url("img/streetviewbutton.svg") !important;
+    background-image: url("img/streetviewbutton.svg") !important;
 }
 
 #obliques {
-background-image: url("img/obliquebutton.svg") !important;
+    background-image: url("img/obliquebutton.svg") !important;
 }
 
 
@@ -769,7 +854,7 @@ background-image: url("img/obliquebutton.svg") !important;
     position: absolute;
     width: auto;
     height: auto;
-    background-color: black; 
+    background-color: black;
 }
 
 .context-menu {
@@ -785,10 +870,10 @@ background-image: url("img/obliquebutton.svg") !important;
 
 .context-menu__button {
     width: 100%;
-    height: 2em;  
+    height: 2em;
     line-height: 2em;
     padding-left: 1em;
-    cursor: pointer; 
+    cursor: pointer;
     background-color: white;
 }
 
@@ -802,13 +887,25 @@ background-image: url("img/obliquebutton.svg") !important;
     cursor: default;
 }
 
-.style-name__display {
-    position:absolute;
-    top:6px;
-    right:50px;
-    color: white;
-    font-weight: bold;
+.bg-color__container {
+    display: flex;
+    flex-flow: column;
 }
+
+.contex-menu__close {
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    line-height: 1em;
+    color: #842e93;
+    cursor: pointer;
+    background-color: white;
+}
+
+
 
 .ls-filterbutton {
     width: 1em;
@@ -821,15 +918,19 @@ background-image: url("img/obliquebutton.svg") !important;
     background-image: url(img/filterButtonGrey.svg);
 }
 
+/**********************/
+/* Feature info table */
+/**********************/
+
 .featureinfo-popup {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: auto;
     min-width: 40em;
     max-width: 80%;
-    height: auto; 
+    height: auto;
     height: 60%;
     background: white;
     padding: 1em;
@@ -908,7 +1009,7 @@ background-image: url("img/obliquebutton.svg") !important;
     border: 1px solid #ccc;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    
+
 }
 
 .featureinfo-table th {
@@ -931,6 +1032,5 @@ background-image: url("img/obliquebutton.svg") !important;
     cursor: pointer;
     z-index: 1;
 }
-.featureinfo-close-button:hover {
-    
-}
+
+/* .featureinfo-close-button:hover {} */
