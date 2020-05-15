@@ -1,4 +1,4 @@
-document.write('<link rel="stylesheet" href="../../basisviewer2/lib/OpenLayers-2.12/theme/default/style.css" type="text/css" />');
+document.write('<link rel="stylesheet" href="../../basisviewer2/lib/OpenLayers-master/theme/default/style.css" type="text/css" />');
 //document.write('<link rel="stylesheet" href="../../basisviewer2/styles/Website.css" type="text/css" type="text/css" />');
 
 document.write('<link rel="stylesheet" href="../../basisviewer2/lib/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" type="text/css" />');
@@ -10,6 +10,7 @@ document.write('<link rel="stylesheet" href="../../basisviewer2/styles/alt_layer
 document.write('<link rel="stylesheet" href="../../basisviewer2/styles/filter_buttons.css" type="text/css" type="text/css" />');
 document.write('<link rel="stylesheet" href="../../basisviewer2/styles/infoTab_style.css" type="text/css" type="text/css" />');
 document.write('<link rel="stylesheet" href="../../basisviewer2/styles/wfst.css" type="text/css" type="text/css" />');
+document.write('<link rel="stylesheet" href="../../basisviewer2/styles/print_extension.css" type="text/css" type="text/css" />');
 
 document.write('<script type="text/javascript" src="../../basisviewer2/lib/OpenLayers.js"></script>');
 document.write('<script type="text/javascript" src="../../basisviewer2/lib/LoadingPanel.js"></script>');
@@ -26,5 +27,6 @@ document.write('<script type="text/javascript" src="../../basisviewer2/wfst.js">
 
 document.write('<script type="text/javascript" src="../../basisviewer2/extra_functies/alt_layerswitcher.js"></script>');
 document.write('<script type="text/javascript" src="../../basisviewer2/extra_functies/multiFilter.js"></script>');
+document.write('<script type="text/javascript" src="../../basisviewer2/extra_functies/printExtension.js"></script>');
 
 document.write('<script type="text/javascript" src="settings.js"></script>');
