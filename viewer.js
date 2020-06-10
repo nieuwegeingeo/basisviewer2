@@ -419,7 +419,6 @@ Geogem.onFeatureSelect = function (e) {
 		content = Geogem.formatAttributes(attributes, '', layer.geogem_fields);
 	} else {
 		content = Geogem.formatAttributes(attributes);
-
 	}
 
 	if (content) {
@@ -432,7 +431,6 @@ Geogem.onFeatureSelect = function (e) {
 		tmp = tmp.split(',');
 		if (tmp.length == 2) {
 			popupSize = new OpenLayers.Size(parseInt(tmp[0]), parseInt(tmp[1]));
-
 		} else {
 			alert('Fout bij instellen popupafmeting');
 		}
@@ -442,7 +440,6 @@ Geogem.onFeatureSelect = function (e) {
 
 		if ($('#sidebar').length === 0) {
 			// new popup
-
 			Geogem.popup = null;
 			Geogem.popup = new OpenLayers.Popup.FramedCloud("geoviewerpopup", // id
 				feature.geometry.getBounds().getCenterLonLat(), // lonlat
@@ -452,7 +449,6 @@ Geogem.onFeatureSelect = function (e) {
 				true, // closeBox
 				Geogem.onPopupClose // closeBoxCallback
 			);
-
 			if (popupSize) {
 				Geogem.popup.maxSize = popupSize;
 			}
@@ -943,6 +939,7 @@ Geogem.createWMSLayer = function (config) {
 		transparent: 'true',
 		format: 'image/png'
 	};
+
 	OpenLayers.Util.extend(params, config.params);
 	var options = {
 		isBaseLayer: false,
@@ -955,6 +952,8 @@ Geogem.createWMSLayer = function (config) {
 		params,
 		options
 	);
+    lyr.params.LAYERS = lyr.params.LAYERS.trim();
+    console.log(lyr)
 	// setting attribuut mapping fields in layer object as 'geomgemfields'
 	if (config.fields) {
 		lyr.geogemfields = config.fields; // fields can be fields of several layers
@@ -988,14 +987,16 @@ Geogem.createWMSLayer = function (config) {
 						var filterString = '';
 						delete featureInfoControl.vendorParams.CQL_FILTER;
 						$.each(Geogem.map.getControlsBy('displayClass', 'olControlWMSGetFeatureInfo')[0].layers, function (index, layer) {
-							//console.log(layer)
 							if (filterString === '' && layer.visibility === true) {
 								if (layer.params.CQL_FILTER === undefined) {
 									if (layer.params.LAYERS.match(',')) {
 										layerArray = layer.params.LAYERS.split(',');
-										filterString = 'INCLUDE';
 										for (i = 0; i < layerArray.length; i++) {
-											filterString = filterString + ';INCLUDE';
+											if (filterString === '') {
+                                                filterString = 'INCLUDE';
+											} else {
+												filterString = filterString + ';INCLUDE';
+											}
 										}
 									} else {
 										filterString = 'INCLUDE';
@@ -1007,10 +1008,11 @@ Geogem.createWMSLayer = function (config) {
 								if (layer.params.CQL_FILTER === undefined) {
 									if (layer.params.LAYERS.match(',')) {
 										layerArray = layer.params.LAYERS.split(',');
-										for (i = 0; i < layer.params.LAYERS; i++) {
-											filterString = filterString + ';INCLUDE;';
+										for (i = 0; i < layerArray.length; i++) {
+											filterString = filterString + ';INCLUDE';
 										}
 									} else {
+
 										filterString = filterString + ';INCLUDE';
 									}
 								} else {
@@ -1045,11 +1047,16 @@ Geogem.createWMSLayer = function (config) {
 							var handledFeatureTypes = [];
 							for (i = 0; i < event.features.length; i++) {
 								var featureType = event.features[i].gml.featureNSPrefix + ':' + event.features[i].gml.featureType;
-								var layer = Geogem.findWMSLayer(featureType);
+                                var layer = Geogem.findWMSLayer(featureType);
+                                
 								if (layer === undefined) {
 									// try to search for layer WITHOUT featureNSPrefix
 									featureType = event.features[i].gml.featureType;
 									layer = Geogem.findWMSLayer(featureType);
+                                    if (layer === undefined) {
+                                        console.log('Layer "' + featureType + '" Featureinfo werkt niet goed, controleer de laagnaam')
+                                        continue;
+                                    }
 								}
 								if (layer) { // some services do not have featureType etc in service response
 									layerName = layer.name;
@@ -1063,7 +1070,7 @@ Geogem.createWMSLayer = function (config) {
 									}
 								} else if (Geogem.Settings.featureInfoScreen === true) {
 									//console.log(event.features[i].attributes,layerName,fields)
-									var layerFields = layer.geogemfields[layer.params.LAYERS];
+									var layerFields = layer.geogemfields[layer.params.LAYERS.trim()];
 									// console.log(layer)
 									// console.log(layerFields)
 									var layerID = event.features[i].type;
@@ -1175,7 +1182,7 @@ Geogem.createWMSLayer = function (config) {
 								);
 							}
 						}
-						if (popupContent.length > 0) {
+						if (undefined !== popupContent && popupContent.length > 0) {
 							$('#featurePopup').show();
 							if ($('#featurePopup').length > 0) {
 								$('#featurePopup_contentDiv').append(popupContent);
@@ -1700,11 +1707,8 @@ Geogem.init = function () {
 			'<input id="bg-black" name="bg-color" value="bg-black" class="bg-button" type="radio"><label for="bg-black">Zwart</label>' +
 			'</div></div>');
 
-		if (bgColor === 'white') {
-			$('#bg-white').prop('checked', true);
-		} else {
-			$('#bg-black').prop('checked', true);
-		}
+		bgColor === 'white' ? $('#bg-white').prop('checked', true) : $('#bg-black').prop('checked', true);
+
 		$('.bg-button').click(function (e) {
 			if (this.value === 'bg-black') {
 				$('body').css('background-color', 'black');

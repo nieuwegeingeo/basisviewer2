@@ -175,7 +175,7 @@ Geogem.initWFST = function (wfs) {
                 });
                 var filterField = '';
                 var filterContent = '';
-                if (filter !== '') {
+                if (filter !== '' && filter !== undefined && filter !== null) {
                     filterField = filter.property;
                     filterContent = filter.value.toLowerCase();
                 }
