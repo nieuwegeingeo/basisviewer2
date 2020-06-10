@@ -270,6 +270,16 @@ Geogem.formatAttributes = function (attributes, title, fields) {
                     html += '<tr class="inforow' + rowstyle + '"><td class="first">' + fields[field] + '</td></tr>';
 					html += '<tr><td colspan="2"><a href="' + value + '" target="basisviewer_foto"><img style="border:0;width:220px;" src="' + value + '"/></a></td></tr>';
 				}
+			} else if (field.substring(0, 4).toUpperCase() == 'VIDEO') {
+				value = attributes[field];
+				// development
+				//value = "http://geoserver.nieuwegein.nl/beheer2014fotos/m_reparatieplekken_reparatieplek8.jpg";
+				if (value && value.length > 5) {
+                    html += '<tr class="inforow' + rowstyle + '"><td class="first">' + fields[field] + '</td></tr>';
+					html += '<tr><td colspan="2"><video>' +
+								'<source src="' + value + '">' +
+							'</video></td></tr>';
+				}
 			} else {
 				value = attributes[field];
 				// config error
@@ -1048,7 +1058,7 @@ Geogem.createWMSLayer = function (config) {
 							for (i = 0; i < event.features.length; i++) {
 								var featureType = event.features[i].gml.featureNSPrefix + ':' + event.features[i].gml.featureType;
                                 var layer = Geogem.findWMSLayer(featureType);
-                                
+
 								if (layer === undefined) {
 									// try to search for layer WITHOUT featureNSPrefix
 									featureType = event.features[i].gml.featureType;
@@ -2310,7 +2320,7 @@ Geogem.init = function () {
 			multiFilter.filterLoader();
 		}
 	}
-    
+
     if (Geogem.Settings.printExtension === true) {
         printExt.printLoader();
     }
