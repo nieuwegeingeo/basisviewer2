@@ -267,8 +267,17 @@ Geogem.formatAttributes = function (attributes, title, fields) {
 				// development
 				//value = "http://geoserver.nieuwegein.nl/beheer2014fotos/m_reparatieplekken_reparatieplek8.jpg";
 				if (value && value.length > 5) {
-                    html += '<tr class="inforow' + rowstyle + '"><td class="first">' + fields[field] + '</td></tr>';
-					html += '<tr><td colspan="2"><a href="' + value + '" target="basisviewer_foto"><img style="border:0;width:220px;" src="' + value + '"/></a></td></tr>';
+						html += '<tr class="inforow' + rowstyle + '"><td class="first">' + fields[field] + '</td></tr>';
+					if (value.includes('|')) {
+						html += '<tr><td colspan="2">';
+						var fotoarray = value.split('|');
+						$.each($(fotoarray), function(index, item) {
+							html += '<a href="' + item + '" target="basisviewer_foto"><img style="border:0;width:220px;" src="' + item + '"/></a>';
+						});
+						html += '</td></tr>';
+					} else {
+						html += '<tr><td colspan="2"><a href="' + value + '" target="basisviewer_foto"><img style="border:0;width:220px;" src="' + value + '"/></a></td></tr>';
+					}
 				}
 			} else if (field.substring(0, 5).toUpperCase() == 'VIDEO') {
 				value = attributes[field];
