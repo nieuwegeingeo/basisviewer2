@@ -972,7 +972,6 @@ Geogem.createWMSLayer = function (config) {
 		options
 	);
     lyr.params.LAYERS = lyr.params.LAYERS.trim();
-    console.log(lyr)
 	// setting attribuut mapping fields in layer object as 'geomgemfields'
 	if (config.fields) {
 		lyr.geogemfields = config.fields; // fields can be fields of several layers
