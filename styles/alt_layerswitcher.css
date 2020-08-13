@@ -207,3 +207,33 @@
     line-height: 2em;
     margin-right: 1em;
 }
+
+/****************************/
+/* Layerswitcher Categories */
+/****************************/
+
+.layer-switcher__list {
+    width: 100%;
+    table-layout: unset;
+}
+
+.layer-switcher__list:hover {
+    background-color: #842e934d;
+    width: 100%;
+}
+.layer-switcher__content details {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    outline: none;
+    max-width: 400px
+}
+
+.layer-switcher__content details summary {
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+}
+.layer-switcher__label {
+    cursor: pointer;
+}
+
