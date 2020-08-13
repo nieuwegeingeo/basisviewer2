@@ -2340,9 +2340,7 @@ Geogem.init = function () {
 		function sortLayers() {
 			for (var key in detailObject) {
 				var open = detailObject[key].isOpen === true ? 'open' : false;
-				console.log(open)
 				$('.layer-switcher__content').append('<details class='+detailObject[key].title+' '+open+'><summary>'+detailObject[key].title+'</summary></details><br>');
-
 				$.each(Geogem.applicatieSettings.overLays, function(index, layer) {
 					console.log(layer.options.group, key)
 					if(layer.options.group  === detailObject[key].title) {
@@ -2351,16 +2349,10 @@ Geogem.init = function () {
 						$('[name="'+title+'"]').parents('table').detach().appendTo('.' + group);
 					}
 				})
-
 				if ($('.'+detailObject[key].title)[0].childElementCount === 1) {
 					$('.'+detailObject[key].title).remove();
 				}
-
 			}
-
-
-
-			console.log()
 		}
 		sortLayers()
 	}
