@@ -698,44 +698,45 @@ input {
 }
 
 
-.download_icon {
-    background-image: url("img/download.svg") !important;
-    order: 6;
-}
+
 
 .save_icon {
     background-image: url("img/save.svg") !important;
-    order: 5;
+    order: 7;
 }
 
 .redo_icon {
     background-image: url("img/redo.svg") !important;
+    order: 6;
+}
+
+.point_icon {
+    background-image: url("img/new_point.svg") !important;
+    order: 5;
+}
+
+.polygon_icon {
+    background-image: url("img/new_polygon.svg") !important;
+    order: 5;
+}
+
+.polyline_icon {
+    background-image: url("img/new_polyline.svg") !important;
+    order: 5;
+}
+
+.circle_icon {
+    background-image: url("img/new_circle.svg") !important;
+    order: 5;
+}
+
+.snapping_icon {
+    background-image: url("img/snapping.svg") !important;
     order: 5;
 }
 
 .edit_icon {
     background-image: url("img/edit.svg") !important;
-    order: 3;
-}
-
-.point_icon {
-    background-image: url("img/new_point.svg") !important;
-}
-
-.polygon_icon {
-    background-image: url("img/new_polygon.svg") !important;
-}
-
-.polyline_icon {
-    background-image: url("img/new_polyline.svg") !important;
-}
-
-.circle_icon {
-    background-image: url("img/new_circle.svg") !important;
-}
-
-.snapping_icon {
-    background-image: url("img/snapping.svg") !important;
     order: 4;
 }
 
@@ -747,6 +748,23 @@ input {
 .style_switch_icon {
     background-image: url("img/style_switch.svg") !important;
     order: 1;
+}
+
+.download_icon {
+    background-image: url("img/download.svg") !important;
+    order: 1;
+}
+
+.wfs-selector_container {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 0.5em;
+    margin-right: 5px;
+    background: #842e93;
+    border: #842e93 1px solid;
+    border-radius: 5px;
+    order: 3;
 }
 
 #formulier input {

@@ -2332,5 +2332,36 @@ Geogem.init = function () {
 
     if (Geogem.Settings.printExtension === true) {
         printExt.printLoader();
-    }
+	}
+
+	if (Geogem.Settings.layerCategories) {
+		var detailObject = Geogem.Settings.layerCategories;
+		console.log(detailObject)
+		function sortLayers() {
+			for (var key in detailObject) {
+				var open = detailObject[key].isOpen === true ? 'open' : false;
+				console.log(open)
+				$('.layer-switcher__content').append('<details class='+detailObject[key].title+' '+open+'><summary>'+detailObject[key].title+'</summary></details><br>');
+
+				$.each(Geogem.applicatieSettings.overLays, function(index, layer) {
+					console.log(layer.options.group, key)
+					if(layer.options.group  === detailObject[key].title) {
+						var title = layer.title;
+						var group = layer.options.group;
+						$('[name="'+title+'"]').parents('table').detach().appendTo('.' + group);
+					}
+				})
+
+				if ($('.'+detailObject[key].title)[0].childElementCount === 1) {
+					$('.'+detailObject[key].title).remove();
+				}
+
+			}
+
+
+
+			console.log()
+		}
+		sortLayers()
+	}
 };
