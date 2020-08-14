@@ -2333,8 +2333,8 @@ Geogem.init = function () {
         printExt.printLoader();
 	}
 
-	if (Geogem.Settings.layerCategories) {
-		var detailObject = Geogem.Settings.layerCategories;
+	if (Geogem.Settings.layerGroups) {
+		var detailObject = Geogem.Settings.layerGroups;
 		console.log(detailObject)
 		function sortLayers() {
 			for (var key in detailObject) {
