@@ -2,9 +2,9 @@
 function loadAltLayerswitcher() {
     addDomElements = function() {
         $('#map').append('<div class="layer-switcher__button layer-switcher__view"></div>'+
-                     '<div class="layer-switcher__container zichtbaar-flex">'+ 
-                     '<div class="layer-switcher__head layer-switcher__view"></div>'+ 
-                     '<div class="layer-switcher__content"></div>')  
+                     '<div class="layer-switcher__container zichtbaar-flex">'+
+                     '<div class="layer-switcher__head layer-switcher__view"></div>'+
+                     '<div class="layer-switcher__content"></div>')
 }
 
 showHideLayerSwitcher = function() {
@@ -14,9 +14,9 @@ showHideLayerSwitcher = function() {
                 } else {
                     $('.layer-switcher__container').addClass('zichtbaar-flex');
                     $('.layer-switcher__button').removeClass('zichtbaar-block');
-                }   
+                }
         }
-    $('.layer-switcher__view').on('click', showHideLayerSwitcher)  
+    $('.layer-switcher__view').on('click', showHideLayerSwitcher)
     addDomElements();
     $.each(Geogem.map.layers, function(){
         if ($(this).prop('displayInLayerSwitcher') === true) {
@@ -30,16 +30,40 @@ showHideLayerSwitcher = function() {
     });
 
     Geogem.map.layerInput = $('.layer-switcher__item').children().children('label').children('input');
-    
-    $(Geogem.map.layerInput).change( function(){                
+
+    $(Geogem.map.layerInput).change( function(){
         if ($(this).prop('checked') === true) {
             mapLayer = Geogem.map.getLayersByName($(this).prop('name'))[0];
             mapLayer.setVisibility(true);
         } else {
-            mapLayer = Geogem.map.getLayersByName($(this).prop('name'))[0];                                     
+            mapLayer = Geogem.map.getLayersByName($(this).prop('name'))[0];
             mapLayer.setVisibility(false);
         }
     })
 
     $('.layer-switcher__view').on('click', showHideLayerSwitcher);
+}
+
+
+if (Geogem.Settings.layerGroups) {
+    var detailObject = Geogem.Settings.layerGroups;
+    console.log(detailObject)
+    function sortLayers() {
+        for (var key in detailObject) {
+            var open = detailObject[key].isOpen === true ? 'open' : false;
+            $('.layer-switcher__content').append('<details class='+detailObject[key].title+' '+open+'><summary>'+detailObject[key].title+'</summary></details><br>');
+            $.each(Geogem.applicatieSettings.overLays, function(index, layer) {
+                console.log(layer.options.group, key)
+                if(layer.options.group  === detailObject[key].title) {
+                    var title = layer.title;
+                    var group = layer.options.group;
+                    $('[name="'+title+'"]').parents('table').detach().appendTo('.' + group);
+                }
+            })
+            if ($('.'+detailObject[key].title)[0].childElementCount === 1) {
+                $('.'+detailObject[key].title).remove();
+            }
+        }
+    }
+    sortLayers()
 }
