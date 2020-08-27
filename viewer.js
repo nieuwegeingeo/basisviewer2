@@ -2068,6 +2068,40 @@ Geogem.init = function () {
 		};
 	} // end download tool code
 
+	// Add a little infoTab at the top of the screen //
+	if (Geogem.Settings.infoTab !== null) {
+		var infoTab = Geogem.Settings.infoTab;
+		$('<div class="info-tab border-ng-paars border-round">' +
+			'<div class="info-tab__body">' +
+			'</div>' +
+			'<div class="info-tab__button border-ng-paars" ><span>Sluit</span></div>' +
+			'</div>'
+		).insertBefore('#topbar');
+		$('.info-tab__body').append('<p>' + infoTab + '</p>');
+		if (document.cookie.indexOf('infotab=1') >= 0) {
+			$('.info-tab').addClass('info-tab__close');
+			$('.info-tab__button').children('span')[0].innerHTML = 'Open';
+		}
+		var openCloseInfoTab = function () {
+			$('.info-tab').toggleClass('info-tab__close');
+			if ($('.info-tab').hasClass('info-tab__close')) {
+				$('.info-tab__button').children('span')[0].innerHTML = 'Open';
+				document.cookie = 'infotab=1';
+			} else {
+				$('.info-tab__button').children('span')[0].innerHTML = 'Sluit';
+				document.cookie = 'infotab=0';
+			}
+		};
+		var tabHeight = $('.info-tab').height() - 30 + 'px';
+		$('.info-tab__button').click(openCloseInfoTab);
+		$("head").append('<style type="text/css"></style>');
+		var new_stylesheet = $("head").children(':last');
+		new_stylesheet.html('.info-tab__close {transform: translate(-50%, -' + tabHeight + ');}');
+		setTimeout(function () {
+			new_stylesheet.append('.info-tab {transition: transform 0.5s ease-out;}');
+		}, 100);
+	}
+
 	// child apps can implement a function applicationInit which will be called here:
 	if (Geogem.applicatieInit) {
 		Geogem.applicatieInit();
@@ -2252,43 +2286,6 @@ Geogem.init = function () {
 				'"\nmaar alleen "locate" en "track" zijn toegestaan.');
 		}
 	};
-
-	if (Geogem.Settings.infoTab !== null) {
-		var infoTab = Geogem.Settings.infoTab;
-
-		$('<div class="info-tab border-ng-paars border-round">' +
-			'<div class="info-tab__body">' +
-			'</div>' +
-			'<div class="info-tab__button border-ng-paars" ><span>Sluit</span></div>' +
-			'</div>'
-		).insertBefore('#topbar');
-		$('.info-tab__body').append('<p>' + infoTab + '</p>');
-		if (document.cookie.indexOf('infotab=1') >= 0) {
-			$('.info-tab').addClass('info-tab__close');
-			$('.info-tab__button').children('span')[0].innerHTML = 'Open';
-		}
-
-		var openCloseInfoTab = function () {
-			$('.info-tab').toggleClass('info-tab__close');
-			if ($('.info-tab').hasClass('info-tab__close')) {
-				$('.info-tab__button').children('span')[0].innerHTML = 'Open';
-				document.cookie = 'infotab=1';
-			} else {
-				$('.info-tab__button').children('span')[0].innerHTML = 'Sluit';
-				document.cookie = 'infotab=0';
-			}
-		};
-		var tabHeight = $('.info-tab').height() - 30 + 'px';
-
-		$('.info-tab__button').click(openCloseInfoTab);
-
-		$("head").append('<style type="text/css"></style>');
-		var new_stylesheet = $("head").children(':last');
-		new_stylesheet.html('.info-tab__close {transform: translate(-50%, -' + tabHeight + ');}');
-		setTimeout(function () {
-			new_stylesheet.append('.info-tab {transition: transform 0.5s ease-out;}');
-		}, 100);
-	}
 
 	if (Geogem.Settings.styleSwitcher === true) {
 		var styleNr = 0;
