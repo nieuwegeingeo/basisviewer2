@@ -375,7 +375,7 @@ Geogem.initWFST = function (wfs) {
                         data = value;
                     }
                     // image holding the photo or an white pixel if NO data available
-                    htmlAppend += '<br/><img id="photodata" width="100%" alt="Embedded Image" src="' + data + '"/>\n';
+                    htmlAppend += '<br/><img id="photodata" style="max-width:50%;" alt="Embedded Image" src="' + data + '"/>\n';
                 } else if (Geogem.featureTypes[key].TYPE == 'TEXTAREA') {
                     var value = '';
                     var req = '';
