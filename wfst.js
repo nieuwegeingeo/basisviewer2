@@ -365,9 +365,9 @@ Geogem.initWFST = function (wfs) {
                         value = feature.attributes[key];
                     }
                     // file input field to force a button on computer and camera on mobile
-                    htmlAppend += '<div class="form-item">' + Geogem.featureTypes[key].TITLE + '<br/><input type="file" accept="image/*" id="formfile_' + key + '" value="' + value + '" /></div>\n';
+                    htmlAppend += '<div class="form-item">' + Geogem.featureTypes[key].TITLE + '<br/><input type="file" class="photoinput" accept="image/*" id="formfile_' + key + '" value="' + value + '" /></div>\n';
                     // HIDDEN input field which actually holds the data:image/.... content
-                    htmlAppend += '<div class="form-item"><input type="hidden" id="form_' + key + '" value="' + value + '" /></div>\n';
+                    htmlAppend += '<div class="form-item"><input type="hidden" class="photodata"  id="form_' + key + '" value="' + value + '" /></div>\n';
                     if (value.indexOf('data') !== 0) {
                         // set data to 1x1px white image
                         data = "data:imagew/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=";
@@ -582,7 +582,8 @@ Geogem.initWFST = function (wfs) {
         }
 
         if (window.File && window.FileReader && window.FormData) {
-            var $inputField = $('#formfile_IMGDATA');
+            // var $inputField = $('#formfile_IMGDATA');
+            var $inputField = $(".photoinput");
             $inputField.on('change', function (e) {
                 var file = e.target.files[0];
                 if (file) {
@@ -633,8 +634,9 @@ Geogem.initWFST = function (wfs) {
                                 }
 
                                 $('#photodata').attr('src', dataURL);
-                                //$("#wfsform :input[type='file']").data(dataURL)
-                                $("#wfsform :input[id='form_IMGDATA']").val(dataURL);
+                                // $("#wfsform :input[type='file']").data(dataURL)
+                                // $("#wfsform :input[id='form_IMGDATA']").val(dataURL);
+                                $("#wfsform :input[class='photodata']").val(dataURL);
                             };
 
                             image.onerror = function () {
