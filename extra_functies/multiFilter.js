@@ -72,7 +72,7 @@ var filterBuilder = function() {
                     '<input class="filter-radio" type="radio" name="filter-radio__' + name + '" value="' + optionValue + '">' + optionTitle + '</label>';
             });
             filterInput += '</div></div>';
-        
+
         } else if (type === 'SLIDER') {
             var sliderMin = filterItem.MIN;
             var sliderMax = filterItem.MAX;
@@ -95,7 +95,7 @@ var filterBuilder = function() {
         $('.filter-select__container').hide();
 
     }
-    
+
     multiFilter.filterLayer = [];
 
     Geogem.map.layers.map(function(layer) {
@@ -103,8 +103,8 @@ var filterBuilder = function() {
             multiFilter.filterLayer.push(layer);
         }
     });
-    
-    
+
+
 };
 
 var filterCat = '';
@@ -127,15 +127,15 @@ var arrayFiller = function(type) {
 };
 
 var format = new OpenLayers.Format.CQL();
-var wfsRule = new OpenLayers.Rule({ 
-    elseFilter: true, 
+var wfsRule = new OpenLayers.Rule({
+    elseFilter: true,
 })
 
 var resetFilter = function() {
         $.each(multiFilter.filterLayer, function(index, item){
             if (item.id.match(/vector/gi)) {
                 var filter = ''
-                wfsRule.filter = filter;                
+                wfsRule.filter = filter;
                 item.redraw();
             } else{
                 item.params.CQL_FILTER = undefined;
@@ -173,11 +173,11 @@ var listSearch = function() {
         var listSearchbox = $('.feature-filter__' + filterCat + '');
         var listFilter = listSearchbox.prop('value').toLowerCase();
         var listSearchFilter = function(code) {
-            multiFilter.filterLayer.map(function(layer) {                
+            multiFilter.filterLayer.map(function(layer) {
                 if (layer.id.match(/vector/gi)) {
                    var filter = format.read("" + filterCat + " LIKE '"+ code +"'",0);
-                   wfsRule.filter = filter;                
-                   layer.redraw();                    
+                   wfsRule.filter = filter;
+                   layer.redraw();
                 } else{
                     var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ code +"%'";
                     layer.params.CQL_FILTER = filter;
@@ -199,7 +199,7 @@ function sliderFunction(filterName, filterObject) {
     $slider.slider({
     change: function( event, ui ) {
         var values = $slider.slider( "values" );
-        if (range === false) { 
+        if (range === false) {
             console.log(range)
             $.each(layer, function(index, item) {item.mergeNewParams(	{cql_filter:"" + filterName + " = "+ values[0]}	);})
         } else {
@@ -211,7 +211,7 @@ function sliderFunction(filterName, filterObject) {
         slide: function( event, ui ) {
             var values = $slider.slider( "values" );
             if (range == false) {
-                 
+
                 $('#slider-label').html(values[0]--)
             } else {
                 $('#slider-label').html(values[0]-- +' - '+values[1]++);
@@ -226,8 +226,21 @@ function sliderFunction(filterName, filterObject) {
 var filterLayerFunction = function(array) {
         $.each(multiFilter.filterLayer, function(index, layer) {
             if (layer.id.match(/vector/gi)) {
-                   var filter = filterCat + " IN (" + array +")";
-                   wfsRule.filter = filter;                
+                console.log(layer)
+                   //var filter = filterCat + " IN (" + array +")";
+                   var filter;
+                   console.log(array)
+                   console.log(array.length)
+                    if (array.length > 1) {
+                        $.each(array, function(i, item) {
+                            i === 0 ? filter = "" + filterCat + " = "+ item : filter += " OR " + filterCat + " = " + item;
+                        })
+
+                    } else {
+                        filter = filterCat + " = "+ array[0]
+                    }
+                    filter = format.read(filter, 0);
+                   wfsRule.filter = filter;
                    layer.redraw();
                 } else {
                     var filter = filterCat + " IN (" + array +")";
@@ -244,11 +257,11 @@ var radioFunctions = function() {
         $(this).parent().siblings().removeClass('radio-aan');
         var filterValue = this.value;
         if ($(this).hasClass('radio-all')) {filterValue = '';
-            multiFilter.filterLayer.map(function(layer) {                
+            multiFilter.filterLayer.map(function(layer) {
                 if (layer.id.match(/vector/gi)) {
                        //var filter = format.read("" + filterCat + " <> '"+ filterValue +"' OR " + filterCat + " IS NULL",0);
-                       wfsRule.filter = "";                
-                       layer.redraw();                    
+                       wfsRule.filter = "";
+                       layer.redraw();
                 } else {
                         var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ filterValue +"%' OR " + filterCat + " IS NULL";
                         layer.params.CQL_FILTER = filter;
@@ -257,11 +270,11 @@ var radioFunctions = function() {
                 }
             });
         } else {
-            multiFilter.filterLayer.map(function(layer) {                
+            multiFilter.filterLayer.map(function(layer) {
                 if (layer.id.match(/vector/gi)) {
                        var filter = format.read("" + filterCat + " LIKE '"+ filterValue +"'",0);
-                       wfsRule.filter = filter;                
-                       layer.redraw();                    
+                       wfsRule.filter = filter;
+                       layer.redraw();
                 } else {
                         var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ filterValue +"%'";
                         layer.params.CQL_FILTER = filter;
@@ -271,9 +284,9 @@ var radioFunctions = function() {
             });
         }
     })
-    
-}    
-    
+
+}
+
 var checkboxFunctions = function() {
 
 $('.checkbox-all').on('click', function(e) {
