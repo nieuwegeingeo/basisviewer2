@@ -1,13 +1,13 @@
 var multiFilter = multiFilter || {};
 
-var addFilterContainer = function() {
-    var container = '<div class="sidebar-filter__container">'+
-                    '<h3>Filter</h3><div class="sidebar-filter__data">'+
-                    '</div></div>';
+var addFilterContainer = function () {
+    var container = '<div class="sidebar-filter__container">' +
+        '<h3>Filter</h3><div class="sidebar-filter__data">' +
+        '</div></div>';
     $(container).insertAfter('#sidebar_content2');
     $('#sidebar_content2_head').html('Informatie').show();
 
-    var filterHeadToggle = function() {
+    var filterHeadToggle = function () {
         $('.sidebar-filter__container h3').toggleClass('folded');
         if ($('.sidebar-filter__container h3').hasClass('folded')) {
             $('.sidebar-filter__data').hide();
@@ -16,42 +16,42 @@ var addFilterContainer = function() {
         }
     };
     $('.sidebar-filter__container h3').on('click', filterHeadToggle);
-    $('#sidebar_content').on('DOMSubtreeModified', function() {
-    if ($('.sidebar-filter__container h3').hasClass('folded')) {
-        return true;
-    }  else {
-        filterHeadToggle();
-    }
+    $('#sidebar_content').on('DOMSubtreeModified', function () {
+        if ($('.sidebar-filter__container h3').hasClass('folded')) {
+            return true;
+        } else {
+            filterHeadToggle();
+        }
     });
 };
 
 
-var filterBuilder = function() {
-    var filter =  Geogem.Settings.multiFilter[0];
+var filterBuilder = function () {
+    var filter = Geogem.Settings.multiFilter[0];
     var filterHtml = '';
-    var filterMenu = '<div class="filter-select__container"><label><b>Kies een filter: </b>'+
-                     '<select class="filter-categorie" onchange="setCategorie()">';
+    var filterMenu = '<div class="filter-select__container"><label><b>Kies een filter: </b>' +
+        '<select class="filter-categorie" onchange="setCategorie()">';
     var filterInput = '<div class="filter-container">';
     var setDisplay = '';
     var i = 0;
-    $.each(filter, function(name, filterItem, index){
+    $.each(filter, function (name, filterItem, index) {
         var filterTitle = filterItem.TITLE;
         var titleLcase = filterTitle.toLowerCase();
         var type = filterItem.TYPE;
         filterMenu += '<option value="' + name + '">' + filterTitle + '</option>';
         if (type === 'TEXT') {
-            filterInput += '<div class="input-' + name + '" ' + setDisplay + '>'+
-                           '<label><b>Filter op ' + titleLcase + ': </b>'+
-                           '<input class="text-filter feature-filter__' + name + '" onkeyup="listSearch()" type="text"/></label>'+
-                           '</div><br><br>';
+            filterInput += '<div class="input-' + name + '" ' + setDisplay + '>' +
+                '<label><b>Filter op ' + titleLcase + ': </b>' +
+                '<input class="text-filter feature-filter__' + name + '" onkeyup="listSearch()" type="text"/></label>' +
+                '</div><br><br>';
         } else if (type === 'CHECKBOX') {
-            filterInput += '<div class="input-' + name + '" ' + setDisplay + '>'+
-                           '<div class="input-container">'+
-                           '<label class="filterInput checkbox-aan">'+
-                           '<input class="checkbox-all" type="checkbox" name="' + name + '-alles" checked="true">Alles aan</label>'+
-                           '</div><br>'+
-                           '<div class="input-container  flex-wrapper">';
-            $.each(filterItem.OPTIONS, function(key, optionItem) {
+            filterInput += '<div class="input-' + name + '" ' + setDisplay + '>' +
+                '<div class="input-container">' +
+                '<label class="filterInput checkbox-aan">' +
+                '<input class="checkbox-all" type="checkbox" name="' + name + '-alles" checked="true">Alles aan</label>' +
+                '</div><br>' +
+                '<div class="input-container  flex-wrapper">';
+            $.each(filterItem.OPTIONS, function (key, optionItem) {
                 var optionValue = optionItem.value;
                 var optionTitle = optionItem.title;
                 filterInput += '<label class="filterInput">' +
@@ -59,13 +59,13 @@ var filterBuilder = function() {
             });
             filterInput += '</div></div>';
         } else if (type === 'RADIO') {
-            filterInput += '<div class="input-' + name + '" ' + setDisplay + '>'+
-                           '<div class="input-container flex-wrapper">'+
-                           '<label class="filterInput radio-aan">'+
-                           '<input class="filter-radio radio-all" type="radio" name="filter-radio__' + name + '" value="" checked="true">Alles aan</label>'+
-                           '<div class="breakline"></div>';
-                           //'<div class="input-container flex-wrapper">';
-            $.each(filterItem.OPTIONS, function(key, optionItem) {
+            filterInput += '<div class="input-' + name + '" ' + setDisplay + '>' +
+                '<div class="input-container flex-wrapper">' +
+                '<label class="filterInput radio-aan">' +
+                '<input class="filter-radio radio-all" type="radio" name="filter-radio__' + name + '" value="" checked="true">Alles aan</label>' +
+                '<div class="breakline"></div>';
+            //'<div class="input-container flex-wrapper">';
+            $.each(filterItem.OPTIONS, function (key, optionItem) {
                 var optionValue = optionItem.value;
                 var optionTitle = optionItem.title;
                 filterInput += '<label class="filterInput">' +
@@ -76,10 +76,10 @@ var filterBuilder = function() {
         } else if (type === 'SLIDER') {
             var sliderMin = filterItem.MIN;
             var sliderMax = filterItem.MAX;
-            console.log(sliderMin,sliderMax)
-            filterInput += '<div class="input-' + name + '" ' + setDisplay + '><p id="slider-label"></p>'+
-                           '<div id="slider"></div>'+
-                           '</div>'
+            console.log(sliderMin, sliderMax)
+            filterInput += '<div class="input-' + name + '" ' + setDisplay + '><p id="slider-label"></p>' +
+                '<div id="slider"></div>' +
+                '</div>'
         }
         if (i === 0) {
             setDisplay = 'style="display: none;"';
@@ -98,7 +98,7 @@ var filterBuilder = function() {
 
     multiFilter.filterLayer = [];
 
-    Geogem.map.layers.map(function(layer) {
+    Geogem.map.layers.map(function (layer) {
         if (layer.options.filter || layer.options.multiFilter) {
             multiFilter.filterLayer.push(layer);
         }
@@ -113,16 +113,18 @@ var filterArray = [];
 var filterCount = 0;
 var filterStore = [];
 
-var arrayFiller = function(type) {
+var arrayFiller = function (type) {
     filterCount = 0;
     arrayValues = [];
-    $('[name="filter-checkbox__' + type + '"]').map(function(index, item) {
+    $('[name="filter-checkbox__' + type + '"]').map(function (index, item) {
         if (this.checked === true) {
             arrayValues.push("'" + item.value + "'");
             filterCount++
         }
     });
-    if (filterCount === 0 ){ arrayValues = ["''"];}
+    if (filterCount === 0) {
+        arrayValues = ["''"];
+    }
     filterArray = arrayValues;
 };
 
@@ -131,155 +133,168 @@ var wfsRule = new OpenLayers.Rule({
     elseFilter: true,
 })
 
-var resetFilter = function() {
-        $.each(multiFilter.filterLayer, function(index, item){
-            if (item.id.match(/vector/gi)) {
-                var filter = ''
+var resetFilter = function () {
+    $.each(multiFilter.filterLayer, function (index, item) {
+        if (item.id.match(/vector/gi)) {
+            var filter = ''
+            wfsRule.filter = filter;
+            item.redraw();
+        } else {
+            item.params.CQL_FILTER = undefined;
+            item.redraw();
+        }
+    });
+    $('.text-filter').prop('value', '');
+    $.each($('.filter-checkbox, .checkbox-all'), function (index, item) {
+        itemParent = $(item).parent();
+        item.checked = true;
+        if (!$(itemParent).hasClass('checkbox-aan')) {
+            $(itemParent).addClass('checkbox-aan');
+        }
+    });
+};
+
+var setCategorie = function () {
+    filterCat = $('.filter-categorie').prop('value');
+    $.each(Geogem.Settings.multiFilter[0], function (name, item) {
+        if (name === filterCat) {
+            if (item.TYPE === 'CHECKBOX') {
+                checkboxFunctions(filterCat);
+            } else if (item.TYPE === 'SLIDER') {
+                sliderFunction(name, item)
+            }
+        }
+    })
+
+    arrayFiller(filterCat);
+    resetFilter();
+    $('.input-' + filterCat + '').show().siblings().hide();
+};
+
+var listSearch = function () {
+    var listSearchbox = $('.feature-filter__' + filterCat + '');
+    var listFilter = listSearchbox.prop('value').toLowerCase();
+    var listSearchFilter = function (code) {
+        multiFilter.filterLayer.map(function (layer) {
+            if (layer.id.match(/vector/gi)) {
+                var filter = format.read("" + filterCat + " LIKE '" + code + "'", 0);
                 wfsRule.filter = filter;
-                item.redraw();
-            } else{
-                item.params.CQL_FILTER = undefined;
-                item.redraw();
+                layer.redraw();
+            } else {
+                var filter = "strToLowerCase(" + filterCat + ") LIKE '%" + code + "%'";
+                layer.params.CQL_FILTER = filter;
+                Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
+                layer.redraw();
             }
         });
-        $('.text-filter').prop('value','');
-        $.each($('.filter-checkbox, .checkbox-all'), function(index, item) {
-            itemParent = $(item).parent();
-            item.checked = true;
-            if (!$(itemParent).hasClass('checkbox-aan')) {
-                $(itemParent).addClass('checkbox-aan');
-            }
-        });
-};
-
-var setCategorie = function() {
-        filterCat = $('.filter-categorie').prop('value');
-        $.each(Geogem.Settings.multiFilter[0], function(name, item){
-            if (name === filterCat) {
-                if (item.TYPE === 'CHECKBOX') {
-                    checkboxFunctions(filterCat);
-                } else if (item.TYPE === 'SLIDER') {
-                    sliderFunction(name, item)
-                }
-            }
-        })
-
-        arrayFiller(filterCat);
-        resetFilter();
-        $('.input-' + filterCat + '').show().siblings().hide();
-};
-
-var listSearch = function() {
-        var listSearchbox = $('.feature-filter__' + filterCat + '');
-        var listFilter = listSearchbox.prop('value').toLowerCase();
-        var listSearchFilter = function(code) {
-            multiFilter.filterLayer.map(function(layer) {
-                if (layer.id.match(/vector/gi)) {
-                   var filter = format.read("" + filterCat + " LIKE '"+ code +"'",0);
-                   wfsRule.filter = filter;
-                   layer.redraw();
-                } else{
-                    var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ code +"%'";
-                    layer.params.CQL_FILTER = filter;
-                    Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
-                    layer.redraw();
-                }
-            });
-        };
-        listSearchFilter(listFilter);
+    };
+    listSearchFilter(listFilter);
 };
 
 function sliderFunction(filterName, filterObject) {
     var sliderMin = filterObject.MIN;
     var sliderMax = filterObject.MAX;
     var sliderStep = filterObject.STEP !== undefined ? filterObject.STEP : 3;
-    var range =  filterObject.RANGE !== undefined ? filterObject.RANGE : false;
-    var $slider = $( "#slider" ).slider({ range: range, min: sliderMin, max: sliderMax });
+    var range = filterObject.RANGE !== undefined ? filterObject.RANGE : false;
+    var $slider = $("#slider").slider({
+        range: range,
+        min: sliderMin,
+        max: sliderMax
+    });
     var layer = multiFilter.filterLayer;
     $slider.slider({
-    change: function( event, ui ) {
-        var values = $slider.slider( "values" );
-        if (range === false) {
-            console.log(range)
-            $.each(layer, function(index, item) {item.mergeNewParams(	{cql_filter:"" + filterName + " = "+ values[0]}	);})
-        } else {
-            $.each(layer, function(index, item) {item.mergeNewParams(	{cql_filter:"" + filterName + " BETWEEN "+values[0]-- +' AND '+values[1]++ }	);})
-        }
-    }
-    });
-    $slider.slider({
-        slide: function( event, ui ) {
-            var values = $slider.slider( "values" );
-            if (range == false) {
-
-                $('#slider-label').html(values[0]--)
+        change: function (event, ui) {
+            var values = $slider.slider("values");
+            if (range === false) {
+                console.log(range)
+                $.each(layer, function (index, item) {
+                    item.mergeNewParams({
+                        cql_filter: "" + filterName + " = " + values[0]
+                    });
+                })
             } else {
-                $('#slider-label').html(values[0]-- +' - '+values[1]++);
+                $.each(layer, function (index, item) {
+                    item.mergeNewParams({
+                        cql_filter: "" + filterName + " BETWEEN " + values[0]-- + ' AND ' + values[1]++
+                    });
+                })
             }
         }
     });
-    $slider.slider('pips', {rest: 'label', step: sliderStep});
-    $slider.slider( { values: [ sliderMin, sliderMax ] } );
+    $slider.slider({
+        slide: function (event, ui) {
+            var values = $slider.slider("values");
+            if (range == false) {
+                $('#slider-label').html(values[0]--)
+            } else {
+                $('#slider-label').html(values[0]-- + ' - ' + values[1]++);
+            }
+        }
+    });
+    $slider.slider('pips', {
+        rest: 'label',
+        step: sliderStep
+    });
+    $slider.slider({
+        values: [sliderMin, sliderMax]
+    });
     $('#slider-label').html(sliderMin--)
 }
 
-var filterLayerFunction = function(array) {
-        $.each(multiFilter.filterLayer, function(index, layer) {
-            if (layer.id.match(/vector/gi)) {
-                console.log(layer)
-                   //var filter = filterCat + " IN (" + array +")";
-                   var filter;
-                   console.log(array)
-                   console.log(array.length)
-                    if (array.length > 1) {
-                        $.each(array, function(i, item) {
-                            i === 0 ? filter = "" + filterCat + " = "+ item : filter += " OR " + filterCat + " = " + item;
-                        })
+var filterLayerFunction = function (array) {
+    $.each(multiFilter.filterLayer, function (index, layer) {
+        if (layer.id.match(/vector/gi)) {
+            var filter;
+            if (array.length > 1) {
+                $.each(array, function (i, item) {
+                    i === 0 ? filter = "" + filterCat + " = " + item : filter += " OR " + filterCat + " = " + item;
+                })
 
-                    } else {
-                        filter = filterCat + " = "+ array[0]
-                    }
-                    filter = format.read(filter, 0);
-                   wfsRule.filter = filter;
-                   layer.redraw();
+            } else {
+                filter = filterCat + " = " + array[0]
+            }
+            filter = format.read(filter, 0);
+            wfsRule.filter = filter;
+            layer.redraw();
+        } else {
+            var filter = filterCat + " IN (" + array + ")";
+            layer.params.CQL_FILTER = filter;
+            Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
+            layer.redraw();
+        }
+    });
+};
+
+var radioFunctions = function () {
+    $('.filter-radio').on('click', function () {
+        $(this).parent().addClass('radio-aan');
+        $(this).parent().siblings().removeClass('radio-aan');
+        var filterValue = this.value;
+        if ($(this).hasClass('radio-all')) {
+            filterValue = '';
+            multiFilter.filterLayer.map(function (layer) {
+                if (layer.id.match(/vector/gi)) {
+                    //var filter = format.read("" + filterCat + " <> '"+ filterValue +"' OR " + filterCat + " IS NULL",0);
+                    wfsRule.filter = "";
+                    layer.redraw();
                 } else {
-                    var filter = filterCat + " IN (" + array +")";
+                    var filter = "strToLowerCase(" + filterCat + ") LIKE '%" + filterValue + "%' OR " + filterCat + " IS NULL";
                     layer.params.CQL_FILTER = filter;
                     Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
                     layer.redraw();
                 }
-        });
-    };
-
-var radioFunctions = function() {
-    $('.filter-radio').on('click', function() {
-        $(this).parent().addClass('radio-aan');
-        $(this).parent().siblings().removeClass('radio-aan');
-        var filterValue = this.value;
-        if ($(this).hasClass('radio-all')) {filterValue = '';
-            multiFilter.filterLayer.map(function(layer) {
-                if (layer.id.match(/vector/gi)) {
-                       //var filter = format.read("" + filterCat + " <> '"+ filterValue +"' OR " + filterCat + " IS NULL",0);
-                       wfsRule.filter = "";
-                       layer.redraw();
-                } else {
-                        var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ filterValue +"%' OR " + filterCat + " IS NULL";
-                        layer.params.CQL_FILTER = filter;
-                        Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
-                        layer.redraw();
-                }
             });
         } else {
-            multiFilter.filterLayer.map(function(layer) {
+            multiFilter.filterLayer.map(function (layer) {
                 if (layer.id.match(/vector/gi)) {
-                       var filter = format.read("" + filterCat + " LIKE '"+ filterValue +"'",0);
-                       wfsRule.filter = filter;
-                       layer.redraw();
+                    var filter = format.read("" + filterCat + " LIKE '" + filterValue + "'", 0);
+                    wfsRule.filter = filter;
+                    layer.redraw();
                 } else {
-                        var filter = "strToLowerCase(" + filterCat + ") LIKE '%"+ filterValue +"%'";
-                        layer.params.CQL_FILTER = filter;
-                        Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
-                        layer.redraw();
+                    var filter = "strToLowerCase(" + filterCat + ") LIKE '%" + filterValue + "%'";
+                    layer.params.CQL_FILTER = filter;
+                    Geogem.map.infoControl !== undefined ? Geogem.map.infoControl.vendorParams.cql_filter = filter : false;
+                    layer.redraw();
                 }
             });
         }
@@ -287,47 +302,50 @@ var radioFunctions = function() {
 
 }
 
-var checkboxFunctions = function() {
+var checkboxFunctions = function () {
 
-$('.checkbox-all').on('click', function(e) {
-    if ($(this).prop('checked') === true) {
-        if (arrayValues.length === 0) {arrayFiller(filterCat)}
+    $('.checkbox-all').on('click', function (e) {
+        if ($(this).prop('checked') === true) {
+            if (arrayValues.length === 0) {
+                arrayFiller(filterCat)
+            }
+            arrayFiller(filterCat);
+            filterArray = arrayValues;
+            $('.filter-checkbox').prop('checked', true);
+            filterLayerFunction(filterArray);
+            $('.filterInput').addClass('checkbox-aan');
+        } else {
+            filterArray = ["''"];
+            $('.filter-checkbox').prop('checked', false);
+            filterLayerFunction(filterArray);
+            $('.filterInput').removeClass('checkbox-aan');
+        }
+    });
+
+    $('.filter-checkbox').on('click', function (e) {
+        inputValue = "'" + $(this).prop('value') + "'";
         arrayFiller(filterCat);
-        filterArray = arrayValues;
-        $('.filter-checkbox').prop('checked', true);
-        filterLayerFunction(filterArray);
-        $('.filterInput').addClass('checkbox-aan');
-    } else {
-        filterArray = ["''"];
-        $('.filter-checkbox').prop('checked', false);
-        filterLayerFunction(filterArray);
-        $('.filterInput').removeClass('checkbox-aan');
-    }
-});
-
-$('.filter-checkbox').on('click', function(e) {
-    inputValue = "'"+ $(this).prop('value')+ "'";
-    arrayFiller(filterCat);
-    filterLayerFunction(filterArray)
-    if ($(this).prop('checked') === true) {
-        $(this).parent().addClass('checkbox-aan');
-        if ($('[name="filter-checkbox__' + filterCat + '"]').length == filterCount){$('.checkbox-all').prop('checked', true).parent().addClass('checkbox-aan');}
-    } else {
-        $('.checkbox-all').prop('checked', false);
-        $(this).parent().removeClass('checkbox-aan');
-        $('.checkbox-all').parent().removeClass('checkbox-aan');
-    }
-});
+        filterLayerFunction(filterArray)
+        if ($(this).prop('checked') === true) {
+            $(this).parent().addClass('checkbox-aan');
+            if ($('[name="filter-checkbox__' + filterCat + '"]').length == filterCount) {
+                $('.checkbox-all').prop('checked', true).parent().addClass('checkbox-aan');
+            }
+        } else {
+            $('.checkbox-all').prop('checked', false);
+            $(this).parent().removeClass('checkbox-aan');
+            $('.checkbox-all').parent().removeClass('checkbox-aan');
+        }
+    });
 };
 if (filterStore.length !== 0) {
     filterArray = filterStore;
 }
 
-multiFilter.filterLoader = function() {
+multiFilter.filterLoader = function () {
     addFilterContainer();
     filterBuilder();
     setCategorie();
     checkboxFunctions();
     radioFunctions();
 };
-
