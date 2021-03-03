@@ -1,3 +1,4 @@
 *.bak
 extra_functies/multiFilter.js.bu
 lib/backup/
+index.html.old
