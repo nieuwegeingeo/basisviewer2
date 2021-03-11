@@ -281,7 +281,9 @@ Geogem.initWFST = function (wfs) {
         if (Geogem.Settings.formContainer === true) {
             $('.form-overlay').remove();
         }
-        Geogem.map.infoControl.activate();
+        if ( Geogem.map.infoControl) {
+            Geogem.map.infoControl.activate();
+        }
     };
 
     var escCloseForm = function () {
