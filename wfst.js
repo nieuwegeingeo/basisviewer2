@@ -869,7 +869,6 @@ Geogem.initWFST = function (wfs) {
                 Geogem.editAction.deactivate();
                 Geogem.editAction.activate();
             }
-            Geogem.map.infoControl.deactivate();
         } else if (wfs.type == "polyline") {
             if (Geogem.drawActionPolyline && Geogem.drawActionPolyline.active) {
                 Geogem.drawActionPolyline.deactivate();
@@ -879,7 +878,6 @@ Geogem.initWFST = function (wfs) {
                 Geogem.editAction.deactivate();
                 Geogem.editAction.activate();
             }
-            Geogem.map.infoControl.deactivate();
         } else if (wfs.type == "polygon") {
             if (Geogem.drawActionPolygon && Geogem.drawActionPolygon.active) {
                 Geogem.drawActionPolygon.deactivate();
@@ -889,7 +887,6 @@ Geogem.initWFST = function (wfs) {
                 Geogem.editAction.deactivate();
                 Geogem.editAction.activate();
             }
-            Geogem.map.infoControl.deactivate();
         } else if (wfs.type == "multi") {
             if (Geogem.drawActionPoint && Geogem.drawActionPoint.active) {
                 Geogem.drawActionPoint.deactivate();
@@ -907,6 +904,9 @@ Geogem.initWFST = function (wfs) {
                 Geogem.editAction.deactivate();
                 Geogem.editAction.activate();
             }
+
+        }
+        if ( Geogem.map.infoControl) {
             Geogem.map.infoControl.deactivate();
         }
     };
@@ -984,7 +984,9 @@ Geogem.initWFST = function (wfs) {
                     Geogem.showSidebar(false);
                 }
                 // deactivate infotool for wms layer
-                Geogem.map.infoControl.deactivate();
+                if ( Geogem.map.infoControl) {
+                    Geogem.map.infoControl.deactivate();
+                }
             }
         );
         Geogem.drawAction.events.register('deactivate', Geogem.drawType,
@@ -993,7 +995,9 @@ Geogem.initWFST = function (wfs) {
                 wfs.setVisibility(false);
                 Geogem.showSidebar(false);
                 // reactivate infotool for wms layer again
-                Geogem.map.infoControl.activate();
+                if ( Geogem.map.infoControl) {
+                    Geogem.map.infoControl.activate();
+                }
             }
         );
         Geogem.map.addControls([Geogem.drawAction]);
@@ -1028,7 +1032,9 @@ Geogem.initWFST = function (wfs) {
                     Geogem.showSidebar(false);
                 }
                 // deactivate infotool for wms layer
-                Geogem.map.infoControl.deactivate();
+                if ( Geogem.map.infoControl) {
+                    Geogem.map.infoControl.deactivate();
+                }
             }
         );
         Geogem.drawAction.events.register('deactivate', Geogem.drawAction,
@@ -1037,7 +1043,9 @@ Geogem.initWFST = function (wfs) {
                 wfs.setVisibility(false);
                 Geogem.showSidebar(false);
                 // reactivate infotool for wms layer again
-                Geogem.map.infoControl.activate();
+                if ( Geogem.map.infoControl) {
+                    Geogem.map.infoControl.activate();
+                }
             }
         );
     }
@@ -1047,7 +1055,9 @@ Geogem.initWFST = function (wfs) {
             wfs.setVisibility(true);
             Geogem.showSidebar(false);
             // deactivate infotool for wms layer
-            Geogem.map.infoControl.deactivate();
+            if ( Geogem.map.infoControl) {
+                Geogem.map.infoControl.deactivate();
+            }
         }
     );
     // deactivate should close sidebar/form
@@ -1061,7 +1071,9 @@ Geogem.initWFST = function (wfs) {
             // Geogem.deleteAction.trigger();
             // }
             // reactivate infotool for wms layer again
-            Geogem.map.infoControl.activate();
+            if ( Geogem.map.infoControl) {
+                Geogem.map.infoControl.activate();
+            }
         }
     );
 
