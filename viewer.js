@@ -932,12 +932,13 @@ Geogem.createWfsLayer = function (config) {
 };
 
 
-Geogem.findWMSLayer = function (layername) {
+Geogem.findWMSLayer = function (layername, vis) {
 	var layers = Geogem.map.layers;
 	var layer;
 	for (var i = 0; i < layers.length; i++)
 		if (layers[i].params && layers[i].params.LAYERS) {
 			{
+				if (vis === true) {if (layers[i].visibility === false) {continue;}}
 				// layers[i].params.LAYERS can be a list (layer1,layer2,layer3)
 				var layersparam = layers[i].params.LAYERS.split(',');
 				if ($.inArray(layername, layersparam) >= 0) {
@@ -1065,12 +1066,12 @@ Geogem.createWMSLayer = function (config) {
 							var handledFeatureTypes = [];
 							for (i = 0; i < event.features.length; i++) {
 								var featureType = event.features[i].gml.featureNSPrefix + ':' + event.features[i].gml.featureType;
-                                var layer = Geogem.findWMSLayer(featureType);
+                                var layer = Geogem.findWMSLayer(featureType, true);
 
 								if (layer === undefined) {
 									// try to search for layer WITHOUT featureNSPrefix
 									featureType = event.features[i].gml.featureType;
-									layer = Geogem.findWMSLayer(featureType);
+									layer = Geogem.findWMSLayer(featureType, true);
                                     if (layer === undefined) {
                                         console.log('Layer "' + featureType + '" Featureinfo werkt niet goed, controleer de laagnaam')
                                         continue;
