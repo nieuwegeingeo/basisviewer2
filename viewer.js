@@ -1065,7 +1065,11 @@ Geogem.createWMSLayer = function (config) {
 						} else if (infoformat == 'application/vnd.ogc.gml') {
 							var handledFeatureTypes = [];
 							for (i = 0; i < event.features.length; i++) {
-								var featureType = event.features[i].gml.featureNSPrefix + ':' + event.features[i].gml.featureType;
+								if (event.features[i].gml) {
+									var featureType = event.features[i].gml.featureNSPrefix + ':' + event.features[i].gml.featureType;
+								} else {
+									var featureType = event.features[i].type;
+								}
                                 var layer = Geogem.findWMSLayer(featureType, true);
 
 								if (layer === undefined) {
