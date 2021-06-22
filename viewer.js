@@ -1395,10 +1395,11 @@ Geogem.createWMTSLayer = function (layerConfigObj) {
 // wfs filter op: hoofdcategorie EN subcategorie
 // wms kaartlaag: alles laten zien?
 
-Geogem.geoserverAutorisatie = function (layername) {
+Geogem.geoserverAutorisatie = function (layername, geoserver) {
+	var gs = geoserver === undefined ? 'geoserver' : geoserver;
 	var checkUsername = function () {
 		$.ajax({
-			url: '//' + location.host + '/geoserver/web/',
+			url: '//' + location.host + '/'+ gs +'/web/',
 			success: function (result) {
 				var lines = result.split('\n');
 				$.each(lines, function (index, line) {
@@ -1414,7 +1415,7 @@ Geogem.geoserverAutorisatie = function (layername) {
 	$(function () {
 
 		$.ajax({
-			url: '//' + location.host + '/geoserver/wms?request=getMap&LAYERS=nieuwegein:' + layername + '&BBOX=134249.8,448949.6,134275.1,448968.5&WIDTH=10&HEIGHT=10&format=image/png',
+			url: '//' + location.host + '/'+ gs +'/wms?request=getMap&LAYERS=nieuwegein:' + layername + '&BBOX=134249.8,448949.6,134275.1,448968.5&WIDTH=10&HEIGHT=10&format=image/png',
 			statusCode: {
 
 				401: function () {
