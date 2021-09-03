@@ -121,6 +121,10 @@ Geogem.initWFST = function (wfs) {
     );
 
     Geogem.beforeFeatureModified = function (evt) {
+        if (evt.feature.state === "Insert") {
+            Geogem.showFeature(evt.feature);
+            return;
+        }
         wfs.styleMap.styles['default'].rules = [];
         if (wfs.hasUnsavedChanges) {
             if (confirm("U heeft niet opgeslagen verandering. Na OK gaan uw aanpassingen verloren.")) {
@@ -156,6 +160,7 @@ Geogem.initWFST = function (wfs) {
         }
 
         // Create a list of features to edit //
+
         if (nameKey !== '') {
             if (numberOfFeatures.length > 1) {
                 Geogem.featuresList = evt.object.features;
