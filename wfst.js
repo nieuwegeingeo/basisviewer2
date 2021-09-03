@@ -148,6 +148,12 @@ Geogem.initWFST = function (wfs) {
                 nameKey = key;
             }
         }
+        var selectID;
+        for (var key in Geogem.featureTypes) {
+            if (Geogem.featureTypes[key].TYPE == 'ID') {
+                selectID = key;
+            }
+        }
 
         // Create a list of features to edit //
         if (nameKey !== '') {
@@ -169,7 +175,7 @@ Geogem.initWFST = function (wfs) {
                 var filter = '';
                 $.each(evt.feature.layer.styleMap.styles, function (index, style) {
                     if (style.rules.length > 0) {
-                        console.log(style.rules);
+                        // console.log(style.rules);
                         filter = style.rules[0].filter;
                     }
                 });
@@ -197,20 +203,23 @@ Geogem.initWFST = function (wfs) {
                         }
                     }
                     if (item.geometry.bounds.intersectsBounds(clickedBounds) && item.isFiltered === true) {
-                        var selectName = item.attributes[nameKey];
-                        itemArray.push(selectName);
+
+                        // var selectName = item.attributes[nameKey];
+
+                        var selectObject = {name: item.attributes[nameKey], id: item.attributes[selectID]}
+                        itemArray.push(selectObject);
                     }
                 });
 
                 // Append items to the select box //
                 $.each(itemArray.sort(), function (index, item) {
-                    $('.feature-selector').append('<div class="feature-selector__item" >' + item + '</div>');
+                    $('.feature-selector').append('<div class="feature-selector__item" >' + item.name + '<input type="hidden" value="'+item.id+'"></div>');
                 });
 
                 $('.feature-selector__item').on('click', function () {
-                    var objectName = $(this).prop('innerText');
+                    var objectID = $(this).children('input')[0].value;
                     var filteredFeature = Geogem.featuresList.filter(function (item) {
-                        return item.attributes[nameKey] === objectName;
+                        return item.attributes[selectID] === objectID;
                     });
                     evt.feature = filteredFeature[0];
                     Geogem.editAction.unselectFeature();
