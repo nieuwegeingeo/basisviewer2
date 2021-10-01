@@ -106,9 +106,17 @@ Geogem.initWFST = function (wfs) {
     Geogem.saveStrategy.events.register('fail', null,
         function (evt) {
             //console.log('FOUT FOUT');
-            var xml = $.parseXML(evt.response.priv.responseText);
-            var error = $(xml).find('ExceptionText').text();
-            alert("ERROR:\n" + error);
+            var xmlDoc = $.parseXML(evt.response.priv.responseText),
+                $xml = $(xmlDoc),
+                exception = $xml.children().children().children().text();
+            var error = '';
+            if (exception.match(/Cannot access/g).length === 1) {
+                error = 'Je hebt niet genoeg privileges om deze data te bewerken. Vraag toegang aan via geoinformatie@nieuwegein.nl'
+            } else {
+                error = 'Er is een fout opgetreden, neem contact op met geoinformatie@nieuwegein.nl'
+            }
+            alert(error);
+
         }
     );
     Geogem.saveStrategy.events.register('start', null,
