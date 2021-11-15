@@ -1509,6 +1509,11 @@ Geogem.init = function () {
 	var i;
 	// base layers
 
+	if (isAndroid || isMobile || isIthing) {
+		var touchNavControl = new OpenLayers.Control.TouchNavigation();
+		Geogem.map.addControl(touchNavControl);
+	}
+
 	$('<div id="barContainer"/>').appendTo($('#map'));
 
 	var baselayerButtons = '<div id="baselayerbuttons">';
