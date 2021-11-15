@@ -110,12 +110,12 @@ Geogem.initWFST = function (wfs) {
                 $xml = $(xmlDoc),
                 exception = $xml.children().children().children().text();
             var error = '';
-            // if (exception.match(/Cannot access/g) !== undefined) {
-            //     error = 'Je hebt niet genoeg privileges om deze data te bewerken. Vraag toegang aan via geoinformatie@nieuwegein.nl'
-            // } else {
+            if (exception.match(/Cannot access/g) !== undefined) {
+                error = 'Je hebt niet genoeg privileges om deze data te bewerken. Vraag toegang aan via geoinformatie@nieuwegein.nl'
+            } else {
                 console.log(exception);
                 error = 'Er is een fout opgetreden, neem contact op met geoinformatie@nieuwegein.nl'
-            // }
+            }
             alert(error);
 
         }
