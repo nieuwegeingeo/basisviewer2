@@ -15,7 +15,7 @@ Geogem.initWFST = function (wfs) {
         OpenLayers.Feature.Vector.style.select.pointRadius = 20;
         OpenLayers.Feature.Vector.style.select.fillColor = '#ff0000';
         OpenLayers.Feature.Vector.style.select.strokeColor = '#ff0000';
-    } else if (wfs.type == "polygon" || wfs.type == "polyline" || wfs.type == "multi") {
+    } else if (wfs.type == "polygon" || wfs.type == "multi") {
         OpenLayers.Feature.Vector.style.default.pointRadius = 10;
         OpenLayers.Feature.Vector.style.default.strokeWidth = 2;
         OpenLayers.Feature.Vector.style.default.fillColor = '#88179F';
@@ -25,6 +25,15 @@ Geogem.initWFST = function (wfs) {
         OpenLayers.Feature.Vector.style.select.fillColor = '#ff0000';
         OpenLayers.Feature.Vector.style.select.strokeColor = '#ff0000';
 
+    } else if (wfs.type == "polyline") {
+        OpenLayers.Feature.Vector.style.default.pointRadius = 10;
+        OpenLayers.Feature.Vector.style.default.strokeWidth = 4;
+        OpenLayers.Feature.Vector.style.default.fillColor = '#cb4deb';
+        OpenLayers.Feature.Vector.style.default.strokeColor = '#cb4deb';
+        OpenLayers.Feature.Vector.style.default.cursor = 'pointer';
+        OpenLayers.Feature.Vector.style.select.pointRadius = 10;
+        OpenLayers.Feature.Vector.style.select.fillColor = '#ff0000';
+        OpenLayers.Feature.Vector.style.select.strokeColor = '#ff0000';
     }
 
     Geogem.vertexStyle = {
