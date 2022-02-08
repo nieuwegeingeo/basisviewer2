@@ -1461,7 +1461,7 @@ Geogem.geoserverLayerCheck = function() {
 	var errorNr = 0;
 	$.each(Geogem.map.layers, function(index,layer) {
 		if (layer.params !== undefined && layer.params['SERVICE'] == 'WMS' && !layer.params['LAYERS'].match(/,/) ) {
-			var url = layer.url;
+			var url = layer.url.replace('?','');
 			var layerName = layer.name;
 			var paramFormat = layer.params['FORMAT'];
 			var paramLayers = layer.params['LAYERS'];
