@@ -1457,6 +1457,49 @@ Geogem.geoserverAutorisatie = function (layername, geoserver) {
 	}, 100);
 };
 
+Geogem.geoserverLayerCheck = function() {
+	var errorNr = 0;
+	$.each(Geogem.map.layers, function(index,layer) {
+		if (layer.params !== undefined && layer.params['SERVICE'] == 'WMS' && !layer.params['LAYERS'].match(/,/) ) {
+			var url = layer.url;
+			var layerName = layer.name;
+			var paramFormat = layer.params['FORMAT'];
+			var paramLayers = layer.params['LAYERS'];
+			var paramVersion = layer.params['VERSION'];
+			var nextIdx = 1;
+			var request = url + '?REQUEST=GetMap&SERVICE=WMS&FORMAT=' + paramFormat + '&LAYERS=' + paramLayers + '&VERSION=' + paramVersion + '&BBOX=134249.8,448949.6,134275.1,448968.5&WIDTH=10&HEIGHT=10&SRS=EPSG:28992&STYLES';
+
+			$.ajax({
+				url: request,
+				dataType: 'xml',
+				success: function (result) {
+					var error = $(result).find('ServiceException').first().text();
+					errorNr = errorNr + 1;
+					layerError = '<details class="layer-header border-box layer-number__'+index+'"><summary>'+layerName+'</summary><span><b>Fout:</b></span><p>'+error+'</p></details>';
+					if (errorNr > 0 && $('.errorBox-container').length === 0) {
+						$('#map').append('<div class="errorBox-container border-ng-paars">'+
+											'<div class="errorBox-head"><div class="errorBox-head__text"><span></span></div><div class="errorBox-close"><span>X</span></div></div>'+
+											'<div></div>'+
+											'</div>');
+						$('.errorBox-head__text span').text(errorNr + ' fout gevonden');
+
+						$('.errorBox-close').click(function() {
+							$('.errorBox-container').remove();
+						})
+					} else {
+						$('.errorBox-head__text span').text(errorNr + ' fouten gevonden');
+					}
+					$('.errorBox-container').append(layerError);
+
+				}
+			})
+
+		}
+
+	})
+
+}
+
 Geogem.init = function () {
 
 	// create topbar and bottombar
@@ -2340,4 +2383,6 @@ Geogem.init = function () {
     if (Geogem.Settings.printExtension === true) {
         printExt.printLoader();
 	}
+
+	Geogem.geoserverLayerCheck();
 };
