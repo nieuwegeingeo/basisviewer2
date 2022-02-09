@@ -1115,6 +1115,7 @@ input {
 .layer-header summary {
     height: 2em;
     cursor: pointer;
+    padding-top: 1em;
 }
 
 .layer-header summary:hover {
